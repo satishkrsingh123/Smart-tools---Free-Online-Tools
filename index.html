@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Tools - Free Online Tools</title>
+    <meta name="description" content="Free online calculators including Age, Percentage, BMI, GST and EMI Calculator.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Smart<span>Tools</span></div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1>Free Online Tools</h1>
+
+        <p>
+            Calculate everything quickly and easily with our free online tools.
+        </p>
+        <p class="creator">By Satish kumar Singh</p>
+
+        <a href="#tools" class="main-btn">Explore Tools</a>
+    </section>
+
+
+    <!-- Tools -->
+    <section class="tools-section" id="tools">
+
+        <h2>Our Popular Tools</h2>
+
+        <div class="tools-container">
+
+            <!-- Age Calculator -->
+            <div class="tool-card">
+                <h3>🎂 Age Calculator</h3>
+
+                <label>Date of Birth</label>
+                <input type="date" id="dob">
+
+                <button onclick="calculateAge()">Calculate Age</button>
+
+                <div class="result" id="ageResult"></div>
+            </div>
+
+
+            <!-- Percentage Calculator -->
+            <div class="tool-card">
+                <h3>📊 Percentage Calculator</h3>
+
+                <input type="number" id="obtained" placeholder="Obtained Marks">
+
+                <input type="number" id="total" placeholder="Total Marks">
+
+                <button onclick="calculatePercentage()">Calculate</button>
+
+                <div class="result" id="percentageResult"></div>
+            </div>
+
+
+            <!-- BMI Calculator -->
+            <div class="tool-card">
+                <h3>⚖️ BMI Calculator</h3>
+
+                <input type="number" id="weight" placeholder="Weight (kg)">
+
+                <input type="number" id="height" placeholder="Height (cm)">
+
+                <button onclick="calculateBMI()">Calculate BMI</button>
+
+                <div class="result" id="bmiResult"></div>
+            </div>
+
+
+            <!-- GST Calculator -->
+            <div class="tool-card">
+                <h3>💰 GST Calculator</h3>
+
+                <input type="number" id="amount" placeholder="Amount">
+
+                <input type="number" id="gst" placeholder="GST %">
+
+                <button onclick="calculateGST()">Calculate GST</button>
+
+                <div class="result" id="gstResult"></div>
+            </div>
+
+
+            <!-- EMI Calculator -->
+            <div class="tool-card">
+                <h3>🏦 EMI Calculator</h3>
+
+                <input type="number" id="loan" placeholder="Loan Amount">
+
+                <input type="number" id="interest" placeholder="Annual Interest %">
+
+                <input type="number" id="months" placeholder="Loan Period (Months)">
+
+                <button onclick="calculateEMI()">Calculate EMI</button>
+
+                <div class="result" id="emiResult"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+        <h2>About SmartTools</h2>
+
+        <p>
+            SmartTools is a simple free online tools website.
+            Use our calculators quickly from your mobile, tablet or computer.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 SmartTools. All Rights Reserved.</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
