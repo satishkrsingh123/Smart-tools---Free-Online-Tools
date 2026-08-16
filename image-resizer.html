@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Resizer - Free Online Image Resizer | SmartTools</title>
+
+    <meta name="description"
+          content="Resize images online for free. Change image width and height, maintain aspect ratio and download your resized image easily.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f8fc;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 17px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #172033;
+            text-decoration: none;
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #172033;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+
+            color: white;
+            text-align: center;
+
+            padding: 65px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 55px);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            opacity: 0.95;
+        }
+
+        /* TOOL */
+
+        .tool-wrapper {
+            max-width: 850px;
+            margin: 50px auto;
+
+            padding: 0 20px;
+        }
+
+        .tool-box {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.07);
+        }
+
+        /* UPLOAD */
+
+        .upload-area {
+            border: 2px dashed #bfdbfe;
+
+            background: #eff6ff;
+
+            border-radius: 15px;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .upload-area:hover {
+            border-color: #2563eb;
+            background: #dbeafe;
+        }
+
+        .upload-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .upload-area h2 {
+            margin-bottom: 8px;
+        }
+
+        .upload-area p {
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .upload-button {
+            display: inline-block;
+
+            background: #2563eb;
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        /* PREVIEW */
+
+        .preview-section {
+            display: none;
+
+            margin-top: 30px;
+        }
+
+        .preview-section.show {
+            display: block;
+        }
+
+        .preview-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .preview-box {
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 15px;
+
+            text-align: center;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            max-height: 350px;
+
+            border-radius: 8px;
+        }
+
+        .image-info {
+            margin-top: 12px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        /* CONTROLS */
+
+        .controls {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-top: 25px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #dbe1ea;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .checkbox-row {
+            grid-column: 1 / -1;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            color: #475569;
+
+            font-size: 14px;
+        }
+
+        .checkbox-row input {
+            width: 17px;
+            height: 17px;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+
+            border: none;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .resize-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .resize-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .reset-btn {
+            background: #e5e7eb;
+            color: #172033;
+        }
+
+        /* RESULT */
+
+        .result {
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            text-align: center;
+
+            font-weight: 700;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        /* DOWNLOAD */
+
+        .download-btn {
+            display: none;
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 14px;
+
+            background: #16a34a;
+
+            color: white;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+        }
+
+        .download-btn.show {
+            display: block;
+        }
+
+        .download-btn:hover {
+            background: #15803d;
+        }
+
+        /* INFO */
+
+        .info-section {
+            max-width: 850px;
+
+            margin: 0 auto 60px;
+
+            padding: 0 20px;
+        }
+
+        .info-box {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 25px;
+        }
+
+        .info-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            color: #64748b;
+
+            line-height: 1.7;
+
+            margin-bottom: 12px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer a {
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .tool-box {
+                padding: 20px;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-row {
+                grid-column: auto;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 430px) {
+
+            nav {
+                display: none;
+            }
+
+            .upload-area {
+                padding: 35px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<header>
+
+    <a href="index.html" class="logo">
+        Smart<span>Tools</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#about">About</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <h1>🖼️ Image Resizer</h1>
+
+    <p>
+        Resize your images online for free.
+        Change width and height, maintain aspect ratio
+        and download your resized image.
+    </p>
+
+</section>
+
+
+<main class="tool-wrapper">
+
+    <div class="tool-box">
+
+        <!-- UPLOAD -->
+
+        <label for="imageInput" class="upload-area">
+
+            <div class="upload-icon">📤</div>
+
+            <h2>Upload Your Image</h2>
+
+            <p>
+                JPG, PNG or WebP images supported
+            </p>
+
+            <span class="upload-button">
+                Choose Image
+            </span>
+
+        </label>
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/jpeg,image/png,image/webp"
+        >
+
+
+        <!-- PREVIEW -->
+
+        <div class="preview-section" id="previewSection">
+
+            <h2 class="preview-title">
+                Image Preview
+            </h2>
+
+            <div class="preview-box">
+
+                <img
+                    id="previewImage"
+                    alt="Image preview"
+                >
+
+                <div
+                    class="image-info"
+                    id="originalInfo">
+                </div>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <div class="input-group">
+
+                    <label for="width">
+                        Width (px)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="width"
+                        min="1"
+                        placeholder="Width"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="height">
+                        Height (px)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="height"
+                        min="1"
+                        placeholder="Height"
+                    >
+
+                </div>
+
+
+                <div class="checkbox-row">
+
+                    <input
+                        type="checkbox"
+                        id="lockRatio"
+                        checked
+                    >
+
+                    <label for="lockRatio">
+                        Lock aspect ratio
+                    </label>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="format">
+                        Output Format
+                    </label>
+
+                    <select id="format">
+
+                        <option value="image/jpeg">
+                            JPG
+                        </option>
+
+                        <option value="image/png">
+                            PNG
+                        </option>
+
+                        <option value="image/webp">
+                            WebP
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="actions">
+
+                <button
+                    class="btn resize-btn"
+                    onclick="resizeImage()"
+                >
+                    Resize Image
+                </button>
+
+                <button
+                    class="btn reset-btn"
+                    onclick="resetTool()"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+
+            <div
+                class="result"
+                id="result">
+            </div>
+
+
+            <a
+                href="#"
+                id="downloadBtn"
+                class="download-btn"
+                download="resized-image.jpg"
+            >
+                ⬇️ Download Resized Image
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<section class="info-section">
+
+    <div class="info-box">
+
+        <h2>How to Resize an Image?</h2>
+
+        <p>
+            1. Click on <strong>Choose Image</strong> and select
+            an image from your device.
+        </p>
+
+        <p>
+            2. Enter the desired width and height.
+        </p>
+
+        <p>
+            3. Keep <strong>Lock aspect ratio</strong> enabled
+            to maintain the original image proportions.
+        </p>
+
+        <p>
+            4. Select your preferred output format.
+        </p>
+
+        <p>
+            5. Click <strong>Resize Image</strong> and download
+            your resized image.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        <a href="index.html">SmartTools</a>
+        — Free Online Tools
+    </p>
+
+    <p style="margin-top:10px; font-size:13px;">
+        © 2026 SmartTools. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    let selectedImage = null;
+    let originalWidth = 0;
+    let originalHeight = 0;
+    let resizedImageURL = null;
+
+
+    /* IMAGE SELECT */
+
+    document
+        .getElementById("imageInput")
+        .addEventListener("change", function(event) {
+
+            const file = event.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+
+                alert("Please select a valid image.");
+
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                selectedImage = new Image();
+
+                selectedImage.onload = function() {
+
+                    originalWidth =
+                        selectedImage.width;
+
+                    originalHeight =
+                        selectedImage.height;
+
+                    document
+                        .getElementById("previewImage")
+                        .src = e.target.result;
+
+                    document
+                        .getElementById("width")
+                        .value = originalWidth;
+
+                    document
+                        .getElementById("height")
+                        .value = originalHeight;
+
+                    document
+                        .getElementById("originalInfo")
+                        .innerText =
+                        "Original size: " +
+                        originalWidth +
+                        " × " +
+                        originalHeight +
+                        " px";
+
+                    document
+                        .getElementById("previewSection")
+                        .classList.add("show");
+
+                };
+
+                selectedImage.src =
+                    e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+    /* LOCK RATIO */
+
+    document
+        .getElementById("width")
+        .addEventListener("input", function() {
+
+            const lock =
+                document.getElementById("lockRatio").checked;
+
+            if (!lock || !originalWidth) {
+                return;
+            }
+
+            const newWidth =
+                parseInt(this.value);
+
+            if (!isNaN(newWidth)) {
+
+                const newHeight =
+                    Math.round(
+                        newWidth *
+                        originalHeight /
+                        originalWidth
+                    );
+
+                document
+                    .getElementById("height")
+                    .value = newHeight;
+            }
+
+        });
+
+
+    document
+        .getElementById("height")
+        .addEventListener("input", function() {
+
+            const lock =
+                document.getElementById("lockRatio").checked;
+
+            if (!lock || !originalHeight) {
+                return;
+            }
+
+            const newHeight =
+                parseInt(this.value);
+
+            if (!isNaN(newHeight)) {
+
+                const newWidth =
+                    Math.round(
+                        newHeight *
+                        originalWidth /
+                        originalHeight
+                    );
+
+                document
+                    .getElementById("width")
+                    .value = newWidth;
+            }
+
+        });
+
+
+    /* RESIZE */
+
+    function resizeImage() {
+
+        if (!selectedImage) {
+
+            alert("Please choose an image first.");
+
+            return;
+        }
+
+        const width =
+            parseInt(
+                document.getElementById("width").value
+            );
+
+        const height =
+            parseInt(
+                document.getElementById("height").value
+            );
+
+        const format =
+            document.getElementById("format").value;
+
+        if (
+            isNaN(width) ||
+            isNaN(height) ||
+            width <= 0 ||
+            height <= 0
+        ) {
+
+            alert("Please enter valid width and height.");
+
+            return;
+        }
+
+
+        const canvas =
+            document.createElement("canvas");
+
+        canvas.width = width;
+        canvas.height = height;
+
+
+        const context =
+            canvas.getContext("2d");
+
+        context.drawImage(
+            selectedImage,
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        let quality = 0.92;
+
+        if (format === "image/jpeg") {
+            quality = 0.90;
+        }
+
+        if (format === "image/webp") {
+            quality = 0.90;
+        }
+
+
+        canvas.toBlob(
+            function(blob) {
+
+                if (!blob) {
+
+                    alert(
+                        "Unable to resize this image."
+                    );
+
+                    return;
+                }
+
+
+                if (resizedImageURL) {
+
+                    URL.revokeObjectURL(
+                        resizedImageURL
+                    );
+                }
+
+
+                resizedImageURL =
+                    URL.createObjectURL(blob);
+
+
+                const downloadBtn =
+                    document.getElementById(
+                        "downloadBtn"
+                    );
+
+
+                downloadBtn.href =
+                    resizedImageURL;
+
+
+                let extension = "jpg";
+
+                if (format === "image/png") {
+                    extension = "png";
+                }
+
+                if (format === "image/webp") {
+                    extension = "webp";
+                }
+
+
+                downloadBtn.download =
+                    "smarttools-resized-image." +
+                    extension;
+
+
+                downloadBtn.classList.add("show");
+
+
+                const result =
+                    document.getElementById("result");
+
+
+                result.innerText =
+                    "✓ Image resized successfully: " +
+                    width +
+                    " × " +
+                    height +
+                    " px";
+
+
+                result.classList.add("show");
+
+            },
+            format,
+            quality
+        );
+
+    }
+
+
+    /* RESET */
+
+    function resetTool() {
+
+        document
+            .getElementById("imageInput")
+            .value = "";
+
+        document
+            .getElementById("previewSection")
+            .classList.remove("show");
+
+        document
+            .getElementById("downloadBtn")
+            .classList.remove("show");
+
+        document
+            .getElementById("result")
+            .classList.remove("show");
+
+        selectedImage = null;
+
+        originalWidth = 0;
+        originalHeight = 0;
+
+        if (resizedImageURL) {
+
+            URL.revokeObjectURL(
+                resizedImageURL
+            );
+
+            resizedImageURL = null;
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
