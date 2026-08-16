@@ -1,144 +1,390 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Tools - Free Online Tools</title>
-    <meta name="description" content="Free online calculators including Age, Percentage, BMI, GST and EMI Calculator.">
+    <title>SmartTools - Free Online Tools & Calculators</title>
+    <meta name="description" content="Free online tools and calculators including Age, Percentage, BMI, GST and EMI Calculator. Fast, simple and easy to use.">
 <meta name="google-site-verification" content="vYD-FMPCi98MsYPl840Vt26KMnVEyKm_4U9jIz-tkjM" />
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">Smart<span>Tools</span></div>
+<header class="header">
+    <a href="#home" class="logo">Smart<span>Tools</span></a>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#tools">Tools</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">🌙</button>
+</header>
 
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <h1>Free Online Tools</h1>
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">⚡ 100% Free Online Tools</div>
+
+        <h1>Smart Tools for <span>Everyday Life</span></h1>
 
         <p>
-            Calculate everything quickly and easily with our free online tools.
+            Calculate, convert and simplify everyday tasks with our
+            fast, free and easy-to-use online tools.
         </p>
-        <p class="creator">By Satish kumar Singh</p>
 
-        <a href="#tools" class="main-btn">Explore Tools</a>
-    </section>
+        <div class="hero-buttons">
+            <a href="#tools" class="main-btn">Explore Tools →</a>
+            <a href="#about" class="secondary-btn">Learn More</a>
+        </div>
 
+    </div>
 
-    <!-- Tools -->
-    <section class="tools-section" id="tools">
-
-        <h2>Our Popular Tools</h2>
-
-        <div class="tools-container">
-
-            <!-- Age Calculator -->
-            <div class="tool-card">
-                <h3>🎂 Age Calculator</h3>
-
-                <label>Date of Birth</label>
-                <input type="date" id="dob">
-
-                <button onclick="calculateAge()">Calculate Age</button>
-
-                <div class="result" id="ageResult"></div>
-            </div>
+</section>
 
 
-            <!-- Percentage Calculator -->
-            <div class="tool-card">
-                <h3>📊 Percentage Calculator</h3>
+<section class="tools-section" id="tools">
 
-                <input type="number" id="obtained" placeholder="Obtained Marks">
-
-                <input type="number" id="total" placeholder="Total Marks">
-
-                <button onclick="calculatePercentage()">Calculate</button>
-
-                <div class="result" id="percentageResult"></div>
-            </div>
+    <div class="section-heading">
+        <span>OUR TOOLS</span>
+        <h2>Free Online Tools</h2>
+        <p>Choose a tool and get your result quickly.</p>
+    </div>
 
 
-            <!-- BMI Calculator -->
-            <div class="tool-card">
-                <h3>⚖️ BMI Calculator</h3>
-
-                <input type="number" id="weight" placeholder="Weight (kg)">
-
-                <input type="number" id="height" placeholder="Height (cm)">
-
-                <button onclick="calculateBMI()">Calculate BMI</button>
-
-                <div class="result" id="bmiResult"></div>
-            </div>
+    <div class="search-box">
+        🔍
+        <input
+            type="text"
+            id="toolSearch"
+            placeholder="Search tools... e.g. Age, BMI, EMI"
+            onkeyup="searchTools()"
+        >
+    </div>
 
 
-            <!-- GST Calculator -->
-            <div class="tool-card">
-                <h3>💰 GST Calculator</h3>
+    <div class="categories">
 
-                <input type="number" id="amount" placeholder="Amount">
+        <button class="category active" onclick="filterTools('all', this)">
+            All
+        </button>
 
-                <input type="number" id="gst" placeholder="GST %">
+        <button class="category" onclick="filterTools('calculator', this)">
+            🧮 Calculators
+        </button>
 
-                <button onclick="calculateGST()">Calculate GST</button>
+        <button class="category" onclick="filterTools('image', this)">
+            🖼️ Image Tools
+        </button>
 
-                <div class="result" id="gstResult"></div>
-            </div>
+        <button class="category" onclick="filterTools('text', this)">
+            📝 Text Tools
+        </button>
+
+        <button class="category" onclick="filterTools('other', this)">
+            🔧 Other Tools
+        </button>
+
+    </div>
 
 
-            <!-- EMI Calculator -->
-            <div class="tool-card">
-                <h3>🏦 EMI Calculator</h3>
+    <div class="tools-container">
 
-                <input type="number" id="loan" placeholder="Loan Amount">
 
-                <input type="number" id="interest" placeholder="Annual Interest %">
+        <!-- AGE -->
 
-                <input type="number" id="months" placeholder="Loan Period (Months)">
+        <div class="tool-card" data-category="calculator" data-name="age calculator">
 
-                <button onclick="calculateEMI()">Calculate EMI</button>
+            <div class="tool-icon">🎂</div>
 
-                <div class="result" id="emiResult"></div>
-            </div>
+            <h3>Age Calculator</h3>
+
+            <p>Calculate your exact age from your date of birth.</p>
+
+            <label>Date of Birth</label>
+
+            <input type="date" id="dob">
+
+            <button onclick="calculateAge()">Calculate Age</button>
+
+            <div class="result" id="ageResult"></div>
 
         </div>
 
-    </section>
+
+        <!-- PERCENTAGE -->
+
+        <div class="tool-card" data-category="calculator" data-name="percentage calculator">
+
+            <div class="tool-icon">📊</div>
+
+            <h3>Percentage Calculator</h3>
+
+            <p>Calculate percentage from obtained and total marks.</p>
+
+            <input
+                type="number"
+                id="obtained"
+                placeholder="Obtained Marks"
+            >
+
+            <input
+                type="number"
+                id="total"
+                placeholder="Total Marks"
+            >
+
+            <button onclick="calculatePercentage()">Calculate</button>
+
+            <div class="result" id="percentageResult"></div>
+
+        </div>
 
 
-    <!-- About -->
-    <section class="about" id="about">
+        <!-- BMI -->
 
+        <div class="tool-card" data-category="calculator" data-name="bmi calculator">
+
+            <div class="tool-icon">⚖️</div>
+
+            <h3>BMI Calculator</h3>
+
+            <p>Calculate your Body Mass Index using weight and height.</p>
+
+            <input
+                type="number"
+                id="weight"
+                placeholder="Weight (kg)"
+            >
+
+            <input
+                type="number"
+                id="height"
+                placeholder="Height (cm)"
+            >
+
+            <button onclick="calculateBMI()">Calculate BMI</button>
+
+            <div class="result" id="bmiResult"></div>
+
+        </div>
+
+
+        <!-- GST -->
+
+        <div class="tool-card" data-category="calculator" data-name="gst calculator">
+
+            <div class="tool-icon">💰</div>
+
+            <h3>GST Calculator</h3>
+
+            <p>Calculate GST amount and total price quickly.</p>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="Amount (₹)"
+            >
+
+            <input
+                type="number"
+                id="gst"
+                placeholder="GST %"
+            >
+
+            <button onclick="calculateGST()">Calculate GST</button>
+
+            <div class="result" id="gstResult"></div>
+
+        </div>
+
+
+        <!-- EMI -->
+
+        <div class="tool-card" data-category="calculator" data-name="emi calculator">
+
+            <div class="tool-icon">🏦</div>
+
+            <h3>EMI Calculator</h3>
+
+            <p>Calculate your monthly loan EMI easily.</p>
+
+            <input
+                type="number"
+                id="loan"
+                placeholder="Loan Amount (₹)"
+            >
+
+            <input
+                type="number"
+                id="interest"
+                placeholder="Annual Interest %"
+            >
+
+            <input
+                type="number"
+                id="months"
+                placeholder="Loan Period (Months)"
+            >
+
+            <button onclick="calculateEMI()">Calculate EMI</button>
+
+            <div class="result" id="emiResult"></div>
+
+        </div>
+
+
+        <!-- COMING SOON -->
+
+        <div class="tool-card coming-soon" data-category="image" data-name="image resizer">
+
+            <div class="tool-icon">🖼️</div>
+
+            <h3>Image Resizer</h3>
+
+            <p>Resize your images quickly and easily.</p>
+
+            <button onclick="comingSoon('Image Resizer')">
+                Coming Soon
+            </button>
+
+        </div>
+
+
+        <div class="tool-card coming-soon" data-category="image" data-name="image compressor">
+
+            <div class="tool-icon">📷</div>
+
+            <h3>Image Compressor</h3>
+
+            <p>Reduce image file size while maintaining quality.</p>
+
+            <button onclick="comingSoon('Image Compressor')">
+                Coming Soon
+            </button>
+
+        </div>
+
+
+        <div class="tool-card coming-soon" data-category="text" data-name="word counter">
+
+            <div class="tool-icon">📝</div>
+
+            <h3>Word Counter</h3>
+
+            <p>Count words and characters in your text.</p>
+
+            <button onclick="comingSoon('Word Counter')">
+                Coming Soon
+            </button>
+
+        </div>
+
+
+        <div class="tool-card coming-soon" data-category="other" data-name="qr code generator">
+
+            <div class="tool-icon">🔲</div>
+
+            <h3>QR Code Generator</h3>
+
+            <p>Create QR codes quickly from text or links.</p>
+
+            <button onclick="comingSoon('QR Code Generator')">
+                Coming Soon
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="why-section">
+
+    <div class="section-heading">
+        <span>WHY SMARTTOOLS?</span>
+        <h2>Simple. Fast. Free.</h2>
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+            <div>⚡</div>
+            <h3>Fast</h3>
+            <p>Get results quickly without unnecessary steps.</p>
+        </div>
+
+        <div class="feature">
+            <div>🔒</div>
+            <h3>Private</h3>
+            <p>Your calculations happen directly in your browser.</p>
+        </div>
+
+        <div class="feature">
+            <div>📱</div>
+            <h3>Mobile Friendly</h3>
+            <p>Use SmartTools comfortably on phone, tablet or PC.</p>
+        </div>
+
+        <div class="feature">
+            <div>🆓</div>
+            <h3>Free</h3>
+            <p>Our everyday tools are free and easy to use.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="about" id="about">
+
+    <div class="section-heading">
+        <span>ABOUT US</span>
         <h2>About SmartTools</h2>
+    </div>
 
-        <p>
-            SmartTools is a simple free online tools website.
-            Use our calculators quickly from your mobile, tablet or computer.
-        </p>
+    <p>
+        SmartTools is a collection of free online tools designed to make
+        everyday calculations and digital tasks simple, fast and convenient.
+        We are continuously adding new useful tools for students,
+        professionals and everyday users.
+    </p>
 
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 SmartTools. All Rights Reserved.</p>
-    </footer>
+</section>
 
 
-    <script src="script.js"></script>
+<footer>
+
+    <div class="footer-logo">
+        Smart<span>Tools</span>
+    </div>
+
+    <p>
+        Free online tools for everyday use.
+    </p>
+
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 SmartTools. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
