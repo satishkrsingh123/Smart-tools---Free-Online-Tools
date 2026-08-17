@@ -650,3 +650,29 @@ footer p {
     }
 
 }
+/* Image Resizer Button */
+
+.tool-link {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 18px;
+
+    background: #2563eb;
+    color: white;
+
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.tool-link:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
