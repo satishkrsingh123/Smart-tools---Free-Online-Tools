@@ -1089,108 +1089,67 @@ let originalHeight = 0;
 let originalFileSize = 0;
 
 let resizedURL = null;
+/* FILE INPUT - MOBILE FIX */
 
+const imageInput = document.getElementById("imageInput");
 
-/* FILE INPUT */
+imageInput.addEventListener("change", function(event) {
 
-const imageInput =
-    document.getElementById("imageInput");
+    const file = event.target.files && event.target.files[0];
 
-
-imageInput.addEventListener(
-    "change",
-    function(event) {
-
-        const file =
-            event.target.files[0];
-
-        if (!file) {
-            return;
-        }
-
-        if (!file.type.startsWith("image/")) {
-
-            alert(
-                "Please select a valid image."
-            );
-
-            return;
-        }
-
-        originalFileSize =
-            file.size;
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(e) {
-
-                selectedImage =
-                    new Image();
-
-
-                selectedImage.onload =
-                    function() {
-
-                        originalWidth =
-                            selectedImage.width;
-
-                        originalHeight =
-                            selectedImage.height;
-
-
-                        document
-                            .getElementById("previewImage")
-                            .src =
-                            e.target.result;
-
-
-                        document
-                            .getElementById("width")
-                            .value =
-                            originalWidth;
-
-
-                        document
-                            .getElementById("height")
-                            .value =
-                            originalHeight;
-
-
-                        document
-                            .getElementById("originalInfo")
-                            .innerHTML =
-                            "Original dimensions: <strong>" +
-                            originalWidth +
-                            " × " +
-                            originalHeight +
-                            " px</strong><br>" +
-                            "Original file size: <strong>" +
-                            formatBytes(originalFileSize) +
-                            "</strong>";
-
-
-                        document
-                            .getElementById("preview")
-                            .classList.add("show");
-
-                    };
-
-
-                selectedImage.src =
-                    e.target.result;
-
-            };
-
-
-        reader.readAsDataURL(file);
-
+    if (!file) {
+        return;
     }
-);
 
+    if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image.");
+        return;
+    }
+
+    originalFileSize = file.size;
+
+    const imageURL = URL.createObjectURL(file);
+
+    selectedImage = new Image();
+
+    selectedImage.onload = function() {
+
+        originalWidth = selectedImage.naturalWidth;
+        originalHeight = selectedImage.naturalHeight;
+
+        document.getElementById("previewImage").src = imageURL;
+
+        document.getElementById("width").value = originalWidth;
+        document.getElementById("height").value = originalHeight;
+
+        document.getElementById("originalInfo").innerHTML =
+            "Original dimensions: <strong>" +
+            originalWidth +
+            " × " +
+            originalHeight +
+            " px</strong><br>" +
+            "Original file size: <strong>" +
+            formatBytes(originalFileSize) +
+            "</strong>";
+
+        document.getElementById("preview").classList.add("show");
+
+        // Image successfully loaded
+        console.log("Image loaded successfully");
+
+    };
+
+    selectedImage.onerror = function() {
+
+        URL.revokeObjectURL(imageURL);
+
+        alert("Unable to load this image. Please try another image.");
+
+    };
+
+    selectedImage.src = imageURL;
+
+});
 
 /* MOBILE SAFE UPLOAD */
 
