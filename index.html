@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,23 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SmartTools - Free Online Tools & Calculators</title>
-    <meta name="description" content="Free online tools and calculators including Age, Percentage, BMI, GST and EMI Calculator. Fast, simple and easy to use.">
-<meta name="google-site-verification" content="vYD-FMPCi98MsYPl840Vt26KMnVEyKm_4U9jIz-tkjM" />
+
+    <meta
+        name="description"
+        content="Free online tools and calculators including Age, Percentage, BMI, GST and EMI Calculator. Fast, simple and easy to use."
+    >
+
+    <meta
+        name="google-site-verification"
+        content="vYD-FMPCi98MsYPl840Vt26KMnVEyKm_4U9jIz-tkjM"
+    >
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="header">
-    <a href="#home" class="logo">Smart<span>Tools</span></a>
 
-    <nav>
+    <a href="#home" class="logo">
+        Smart<span>Tools</span>
+    </a>
+
+    <nav aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#tools">Tools</a>
         <a href="#about">About</a>
     </nav>
 
-    <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">🌙</button>
+    <button
+        type="button"
+        class="theme-btn"
+        id="themeBtn"
+        title="Toggle dark mode"
+        aria-label="Toggle dark mode"
+    >
+        🌙
+    </button>
+
 </header>
 
 
@@ -32,7 +52,9 @@
 
         <div class="badge">⚡ 100% Free Online Tools</div>
 
-        <h1>Smart Tools for <span>Everyday Life</span></h1>
+        <h1>
+            Smart Tools for <span>Everyday Life</span>
+        </h1>
 
         <p>
             Calculate, convert and simplify everyday tasks with our
@@ -59,35 +81,56 @@
 
 
     <div class="search-box">
-        🔍
+        <span aria-hidden="true">🔍</span>
+
         <input
-            type="text"
+            type="search"
             id="toolSearch"
             placeholder="Search tools... e.g. Age, BMI, EMI"
-            onkeyup="searchTools()"
+            autocomplete="off"
         >
     </div>
 
 
     <div class="categories">
 
-        <button class="category active" onclick="filterTools('all', this)">
+        <button
+            type="button"
+            class="category active"
+            data-category="all"
+        >
             All
         </button>
 
-        <button class="category" onclick="filterTools('calculator', this)">
+        <button
+            type="button"
+            class="category"
+            data-category="calculator"
+        >
             🧮 Calculators
         </button>
 
-        <button class="category" onclick="filterTools('image', this)">
+        <button
+            type="button"
+            class="category"
+            data-category="image"
+        >
             🖼️ Image Tools
         </button>
 
-        <button class="category" onclick="filterTools('text', this)">
+        <button
+            type="button"
+            class="category"
+            data-category="text"
+        >
             📝 Text Tools
         </button>
 
-        <button class="category" onclick="filterTools('other', this)">
+        <button
+            type="button"
+            class="category"
+            data-category="other"
+        >
             🔧 Other Tools
         </button>
 
@@ -99,205 +142,337 @@
 
         <!-- AGE -->
 
-        <div class="tool-card" data-category="calculator" data-name="age calculator">
+        <div
+            class="tool-card"
+            data-category="calculator"
+            data-name="age calculator"
+        >
 
             <div class="tool-icon">🎂</div>
 
             <h3>Age Calculator</h3>
 
-            <p>Calculate your exact age from your date of birth.</p>
+            <p>
+                Calculate your exact age from your date of birth.
+            </p>
 
-            <label>Date of Birth</label>
+            <label for="dob">Date of Birth</label>
 
-            <input type="date" id="dob">
+            <input
+                type="date"
+                id="dob"
+            >
 
-            <button onclick="calculateAge()">Calculate Age</button>
+            <button
+                type="button"
+                id="ageCalculateBtn"
+            >
+                Calculate Age
+            </button>
 
-            <div class="result" id="ageResult"></div>
+            <div
+                class="result"
+                id="ageResult"
+                aria-live="polite"
+            ></div>
 
         </div>
 
 
         <!-- PERCENTAGE -->
 
-        <div class="tool-card" data-category="calculator" data-name="percentage calculator">
+        <div
+            class="tool-card"
+            data-category="calculator"
+            data-name="percentage calculator"
+        >
 
             <div class="tool-icon">📊</div>
 
             <h3>Percentage Calculator</h3>
 
-            <p>Calculate percentage from obtained and total marks.</p>
+            <p>
+                Calculate percentage from obtained and total marks.
+            </p>
 
             <input
                 type="number"
                 id="obtained"
                 placeholder="Obtained Marks"
+                min="0"
+                step="any"
             >
 
             <input
                 type="number"
                 id="total"
                 placeholder="Total Marks"
+                min="0"
+                step="any"
             >
 
-            <button onclick="calculatePercentage()">Calculate</button>
+            <button
+                type="button"
+                id="percentageCalculateBtn"
+            >
+                Calculate
+            </button>
 
-            <div class="result" id="percentageResult"></div>
+            <div
+                class="result"
+                id="percentageResult"
+                aria-live="polite"
+            ></div>
 
         </div>
 
 
         <!-- BMI -->
 
-        <div class="tool-card" data-category="calculator" data-name="bmi calculator">
+        <div
+            class="tool-card"
+            data-category="calculator"
+            data-name="bmi calculator"
+        >
 
             <div class="tool-icon">⚖️</div>
 
             <h3>BMI Calculator</h3>
 
-            <p>Calculate your Body Mass Index using weight and height.</p>
+            <p>
+                Calculate your Body Mass Index using weight and height.
+            </p>
 
             <input
                 type="number"
                 id="weight"
                 placeholder="Weight (kg)"
+                min="0"
+                step="any"
             >
 
             <input
                 type="number"
                 id="height"
                 placeholder="Height (cm)"
+                min="0"
+                step="any"
             >
 
-            <button onclick="calculateBMI()">Calculate BMI</button>
+            <button
+                type="button"
+                id="bmiCalculateBtn"
+            >
+                Calculate BMI
+            </button>
 
-            <div class="result" id="bmiResult"></div>
+            <div
+                class="result"
+                id="bmiResult"
+                aria-live="polite"
+            ></div>
 
         </div>
 
 
         <!-- GST -->
 
-        <div class="tool-card" data-category="calculator" data-name="gst calculator">
+        <div
+            class="tool-card"
+            data-category="calculator"
+            data-name="gst calculator"
+        >
 
             <div class="tool-icon">💰</div>
 
             <h3>GST Calculator</h3>
 
-            <p>Calculate GST amount and total price quickly.</p>
+            <p>
+                Calculate GST amount and total price quickly.
+            </p>
 
             <input
                 type="number"
                 id="amount"
                 placeholder="Amount (₹)"
+                min="0"
+                step="any"
             >
 
             <input
                 type="number"
                 id="gst"
                 placeholder="GST %"
+                min="0"
+                step="any"
             >
 
-            <button onclick="calculateGST()">Calculate GST</button>
+            <button
+                type="button"
+                id="gstCalculateBtn"
+            >
+                Calculate GST
+            </button>
 
-            <div class="result" id="gstResult"></div>
+            <div
+                class="result"
+                id="gstResult"
+                aria-live="polite"
+            ></div>
 
         </div>
 
 
         <!-- EMI -->
 
-        <div class="tool-card" data-category="calculator" data-name="emi calculator">
+        <div
+            class="tool-card"
+            data-category="calculator"
+            data-name="emi calculator"
+        >
 
             <div class="tool-icon">🏦</div>
 
             <h3>EMI Calculator</h3>
 
-            <p>Calculate your monthly loan EMI easily.</p>
+            <p>
+                Calculate your monthly loan EMI easily.
+            </p>
 
             <input
                 type="number"
                 id="loan"
                 placeholder="Loan Amount (₹)"
+                min="0"
+                step="any"
             >
 
             <input
                 type="number"
                 id="interest"
                 placeholder="Annual Interest %"
+                min="0"
+                step="any"
             >
 
             <input
                 type="number"
                 id="months"
                 placeholder="Loan Period (Months)"
+                min="0"
+                step="any"
             >
 
-            <button onclick="calculateEMI()">Calculate EMI</button>
+            <button
+                type="button"
+                id="emiCalculateBtn"
+            >
+                Calculate EMI
+            </button>
 
-            <div class="result" id="emiResult"></div>
+            <div
+                class="result"
+                id="emiResult"
+                aria-live="polite"
+            ></div>
 
         </div>
-           <!-- IMAGE RESIZER -->
 
-<!-- IMAGE RESIZER -->
 
-<div class="tool-card" data-category="image" data-name="image resizer">
+        <!-- IMAGE RESIZER -->
 
-    <div class="tool-icon">🖼️</div>
+        <div
+            class="tool-card"
+            data-category="image"
+            data-name="image resizer"
+        >
 
-    <h3>Image Resizer</h3>
+            <div class="tool-icon">🖼️</div>
 
-    <p>Resize JPG, PNG and WebP images quickly and easily.</p>
+            <h3>Image Resizer</h3>
 
-    <a href="image-resizer.html" class="tool-link">
-        Resize Image →
-    </a>
+            <p>
+                Resize JPG, PNG and WebP images quickly and easily.
+            </p>
 
-</div>
+            <a
+                href="image-resizer.html"
+                class="tool-link"
+            >
+                Resize Image →
+            </a>
+
+        </div>
+
+
         <!-- COMING SOON -->
 
-       
-
-        <div class="tool-card coming-soon" data-category="image" data-name="image compressor">
+        <div
+            class="tool-card coming-soon"
+            data-category="image"
+            data-name="image compressor"
+        >
 
             <div class="tool-icon">📷</div>
 
             <h3>Image Compressor</h3>
 
-            <p>Reduce image file size while maintaining quality.</p>
+            <p>
+                Reduce image file size while maintaining quality.
+            </p>
 
-            <button onclick="comingSoon('Image Compressor')">
+            <button
+                type="button"
+                data-coming-soon="Image Compressor"
+            >
                 Coming Soon
             </button>
 
         </div>
 
 
-        <div class="tool-card coming-soon" data-category="text" data-name="word counter">
+        <div
+            class="tool-card coming-soon"
+            data-category="text"
+            data-name="word counter"
+        >
 
             <div class="tool-icon">📝</div>
 
             <h3>Word Counter</h3>
 
-            <p>Count words and characters in your text.</p>
+            <p>
+                Count words and characters in your text.
+            </p>
 
-            <button onclick="comingSoon('Word Counter')">
+            <button
+                type="button"
+                data-coming-soon="Word Counter"
+            >
                 Coming Soon
             </button>
 
         </div>
 
 
-        <div class="tool-card coming-soon" data-category="other" data-name="qr code generator">
+        <div
+            class="tool-card coming-soon"
+            data-category="other"
+            data-name="qr code generator"
+        >
 
             <div class="tool-icon">🔲</div>
 
             <h3>QR Code Generator</h3>
 
-            <p>Create QR codes quickly from text or links.</p>
+            <p>
+                Create QR codes quickly from text or links.
+            </p>
 
-            <button onclick="comingSoon('QR Code Generator')">
+            <button
+                type="button"
+                data-coming-soon="QR Code Generator"
+            >
                 Coming Soon
             </button>
 
@@ -320,25 +495,33 @@
         <div class="feature">
             <div>⚡</div>
             <h3>Fast</h3>
-            <p>Get results quickly without unnecessary steps.</p>
+            <p>
+                Get results quickly without unnecessary steps.
+            </p>
         </div>
 
         <div class="feature">
             <div>🔒</div>
             <h3>Private</h3>
-            <p>Your calculations happen directly in your browser.</p>
+            <p>
+                Your calculations happen directly in your browser.
+            </p>
         </div>
 
         <div class="feature">
             <div>📱</div>
             <h3>Mobile Friendly</h3>
-            <p>Use SmartTools comfortably on phone, tablet or PC.</p>
+            <p>
+                Use SmartTools comfortably on phone, tablet or PC.
+            </p>
         </div>
 
         <div class="feature">
             <div>🆓</div>
             <h3>Free</h3>
-            <p>Our everyday tools are free and easy to use.</p>
+            <p>
+                Our everyday tools are free and easy to use.
+            </p>
         </div>
 
     </div>
@@ -386,7 +569,7 @@
 </footer>
 
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
 </body>
 </html>
