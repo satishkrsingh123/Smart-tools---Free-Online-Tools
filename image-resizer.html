@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,8 @@
 
 <title>Image Resizer - SmartTools</title>
 
-<meta name="description" content="Free online image resizer. Resize JPG, PNG and WebP images by pixels, percentage or file size.">
+<meta name="description"
+content="Free online image resizer. Resize JPG, PNG and WebP images by pixels, percentage or target KB/MB.">
 
 <style>
 *{
@@ -19,6 +21,7 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     background:#f5f7fb;
     color:#1f2937;
+    line-height:1.6;
 }
 
 header{
@@ -34,7 +37,7 @@ header{
     text-decoration:none;
     color:#111827;
     font-size:25px;
-    font-weight:700;
+    font-weight:800;
 }
 
 .logo span{
@@ -44,7 +47,7 @@ header{
 .back{
     text-decoration:none;
     color:#2563eb;
-    font-weight:600;
+    font-weight:700;
 }
 
 .container{
@@ -59,29 +62,36 @@ header{
 
 .title h1{
     font-size:38px;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .title p{
     color:#6b7280;
-    line-height:1.6;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    margin-bottom:22px;
 }
 
 .upload-area{
     background:#fff;
     border:2px dashed #2563eb;
     border-radius:16px;
-    padding:45px 20px;
+    padding:40px 20px;
     text-align:center;
 }
 
 .upload-icon{
     font-size:48px;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .upload-area h2{
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .upload-area p{
@@ -89,31 +99,34 @@ header{
     margin-bottom:20px;
 }
 
-.choose-btn{
-    display:inline-block;
+/*
+    IMPORTANT:
+    This is the REAL native file input.
+    It is NOT hidden and is NOT opened through
+    JavaScript. This makes mobile file picking
+    much more reliable.
+*/
+.file-input{
+    width:100%;
+    max-width:390px;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    background:#fff;
+    color:#111827;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.file-input::file-selector-button{
+    border:0;
     background:#2563eb;
     color:#fff;
-    border:0;
-    padding:14px 26px;
-    border-radius:9px;
-    font-size:16px;
+    padding:10px 16px;
+    margin-right:12px;
+    border-radius:7px;
     font-weight:700;
     cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
-    user-select:none;
-}
-
-.choose-btn:active{
-    transform:scale(.98);
-}
-
-#imageInput{
-    position:absolute;
-    width:1px;
-    height:1px;
-    opacity:0;
-    overflow:hidden;
 }
 
 .editor{
@@ -125,17 +138,9 @@ header{
     display:block;
 }
 
-.card{
-    background:#fff;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(0,0,0,.07);
-    margin-bottom:22px;
-}
-
 .card h2{
-    margin-bottom:18px;
     font-size:22px;
+    margin-bottom:18px;
 }
 
 .preview{
@@ -146,7 +151,7 @@ header{
     display:block;
     max-width:100%;
     max-height:450px;
-    margin:0 auto;
+    margin:auto;
     border-radius:10px;
     background:#f1f3f5;
 }
@@ -168,11 +173,10 @@ header{
     border:1px solid #2563eb;
     background:#fff;
     color:#2563eb;
-    padding:10px 16px;
+    padding:10px 17px;
     border-radius:8px;
     font-weight:700;
     cursor:pointer;
-    touch-action:manipulation;
 }
 
 .mode-btn.active{
@@ -204,6 +208,13 @@ header{
     border-radius:8px;
     font-size:16px;
     background:#fff;
+    color:#111827;
+}
+
+.field input:focus,
+.field select:focus{
+    outline:none;
+    border-color:#2563eb;
 }
 
 .field small{
@@ -232,12 +243,15 @@ header{
     font-size:16px;
     font-weight:700;
     cursor:pointer;
-    touch-action:manipulation;
 }
 
 .primary{
     background:#2563eb;
     color:#fff;
+}
+
+.primary:hover{
+    background:#1d4ed8;
 }
 
 .secondary{
@@ -247,6 +261,7 @@ header{
 
 .btn:disabled{
     opacity:.6;
+    cursor:not-allowed;
 }
 
 .result{
@@ -267,8 +282,26 @@ header{
 }
 
 .result-info{
-    line-height:1.8;
+    line-height:1.9;
     margin-bottom:18px;
+}
+
+.note{
+    margin-top:18px;
+    padding:12px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.warning{
+    margin-top:12px;
+    padding:11px;
+    background:#fff7ed;
+    color:#9a3412;
+    border-radius:8px;
+    font-size:14px;
 }
 
 footer{
@@ -276,12 +309,16 @@ footer{
     background:#111827;
     color:#fff;
     text-align:center;
-    padding:25px;
-    line-height:1.8;
+    padding:28px 20px;
 }
 
 footer span{
     color:#60a5fa;
+}
+
+footer p{
+    color:#9ca3af;
+    margin-top:5px;
 }
 
 @media(max-width:650px){
@@ -308,12 +345,7 @@ footer span{
     }
 
     .upload-area{
-        padding:35px 15px;
-    }
-
-    .choose-btn{
-        width:100%;
-        max-width:300px;
+        padding:32px 14px;
     }
 
     .grid{
@@ -332,8 +364,17 @@ footer span{
         width:100%;
     }
 
+    .mode-buttons{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
     .mode-btn{
-        flex:1;
+        width:100%;
+    }
+
+    .file-input{
+        max-width:100%;
     }
 }
 </style>
@@ -342,356 +383,1928 @@ footer span{
 <body>
 
 <header>
-    <a href="index.html" class="logo">Smart<span>Tools</span></a>
-    <a href="index.html" class="back">← Back</a>
+
+    <a href="index.html" class="logo">
+        Smart<span>Tools</span>
+    </a>
+
+    <a href="index.html" class="back">
+        ← Back
+    </a>
+
 </header>
+
 
 <main class="container">
 
-    <div class="title">
-        <h1>🖼️ Image Resizer</h1>
-        <p>Resize images by pixels, percentage or target file size. Fast, free and works directly in your browser.</p>
+<div class="title">
+
+    <h1>🖼️ Image Resizer</h1>
+
+    <p>
+        Resize images by pixels, percentage or target KB/MB.
+    </p>
+
+</div>
+
+
+<!-- IMAGE UPLOAD -->
+
+<div class="upload-area">
+
+    <div class="upload-icon">📤</div>
+
+    <h2>Choose Your Image</h2>
+
+    <p>
+        JPG, PNG and WebP supported
+    </p>
+
+    <!-- REAL NATIVE FILE PICKER -->
+    <input
+        type="file"
+        id="imageInput"
+        class="file-input"
+        accept="image/jpeg,image/png,image/webp">
+
+</div>
+
+
+<section
+    class="editor"
+    id="editor">
+
+
+<!-- ORIGINAL IMAGE -->
+
+<div class="card preview">
+
+    <h2>Original Image</h2>
+
+    <img
+        id="previewImage"
+        alt="Original image">
+
+    <div
+        class="info"
+        id="originalInfo">
     </div>
 
-    <div class="upload-area">
-        <div class="upload-icon">📤</div>
-        <h2>Choose Your Image</h2>
-        <p>JPG, PNG and WebP supported</p>
+</div>
 
-        <label for="imageInput" class="choose-btn">
-            Choose Image
-        </label>
 
-        <input
-            type="file"
-            id="imageInput"
-            accept="image/jpeg,image/png,image/webp">
+<!-- SETTINGS -->
+
+<div class="card">
+
+    <h2>Resize Settings</h2>
+
+
+    <div class="mode-buttons">
+
+        <button
+            type="button"
+            class="mode-btn active"
+            data-mode="pixels">
+
+            Pixels
+
+        </button>
+
+        <button
+            type="button"
+            class="mode-btn"
+            data-mode="percentage">
+
+            Percentage
+
+        </button>
+
+        <button
+            type="button"
+            class="mode-btn"
+            data-mode="size">
+
+            KB / MB
+
+        </button>
+
     </div>
 
-    <section class="editor" id="editor">
 
-        <div class="card preview">
-            <h2>Original Image</h2>
-            <img id="previewImage" alt="Original image preview">
-            <div class="info" id="originalInfo"></div>
-        </div>
+    <!-- PIXELS -->
 
-        <div class="card">
-            <h2>Resize Settings</h2>
+    <div id="pixelsMode">
 
-            <div class="mode-buttons">
-                <button type="button" class="mode-btn active" data-mode="pixels">Pixels</button>
-                <button type="button" class="mode-btn" data-mode="percentage">Percentage</button>
-                <button type="button" class="mode-btn" data-mode="size">KB / MB</button>
-            </div>
+        <div class="grid">
 
-            <div id="pixelsMode">
-                <div class="grid">
-                    <div class="field">
-                        <label for="width">Width (px)</label>
-                        <input type="number" id="width" min="1">
-                    </div>
-                    <div class="field">
-                        <label for="height">Height (px)</label>
-                        <input type="number" id="height" min="1">
-                    </div>
-                </div>
-            </div>
+            <div class="field">
 
-            <div id="percentageMode" style="display:none;">
-                <div class="field">
-                    <label for="percentage">Percentage</label>
-                    <input type="number" id="percentage" min="1" max="1000" value="50">
-                    <small>Example: 50 = half the original size.</small>
-                </div>
-            </div>
-
-            <div id="sizeMode" style="display:none;">
-                <div class="field">
-                    <label>Target File Size</label>
-                    <div class="target-row">
-                        <input type="number" id="targetSize" min="1" step="0.1" placeholder="Example: 200">
-                        <select id="targetUnit">
-                            <option value="KB">KB</option>
-                            <option value="MB">MB</option>
-                        </select>
-                    </div>
-                    <small>Final size may be slightly different from the target.</small>
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="field">
-                    <label for="format">Output Format</label>
-                    <select id="format">
-                        <option value="image/jpeg">JPG</option>
-                        <option value="image/png">PNG</option>
-                        <option value="image/webp">WebP</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="quality">Quality: <span id="qualityValue">90%</span></label>
-                    <input type="range" id="quality" min="10" max="100" value="90">
-                </div>
-            </div>
-
-            <div class="actions">
-                <button type="button" class="btn primary" id="resizeBtn">Resize Image</button>
-                <label for="imageInput" class="btn secondary" style="text-align:center;">
-                    Choose Another Image
+                <label for="width">
+                    Width (px)
                 </label>
+
+                <input
+                    type="number"
+                    id="width"
+                    min="1"
+                    inputmode="numeric">
+
             </div>
+
+
+            <div class="field">
+
+                <label for="height">
+                    Height (px)
+                </label>
+
+                <input
+                    type="number"
+                    id="height"
+                    min="1"
+                    inputmode="numeric">
+
+            </div>
+
         </div>
 
-        <div class="card result" id="result">
-            <h2>Resized Image</h2>
-            <img id="resultImage" alt="Resized image">
-            <div class="result-info" id="resultInfo"></div>
-            <a id="downloadBtn" class="btn primary" download="resized-image.jpg"
-               style="display:inline-block;text-decoration:none;">
-                ⬇️ Download Image
-            </a>
+        <small>
+            Aspect ratio is automatically maintained.
+        </small>
+
+    </div>
+
+
+    <!-- PERCENTAGE -->
+
+    <div
+        id="percentageMode"
+        style="display:none;">
+
+        <div class="field">
+
+            <label for="percentage">
+                Percentage
+            </label>
+
+            <input
+                type="number"
+                id="percentage"
+                min="1"
+                max="1000"
+                value="50"
+                inputmode="decimal">
+
+            <small>
+                Example: 50% = half the original dimensions.
+            </small>
+
         </div>
 
-    </section>
+    </div>
+
+
+    <!-- TARGET SIZE -->
+
+    <div
+        id="sizeMode"
+        style="display:none;">
+
+        <div class="field">
+
+            <label for="targetSize">
+                Target File Size
+            </label>
+
+            <div class="target-row">
+
+                <input
+                    type="number"
+                    id="targetSize"
+                    min="1"
+                    step="0.1"
+                    placeholder="Example: 500"
+                    inputmode="decimal">
+
+                <select id="targetUnit">
+
+                    <option value="KB">
+                        KB
+                    </option>
+
+                    <option value="MB">
+                        MB
+                    </option>
+
+                </select>
+
+            </div>
+
+            <small>
+                Dimensions and compression will automatically adjust
+                to get as close as practical to your target.
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMAT -->
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label for="format">
+                Output Format
+            </label>
+
+            <select id="format">
+
+                <option value="image/jpeg">
+                    JPG
+                </option>
+
+                <option value="image/webp">
+                    WebP
+                </option>
+
+                <option value="image/png">
+                    PNG
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- QUALITY -->
+
+        <div class="field">
+
+            <label for="quality">
+                Quality:
+                <span id="qualityValue">
+                    90%
+                </span>
+            </label>
+
+            <input
+                type="range"
+                id="quality"
+                min="10"
+                max="100"
+                value="90">
+
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            type="button"
+            class="btn primary"
+            id="resizeBtn">
+
+            Resize Image
+
+        </button>
+
+
+        <button
+            type="button"
+            class="btn secondary"
+            id="anotherBtn">
+
+            Choose Another Image
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div
+    class="card result"
+    id="result">
+
+    <h2>Resized Image</h2>
+
+    <img
+        id="resultImage"
+        alt="Resized image">
+
+    <div
+        class="result-info"
+        id="resultInfo">
+    </div>
+
+    <a
+        id="downloadBtn"
+        class="btn primary"
+        download="smarttools-resized-image.jpg"
+        style="display:inline-block;text-decoration:none;">
+
+        ⬇️ Download Image
+
+    </a>
+
+    <div class="note">
+
+        Target size is calculated automatically.
+        The final file can differ slightly because image
+        compression depends on the image and selected format.
+
+    </div>
+
+    <div
+        class="warning"
+        id="resultWarning"
+        style="display:none;">
+    </div>
+
+</div>
+
+</section>
 
 </main>
 
+
 <footer>
-    <div>Smart<span>Tools</span></div>
-    <p>Free online tools for everyday use.</p>
-    <p>© 2026 SmartTools. All Rights Reserved.</p>
+
+    <div>
+        Smart<span>Tools</span>
+    </div>
+
+    <p>
+        Free online tools for everyday use.
+    </p>
+
+    <p>
+        © 2026 SmartTools. All Rights Reserved.
+    </p>
+
 </footer>
+
 
 <script>
 
-const imageInput     = document.getElementById("imageInput");
-const editor         = document.getElementById("editor");
-const previewImage   = document.getElementById("previewImage");
-const originalInfo   = document.getElementById("originalInfo");
-const widthInput     = document.getElementById("width");
-const heightInput    = document.getElementById("height");
-const percentageInput= document.getElementById("percentage");
-const targetSizeInput= document.getElementById("targetSize");
-const targetUnit     = document.getElementById("targetUnit");
-const formatSelect   = document.getElementById("format");
-const qualityInput   = document.getElementById("quality");
-const qualityValue   = document.getElementById("qualityValue");
-const resizeBtn      = document.getElementById("resizeBtn");
-const result         = document.getElementById("result");
-const resultImage    = document.getElementById("resultImage");
-const resultInfo     = document.getElementById("resultInfo");
-const downloadBtn    = document.getElementById("downloadBtn");
-const pixelsMode     = document.getElementById("pixelsMode");
-const percentageMode = document.getElementById("percentageMode");
-const sizeMode       = document.getElementById("sizeMode");
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const imageInput =
+    document.getElementById("imageInput");
+
+const anotherBtn =
+    document.getElementById("anotherBtn");
+
+const editor =
+    document.getElementById("editor");
+
+const previewImage =
+    document.getElementById("previewImage");
+
+const originalInfo =
+    document.getElementById("originalInfo");
+
+const widthInput =
+    document.getElementById("width");
+
+const heightInput =
+    document.getElementById("height");
+
+const percentageInput =
+    document.getElementById("percentage");
+
+const targetSizeInput =
+    document.getElementById("targetSize");
+
+const targetUnit =
+    document.getElementById("targetUnit");
+
+const formatSelect =
+    document.getElementById("format");
+
+const qualityInput =
+    document.getElementById("quality");
+
+const qualityValue =
+    document.getElementById("qualityValue");
+
+const resizeBtn =
+    document.getElementById("resizeBtn");
+
+const result =
+    document.getElementById("result");
+
+const resultImage =
+    document.getElementById("resultImage");
+
+const resultInfo =
+    document.getElementById("resultInfo");
+
+const resultWarning =
+    document.getElementById("resultWarning");
+
+const downloadBtn =
+    document.getElementById("downloadBtn");
+
+const pixelsMode =
+    document.getElementById("pixelsMode");
+
+const percentageMode =
+    document.getElementById("percentageMode");
+
+const sizeMode =
+    document.getElementById("sizeMode");
+
+const modeButtons =
+    document.querySelectorAll(".mode-btn");
+
+
+/* =====================================================
+   STATE
+===================================================== */
 
 let selectedImage = null;
-let selectedFile  = null;
+let selectedFile = null;
+
 let originalWidth = 0;
-let originalHeight= 0;
-let originalURL   = null;
-let resultURL     = null;
+let originalHeight = 0;
+
+let originalURL = null;
+let resultURL = null;
+
+
+/*
+    Maximum canvas pixels for stability on mobile.
+
+    This prevents very large images from crashing
+    the browser because of excessive canvas memory.
+*/
+const MAX_CANVAS_PIXELS = 25000000;
+
+
+/* =====================================================
+   FILE SELECTION
+===================================================== */
+
+/*
+    IMPORTANT:
+    No imageInput.click() is used here.
+
+    The native <input type="file"> is directly visible,
+    so mobile browsers can open their own file picker.
+*/
 
 imageInput.addEventListener("change", function(){
 
-    const file = imageInput.files[0];
-    if(!file) return;
+    const pickedFile =
+        imageInput.files &&
+        imageInput.files[0];
 
-    if(
-        file.type !== "image/jpeg" &&
-        file.type !== "image/png"  &&
-        file.type !== "image/webp"
-    ){
-        alert("Please select JPG, PNG or WebP image.");
-        imageInput.value = "";
+    if(!pickedFile){
         return;
     }
 
-    selectedFile = file;
-    if(originalURL) URL.revokeObjectURL(originalURL);
-    originalURL = URL.createObjectURL(file);
 
-    const img = new Image();
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
+
+
+    if(!allowedTypes.includes(pickedFile.type)){
+
+        alert(
+            "Please select a JPG, PNG or WebP image."
+        );
+
+        imageInput.value = "";
+
+        return;
+    }
+
+
+    selectedFile = pickedFile;
+
+
+    if(originalURL){
+
+        URL.revokeObjectURL(
+            originalURL
+        );
+
+        originalURL = null;
+    }
+
+
+    if(resultURL){
+
+        URL.revokeObjectURL(
+            resultURL
+        );
+
+        resultURL = null;
+    }
+
+
+    result.classList.remove("show");
+
+
+    originalURL =
+        URL.createObjectURL(
+            selectedFile
+        );
+
+
+    const img =
+        new Image();
+
 
     img.onload = function(){
-        selectedImage  = img;
-        originalWidth  = img.naturalWidth;
-        originalHeight = img.naturalHeight;
 
-        previewImage.src  = originalURL;
-        widthInput.value  = originalWidth;
-        heightInput.value = originalHeight;
+        selectedImage = img;
+
+        originalWidth =
+            img.naturalWidth;
+
+        originalHeight =
+            img.naturalHeight;
+
+
+        if(
+            !originalWidth ||
+            !originalHeight
+        ){
+
+            resetImageState(
+                "The selected image has invalid dimensions."
+            );
+
+            return;
+        }
+
+
+        previewImage.src =
+            originalURL;
+
+
+        widthInput.value =
+            originalWidth;
+
+        heightInput.value =
+            originalHeight;
+
 
         originalInfo.innerHTML =
-            "Dimensions: <strong>" + originalWidth + " × " + originalHeight + " px</strong><br>" +
-            "File size: <strong>" + formatBytes(file.size) + "</strong>";
 
-        editor.classList.add("show");
-        result.classList.remove("show");
+            "Dimensions: <strong>" +
+
+            originalWidth +
+
+            " × " +
+
+            originalHeight +
+
+            " px</strong><br>" +
+
+            "Original size: <strong>" +
+
+            formatBytes(
+                selectedFile.size
+            ) +
+
+            "</strong>";
+
+
+        editor.classList.add(
+            "show"
+        );
+
 
         setTimeout(function(){
-            editor.scrollIntoView({ behavior:"smooth", block:"start" });
-        }, 100);
+
+            editor.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        },100);
+
     };
+
 
     img.onerror = function(){
-        alert("Image could not be loaded. Please try another image.");
-        URL.revokeObjectURL(originalURL);
-        originalURL = null; selectedImage = null;
-        selectedFile = null; imageInput.value = "";
+
+        resetImageState(
+            "This image could not be loaded. Please try another image."
+        );
+
     };
 
-    img.src = originalURL;
+
+    img.src =
+        originalURL;
+
 });
 
-const modeButtons = document.querySelectorAll(".mode-btn");
 
-modeButtons.forEach(function(button){
-    button.addEventListener("click", function(){
-        modeButtons.forEach(function(btn){ btn.classList.remove("active"); });
-        button.classList.add("active");
-        const mode = button.dataset.mode;
-        pixelsMode.style.display     = mode === "pixels"     ? "block" : "none";
-        percentageMode.style.display = mode === "percentage" ? "block" : "none";
-        sizeMode.style.display       = mode === "size"       ? "block" : "none";
-    });
-});
+/* =====================================================
+   CHOOSE ANOTHER IMAGE
+===================================================== */
 
-qualityInput.addEventListener("input", function(){
-    qualityValue.textContent = qualityInput.value + "%";
-});
+anotherBtn.addEventListener(
+    "click",
+    function(){
 
-widthInput.addEventListener("input", function(){
-    if(!selectedImage) return;
-    const w = parseInt(widthInput.value);
-    if(!w || w <= 0) return;
-    heightInput.value = Math.round(w * originalHeight / originalWidth);
-});
+        /*
+            Reset value first so selecting the
+            same image again also triggers change.
+        */
 
-heightInput.addEventListener("input", function(){
-    if(!selectedImage) return;
-    const h = parseInt(heightInput.value);
-    if(!h || h <= 0) return;
-    widthInput.value = Math.round(h * originalWidth / originalHeight);
-});
+        imageInput.value = "";
 
-resizeBtn.addEventListener("click", async function(){
+        imageInput.focus();
 
-    if(!selectedImage){ alert("Please choose an image first."); return; }
+    }
+);
 
-    resizeBtn.disabled    = true;
-    resizeBtn.textContent = "Processing...";
 
-    try{
-        const mode = document.querySelector(".mode-btn.active").dataset.mode;
-        let newWidth  = originalWidth;
-        let newHeight = originalHeight;
+/* =====================================================
+   MODES
+===================================================== */
 
-        if(mode === "pixels"){
-            newWidth  = parseInt(widthInput.value);
-            newHeight = parseInt(heightInput.value);
-            if(!newWidth || !newHeight || newWidth <= 0 || newHeight <= 0){
-                alert("Enter valid width and height."); return;
+modeButtons.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                modeButtons.forEach(
+                    function(btn){
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const mode =
+                    button.dataset.mode;
+
+
+                pixelsMode.style.display =
+                    mode === "pixels"
+                    ? "block"
+                    : "none";
+
+
+                percentageMode.style.display =
+                    mode === "percentage"
+                    ? "block"
+                    : "none";
+
+
+                sizeMode.style.display =
+                    mode === "size"
+                    ? "block"
+                    : "none";
+
             }
-        }
+        );
 
-        if(mode === "percentage"){
-            const pct = parseFloat(percentageInput.value);
-            if(!pct || pct <= 0){ alert("Enter a valid percentage."); return; }
-            newWidth  = Math.max(1, Math.round(originalWidth  * pct / 100));
-            newHeight = Math.max(1, Math.round(originalHeight * pct / 100));
-        }
-
-        if(mode === "size"){
-            const target = parseFloat(targetSizeInput.value);
-            if(!target || target <= 0){ alert("Enter a target file size."); return; }
-            const targetBytes = targetUnit.value === "MB" ? target*1024*1024 : target*1024;
-            const ratio       = Math.sqrt(targetBytes / selectedFile.size);
-            const safeRatio   = Math.min(1, Math.max(.05, ratio));
-            newWidth  = Math.max(1, Math.round(originalWidth  * safeRatio));
-            newHeight = Math.max(1, Math.round(originalHeight * safeRatio));
-        }
-
-        const canvas = document.createElement("canvas");
-        canvas.width  = newWidth;
-        canvas.height = newHeight;
-
-        const ctx = canvas.getContext("2d");
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
-
-        const format = formatSelect.value;
-
-        if(format === "image/jpeg"){
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, newWidth, newHeight);
-        }
-
-        ctx.drawImage(selectedImage, 0, 0, newWidth, newHeight);
-
-        const quality = parseInt(qualityInput.value) / 100;
-        let blob = await getBlob(canvas, format, quality);
-
-        if(mode === "size"){
-            const target      = parseFloat(targetSizeInput.value);
-            const targetBytes = targetUnit.value === "MB" ? target*1024*1024 : target*1024;
-            let q = quality;
-            for(let i=0; i<8 && blob.size > targetBytes; i++){
-                q    = Math.max(.1, q - .1);
-                blob = await getBlob(canvas, format, q);
-            }
-        }
-
-        if(resultURL) URL.revokeObjectURL(resultURL);
-        resultURL = URL.createObjectURL(blob);
-        resultImage.src = resultURL;
-
-        const extension      = getExtension(format);
-        downloadBtn.href     = resultURL;
-        downloadBtn.download = "resized-image." + extension;
-
-        resultInfo.innerHTML =
-            "New dimensions: <strong>" + newWidth + " × " + newHeight + " px</strong><br>" +
-            "New file size: <strong>" + formatBytes(blob.size) + "</strong><br>" +
-            "Format: <strong>" + extension.toUpperCase() + "</strong>";
-
-        result.classList.add("show");
-
-        setTimeout(function(){
-            result.scrollIntoView({ behavior:"smooth", block:"start" });
-        }, 100);
     }
-    catch(error){
-        console.error(error);
-        alert("Unable to resize this image. Please try again.");
-    }
-    finally{
-        resizeBtn.disabled    = false;
-        resizeBtn.textContent = "Resize Image";
-    }
-});
+);
 
-function getBlob(canvas, format, quality){
-    return new Promise(function(resolve){
-        canvas.toBlob(function(blob){ resolve(blob); }, format, quality);
-    });
+
+/* =====================================================
+   QUALITY DISPLAY
+===================================================== */
+
+qualityInput.addEventListener(
+    "input",
+    function(){
+
+        qualityValue.textContent =
+            qualityInput.value + "%";
+
+    }
+);
+
+
+/* =====================================================
+   ASPECT RATIO
+===================================================== */
+
+widthInput.addEventListener(
+    "input",
+    function(){
+
+        if(!selectedImage){
+            return;
+        }
+
+
+        const width =
+            Number(widthInput.value);
+
+
+        if(!Number.isFinite(width) ||
+           width <= 0){
+
+            return;
+        }
+
+
+        heightInput.value =
+            Math.max(
+                1,
+                Math.round(
+                    width *
+                    originalHeight /
+                    originalWidth
+                )
+            );
+
+    }
+);
+
+
+heightInput.addEventListener(
+    "input",
+    function(){
+
+        if(!selectedImage){
+            return;
+        }
+
+
+        const height =
+            Number(heightInput.value);
+
+
+        if(!Number.isFinite(height) ||
+           height <= 0){
+
+            return;
+        }
+
+
+        widthInput.value =
+            Math.max(
+                1,
+                Math.round(
+                    height *
+                    originalWidth /
+                    originalHeight
+                )
+            );
+
+    }
+);
+
+
+/* =====================================================
+   CANVAS SIZE SAFETY
+===================================================== */
+
+function limitDimensions(
+    width,
+    height
+){
+
+    width =
+        Math.max(
+            1,
+            Math.round(width)
+        );
+
+    height =
+        Math.max(
+            1,
+            Math.round(height)
+        );
+
+
+    const pixels =
+        width * height;
+
+
+    if(
+        pixels <=
+        MAX_CANVAS_PIXELS
+    ){
+
+        return {
+            width,
+            height
+        };
+
+    }
+
+
+    const scale =
+        Math.sqrt(
+            MAX_CANVAS_PIXELS /
+            pixels
+        );
+
+
+    return {
+
+        width:
+            Math.max(
+                1,
+                Math.floor(
+                    width * scale
+                )
+            ),
+
+        height:
+            Math.max(
+                1,
+                Math.floor(
+                    height * scale
+                )
+            )
+
+    };
+
 }
 
-function formatBytes(bytes){
-    if(bytes === 0) return "0 Bytes";
-    const units = ["Bytes","KB","MB","GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    return (bytes / Math.pow(1024,i)).toFixed(2) + " " + units[i];
+
+/* =====================================================
+   CREATE CANVAS BLOB
+===================================================== */
+
+function createBlob(
+    width,
+    height,
+    format,
+    quality
+){
+
+    return new Promise(
+        function(resolve){
+
+            const safe =
+                limitDimensions(
+                    width,
+                    height
+                );
+
+
+            const canvas =
+                document.createElement(
+                    "canvas"
+                );
+
+
+            canvas.width =
+                safe.width;
+
+            canvas.height =
+                safe.height;
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            if(!ctx){
+
+                resolve(null);
+
+                return;
+            }
+
+
+            ctx.imageSmoothingEnabled =
+                true;
+
+            ctx.imageSmoothingQuality =
+                "high";
+
+
+            /*
+                JPG does not support transparency.
+                Use white background.
+            */
+
+            if(
+                format ===
+                "image/jpeg"
+            ){
+
+                ctx.fillStyle =
+                    "#ffffff";
+
+                ctx.fillRect(
+                    0,
+                    0,
+                    safe.width,
+                    safe.height
+                );
+
+            }
+
+
+            ctx.drawImage(
+                selectedImage,
+                0,
+                0,
+                safe.width,
+                safe.height
+            );
+
+
+            canvas.toBlob(
+                function(blob){
+
+                    resolve({
+                        blob: blob,
+                        width: safe.width,
+                        height: safe.height
+                    });
+
+                },
+                format,
+                quality
+            );
+
+        }
+    );
+
 }
 
-function getExtension(type){
-    if(type === "image/png")  return "png";
-    if(type === "image/webp") return "webp";
+
+/* =====================================================
+   TARGET SIZE
+===================================================== */
+
+function getTargetBytes(){
+
+    const value =
+        Number(
+            targetSizeInput.value
+        );
+
+
+    if(
+        !Number.isFinite(value) ||
+        value <= 0
+    ){
+
+        return 0;
+    }
+
+
+    if(
+        targetUnit.value === "MB"
+    ){
+
+        return (
+            value *
+            1024 *
+            1024
+        );
+
+    }
+
+
+    return (
+        value *
+        1024
+    );
+
+}
+
+
+/* =====================================================
+   BEST QUALITY FOR CURRENT DIMENSIONS
+===================================================== */
+
+async function findBestQuality(
+    width,
+    height,
+    format,
+    targetBytes
+){
+
+    /*
+        PNG does not have the same quality control
+        as JPG/WebP. For PNG, dimensions are adjusted.
+    */
+
+    if(
+        format === "image/png"
+    ){
+
+        return await createBlob(
+            width,
+            height,
+            format,
+            1
+        );
+
+    }
+
+
+    let low = 0.05;
+    let high = 1;
+
+    let best = null;
+
+
+    /*
+        Binary search for the highest quality
+        that stays at or below the target.
+    */
+
+    for(
+        let i = 0;
+        i < 9;
+        i++
+    ){
+
+        const quality =
+            (low + high) / 2;
+
+
+        const output =
+            await createBlob(
+                width,
+                height,
+                format,
+                quality
+            );
+
+
+        if(!output || !output.blob){
+
+            break;
+        }
+
+
+        /*
+            Keep the closest result seen so far.
+        */
+
+        if(
+            !best ||
+            Math.abs(
+                output.blob.size -
+                targetBytes
+            )
+            <
+            Math.abs(
+                best.blob.size -
+                targetBytes
+            )
+        ){
+
+            best =
+                output;
+
+        }
+
+
+        if(
+            output.blob.size >
+            targetBytes
+        ){
+
+            high =
+                quality;
+
+        }else{
+
+            low =
+                quality;
+
+        }
+
+    }
+
+
+    /*
+        Also test maximum quality once.
+        This helps when the target is larger than
+        the current quality-optimized result.
+    */
+
+    const maximum =
+        await createBlob(
+            width,
+            height,
+            format,
+            1
+        );
+
+
+    if(
+        maximum &&
+        (
+            !best ||
+            Math.abs(
+                maximum.blob.size -
+                targetBytes
+            )
+            <
+            Math.abs(
+                best.blob.size -
+                targetBytes
+            )
+        )
+    ){
+
+        best =
+            maximum;
+
+    }
+
+
+    return best;
+
+}
+
+
+/* =====================================================
+   TARGET SIZE OPTIMIZER
+===================================================== */
+
+async function resizeToTarget(
+    targetBytes,
+    format
+){
+
+    /*
+        Start from original dimensions.
+    */
+
+    let width =
+        originalWidth;
+
+    let height =
+        originalHeight;
+
+
+    let best = null;
+
+
+    /*
+        Initial scale based on area.
+
+        This is only an estimate.
+        The algorithm below repeatedly corrects it.
+    */
+
+    let initialScale =
+        Math.sqrt(
+            targetBytes /
+            Math.max(
+                1,
+                selectedFile.size
+            )
+        );
+
+
+    initialScale =
+        Math.max(
+            0.05,
+            Math.min(
+                8,
+                initialScale
+            )
+        );
+
+
+    width =
+        Math.max(
+            1,
+            Math.round(
+                originalWidth *
+                initialScale
+            )
+        );
+
+
+    height =
+        Math.max(
+            1,
+            Math.round(
+                originalHeight *
+                initialScale
+            )
+        );
+
+
+    /*
+        Multiple dimension iterations.
+        This is the important part missing from
+        the old implementation.
+    */
+
+    for(
+        let iteration = 0;
+        iteration < 16;
+        iteration++
+    ){
+
+        const output =
+            await findBestQuality(
+                width,
+                height,
+                format,
+                targetBytes
+            );
+
+
+        if(
+            !output ||
+            !output.blob
+        ){
+
+            break;
+        }
+
+
+        const currentSize =
+            output.blob.size;
+
+
+        /*
+            Save closest result.
+        */
+
+        if(
+            !best ||
+            Math.abs(
+                currentSize -
+                targetBytes
+            )
+            <
+            Math.abs(
+                best.blob.size -
+                targetBytes
+            )
+        ){
+
+            best =
+                output;
+
+        }
+
+
+        /*
+            If we are within 1.5%,
+            this is already a very good result.
+        */
+
+        if(
+            Math.abs(
+                currentSize -
+                targetBytes
+            )
+            <=
+            targetBytes * 0.015
+        ){
+
+            return output;
+
+        }
+
+
+        /*
+            Calculate area correction.
+
+            File size roughly follows image area,
+            so use square root for dimension scaling.
+        */
+
+        let factor =
+            Math.sqrt(
+                targetBytes /
+                Math.max(
+                    1,
+                    currentSize
+                )
+            );
+
+
+        /*
+            Limit each correction so the browser
+            does not make a massive jump.
+        */
+
+        factor =
+            Math.max(
+                0.70,
+                Math.min(
+                    1.40,
+                    factor
+                )
+            );
+
+
+        const nextWidth =
+            Math.max(
+                1,
+                Math.round(
+                    width * factor
+                )
+            );
+
+
+        const nextHeight =
+            Math.max(
+                1,
+                Math.round(
+                    height * factor
+                )
+            );
+
+
+        /*
+            Stop if dimensions no longer change.
+        */
+
+        if(
+            nextWidth === width &&
+            nextHeight === height
+        ){
+
+            break;
+        }
+
+
+        width =
+            nextWidth;
+
+        height =
+            nextHeight;
+
+    }
+
+
+    return best;
+
+}
+
+
+/* =====================================================
+   RESIZE BUTTON
+===================================================== */
+
+resizeBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(!selectedImage || !selectedFile){
+
+            alert(
+                "Please choose an image first."
+            );
+
+            return;
+        }
+
+
+        const activeButton =
+            document.querySelector(
+                ".mode-btn.active"
+            );
+
+
+        if(!activeButton){
+
+            alert(
+                "Please select a resize mode."
+            );
+
+            return;
+        }
+
+
+        const mode =
+            activeButton.dataset.mode;
+
+
+        resizeBtn.disabled =
+            true;
+
+        resizeBtn.textContent =
+            "Processing...";
+
+
+        resultWarning.style.display =
+            "none";
+
+        resultWarning.textContent =
+            "";
+
+
+        try{
+
+            let output = null;
+
+
+            /* =========================================
+               PIXELS
+            ========================================= */
+
+            if(
+                mode === "pixels"
+            ){
+
+                const width =
+                    Number(
+                        widthInput.value
+                    );
+
+                const height =
+                    Number(
+                        heightInput.value
+                    );
+
+
+                if(
+                    !Number.isFinite(width) ||
+                    !Number.isFinite(height) ||
+                    width <= 0 ||
+                    height <= 0
+                ){
+
+                    alert(
+                        "Please enter valid dimensions."
+                    );
+
+                    return;
+                }
+
+
+                output =
+                    await createBlob(
+                        width,
+                        height,
+                        formatSelect.value,
+                        Number(
+                            qualityInput.value
+                        ) / 100
+                    );
+
+            }
+
+
+            /* =========================================
+               PERCENTAGE
+            ========================================= */
+
+            if(
+                mode === "percentage"
+            ){
+
+                const percentage =
+                    Number(
+                        percentageInput.value
+                    );
+
+
+                if(
+                    !Number.isFinite(
+                        percentage
+                    ) ||
+                    percentage <= 0
+                ){
+
+                    alert(
+                        "Please enter a valid percentage."
+                    );
+
+                    return;
+                }
+
+
+                const width =
+                    Math.max(
+                        1,
+                        Math.round(
+                            originalWidth *
+                            percentage /
+                            100
+                        )
+                    );
+
+
+                const height =
+                    Math.max(
+                        1,
+                        Math.round(
+                            originalHeight *
+                            percentage /
+                            100
+                        )
+                    );
+
+
+                output =
+                    await createBlob(
+                        width,
+                        height,
+                        formatSelect.value,
+                        Number(
+                            qualityInput.value
+                        ) / 100
+                    );
+
+            }
+
+
+            /* =========================================
+               KB / MB
+            ========================================= */
+
+            if(
+                mode === "size"
+            ){
+
+                const targetBytes =
+                    getTargetBytes();
+
+
+                if(
+                    !targetBytes
+                ){
+
+                    alert(
+                        "Please enter a valid target file size."
+                    );
+
+                    return;
+                }
+
+
+                output =
+                    await resizeToTarget(
+                        targetBytes,
+                        formatSelect.value
+                    );
+
+
+                if(!output){
+
+                    throw new Error(
+                        "Target-size processing failed."
+                    );
+
+                }
+
+
+                /*
+                    Show a warning if the target
+                    could not be reached closely.
+                */
+
+                const difference =
+                    Math.abs(
+                        output.blob.size -
+                        targetBytes
+                    );
+
+
+                if(
+                    difference >
+                    targetBytes * 0.05
+                ){
+
+                    resultWarning.style.display =
+                        "block";
+
+                    resultWarning.textContent =
+                        "The browser could not reach the exact target size for this image. The closest practical result was created.";
+
+                }
+
+            }
+
+
+            if(
+                !output ||
+                !output.blob
+            ){
+
+                throw new Error(
+                    "Unable to create image."
+                );
+
+            }
+
+
+            /* =========================================
+               RESULT URL
+            ========================================= */
+
+            if(resultURL){
+
+                URL.revokeObjectURL(
+                    resultURL
+                );
+
+            }
+
+
+            resultURL =
+                URL.createObjectURL(
+                    output.blob
+                );
+
+
+            resultImage.src =
+                resultURL;
+
+
+            const extension =
+                getExtension(
+                    formatSelect.value
+                );
+
+
+            downloadBtn.href =
+                resultURL;
+
+
+            downloadBtn.download =
+                "smarttools-resized-image." +
+                extension;
+
+
+            const actualSize =
+                formatBytes(
+                    output.blob.size
+                );
+
+
+            resultInfo.innerHTML =
+
+                "Dimensions: <strong>" +
+
+                output.width +
+
+                " × " +
+
+                output.height +
+
+                " px</strong><br>" +
+
+                "Output size: <strong>" +
+
+                actualSize +
+
+                "</strong><br>" +
+
+                "Original size: <strong>" +
+
+                formatBytes(
+                    selectedFile.size
+                ) +
+
+                "</strong><br>" +
+
+                "Format: <strong>" +
+
+                extension.toUpperCase() +
+
+                "</strong>";
+
+
+            result.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    result.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                },
+                100
+            );
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Image Resizer Error:",
+                error
+            );
+
+
+            alert(
+                "Unable to resize this image. Please try another image or format."
+            );
+
+        }
+
+        finally{
+
+            resizeBtn.disabled =
+                false;
+
+            resizeBtn.textContent =
+                "Resize Image";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetImageState(
+    message
+){
+
+    if(originalURL){
+
+        URL.revokeObjectURL(
+            originalURL
+        );
+
+        originalURL =
+            null;
+    }
+
+
+    if(resultURL){
+
+        URL.revokeObjectURL(
+            resultURL
+        );
+
+        resultURL =
+            null;
+    }
+
+
+    selectedImage =
+        null;
+
+    selectedFile =
+        null;
+
+
+    imageInput.value =
+        "";
+
+
+    editor.classList.remove(
+        "show"
+    );
+
+
+    result.classList.remove(
+        "show"
+    );
+
+
+    if(message){
+
+        alert(message);
+
+    }
+
+}
+
+
+/* =====================================================
+   FILE SIZE FORMAT
+===================================================== */
+
+function formatBytes(
+    bytes
+){
+
+    if(
+        !Number.isFinite(bytes) ||
+        bytes <= 0
+    ){
+
+        return "0 Bytes";
+
+    }
+
+
+    if(
+        bytes < 1024
+    ){
+
+        return (
+            bytes.toFixed(0) +
+            " Bytes"
+        );
+
+    }
+
+
+    if(
+        bytes < 1024 * 1024
+    ){
+
+        return (
+            (bytes / 1024)
+            .toFixed(2) +
+            " KB"
+        );
+
+    }
+
+
+    if(
+        bytes < 1024 * 1024 * 1024
+    ){
+
+        return (
+            (
+                bytes /
+                (1024 * 1024)
+            ).toFixed(2) +
+            " MB"
+        );
+
+    }
+
+
+    return (
+        (
+            bytes /
+            (1024 * 1024 * 1024)
+        ).toFixed(2) +
+        " GB"
+    );
+
+}
+
+
+/* =====================================================
+   EXTENSION
+===================================================== */
+
+function getExtension(
+    type
+){
+
+    if(
+        type === "image/png"
+    ){
+
+        return "png";
+
+    }
+
+
+    if(
+        type === "image/webp"
+    ){
+
+        return "webp";
+
+    }
+
+
     return "jpg";
+
 }
 
 </script>
 
 </body>
 </html>
+```
