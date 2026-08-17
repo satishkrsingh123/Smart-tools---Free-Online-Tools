@@ -1,367 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Image Resizer - SmartTools</title>
-
-<meta name="description" content="Free online image resizer. Resize JPG, PNG and WebP images by pixels, percentage or file size.">
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f5f7fb;
-    color:#1f2937;
-}
-
-header{
-    background:#fff;
-    padding:16px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.logo{
-    text-decoration:none;
-    color:#111827;
-    font-size:25px;
-    font-weight:700;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-.back{
-    text-decoration:none;
-    color:#2563eb;
-    font-weight:600;
-}
-
-.container{
-    width:min(950px,92%);
-    margin:35px auto;
-}
-
-.title{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.title h1{
-    font-size:38px;
-    margin-bottom:10px;
-}
-
-.title p{
-    color:#6b7280;
-    line-height:1.6;
-}
-
-/* UPLOAD */
-
-.upload-area{
-    background:#fff;
-    border:2px dashed #2563eb;
-    border-radius:16px;
-    padding:45px 20px;
-    text-align:center;
-}
-
-.upload-icon{
-    font-size:48px;
-    margin-bottom:12px;
-}
-
-.upload-area h2{
-    margin-bottom:8px;
-}
-
-.upload-area p{
-    color:#6b7280;
-    margin-bottom:20px;
-}
-
-.choose-btn{
-    display:inline-block;
-    background:#2563eb;
-    color:#fff;
-    border:0;
-    padding:14px 26px;
-    border-radius:9px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-}
-
-.choose-btn:active{
-    transform:scale(.98);
-}
-
-/*
- IMPORTANT:
- The file input is visually hidden but NOT display:none.
- This works better across mobile browsers.
-*/
-.file-input-wrapper{
-    position:absolute;
-    width:1px;
-    height:1px;
-    overflow:hidden;
-    clip:rect(0,0,0,0);
-    white-space:nowrap;
-}
-
-#imageInput{
-    position:absolute;
-    width:1px;
-    height:1px;
-    opacity:0;
-}
-
-/* EDITOR */
-
-.editor{
-    display:none;
-    margin-top:25px;
-}
-
-.editor.show{
-    display:block;
-}
-
-.card{
-    background:#fff;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(0,0,0,.07);
-    margin-bottom:22px;
-}
-
-.card h2{
-    margin-bottom:18px;
-    font-size:22px;
-}
-
-/* PREVIEW */
-
-.preview{
-    text-align:center;
-}
-
-.preview img{
-    display:block;
-    max-width:100%;
-    max-height:450px;
-    margin:0 auto;
-    border-radius:10px;
-    background:#f1f3f5;
-}
-
-.info{
-    margin-top:15px;
-    color:#555;
-    line-height:1.8;
-}
-
-/* MODES */
-
-.mode-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.mode-btn{
-    border:1px solid #2563eb;
-    background:#fff;
-    color:#2563eb;
-    padding:10px 16px;
-    border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.mode-btn.active{
-    background:#2563eb;
-    color:#fff;
-}
-
-/* FORM */
-
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-}
-
-.field{
-    margin-bottom:16px;
-}
-
-.field label{
-    display:block;
-    font-weight:700;
-    margin-bottom:7px;
-}
-
-.field input,
-.field select{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:16px;
-    background:#fff;
-}
-
-.field small{
-    display:block;
-    margin-top:6px;
-    color:#6b7280;
-}
-
-.target-row{
-    display:grid;
-    grid-template-columns:1fr 130px;
-    gap:10px;
-}
-
-/* BUTTONS */
-
-.actions{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:10px;
-}
-
-.btn{
-    border:0;
-    padding:13px 20px;
-    border-radius:8px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.primary{
-    background:#2563eb;
-    color:#fff;
-}
-
-.secondary{
-    background:#e5e7eb;
-    color:#111827;
-}
-
-.btn:disabled{
-    opacity:.6;
-}
-
-/* RESULT */
-
-.result{
-    display:none;
-    text-align:center;
-}
-
-.result.show{
-    display:block;
-}
-
-.result img{
-    display:block;
-    max-width:100%;
-    max-height:450px;
-    margin:0 auto 18px;
-    border-radius:10px;
-}
-
-.result-info{
-    line-height:1.8;
-    margin-bottom:18px;
-}
-
-/* FOOTER */
-
-footer{
-    margin-top:50px;
-    background:#111827;
-    color:#fff;
-    text-align:center;
-    padding:25px;
-    line-height:1.8;
-}
-
-footer span{
-    color:#60a5fa;
-}
-
-/* MOBILE */
-
-@media(max-width:650px){
-
-    header{
-        padding:14px 5%;
-    }
-
-    .logo{
-        font-size:21px;
-    }
-
-    .back{
-        font-size:14px;
-    }
-
-    .container{
-        width:92%;
-        margin:25px auto;
-    }
-
-    .title h1{
-        font-size:30px;
-    }
-
-    .upload-area{
-        padding:35px 15px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .target-row{
-        grid-template-columns:1fr;
-    }
-
-    .actions{
-        flex-direction:column;
-    }
-
-    .btn{
-        width:100%;
-    }
-
-    .mode-btn{
-        flex:1;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Resizer - SmartTools</title>
+
+    <meta name="description"
+        content="Free online image resizer. Resize JPG, PNG and WebP images by pixels, percentage or KB/MB.">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #ffffff;
+            padding: 16px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #111827;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: min(950px, 92%);
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* UPLOAD */
+
+        .upload-area {
+            background: #ffffff;
+
+            border: 2px dashed #2563eb;
+
+            border-radius: 16px;
+
+            padding: 45px 20px;
+
+            text-align: center;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .upload-area h2 {
+            margin-bottom: 8px;
+        }
+
+        .upload-area p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        /*
+            IMPORTANT MOBILE FIX
+
+            Input is NOT display:none.
+            Native label opens the device file picker.
+        */
+
+        .choose-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #2563eb;
+            color: #ffffff;
+
+            border: 0;
+
+            padding: 14px 26px;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            -webkit-tap-highlight-color: transparent;
+
+            touch-action: manipulation;
+
+            user-select: none;
+        }
+
+        .choose-btn:active {
+            transform: scale(.98);
+        }
+
+        /*
+            Visually hide input without display:none.
+            Label remains connected to it.
+        */
+
+        #imageInput {
+            position: absolute;
+
+            width: 1px;
+            height: 1px;
+
+            opacity: 0;
+
+            overflow: hidden;
+        }
+
+        /* EDITOR */
+
+        .editor {
+            display: none;
+            margin-top: 25px;
+        }
+
+        .editor.show {
+            display: block;
+        }
+
+        .card {
+            background: #ffffff;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .07);
+
+            margin-bottom: 22px;
+        }
+
+        .card h2 {
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+        /* PREVIEW */
+
+        .preview {
+            text-align: center;
+        }
+
+        .preview img {
+            display: block;
+
+            max-width: 100%;
+            max-height: 450px;
+
+            margin: 0 auto;
+
+            border-radius: 10px;
+
+            background: #f1f3f5;
+        }
+
+        .info {
+            margin-top: 15px;
+
+            color: #555;
+
+            line-height: 1.8;
+        }
+
+        /* MODES */
+
+        .mode-buttons {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            border: 1px solid #2563eb;
+
+            background: #ffffff;
+
+            color: #2563eb;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            touch-action: manipulation;
+        }
+
+        .mode-btn.active {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* FORM */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 16px;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field label {
+            display: block;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            background: #ffffff;
+
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .10);
+        }
+
+        .field small {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #6b7280;
+        }
+
+        .target-row {
+            display: grid;
+
+            grid-template-columns: 1fr 130px;
+
+            gap: 10px;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 10px;
+        }
+
+        .btn {
+            border: 0;
+
+            padding: 13px 20px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            touch-action: manipulation;
+        }
+
+        .primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .primary:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .secondary:hover {
+            background: #d1d5db;
+        }
+
+        .btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        /* RESULT */
+
+        .result {
+            display: none;
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result img {
+            display: block;
+
+            max-width: 100%;
+            max-height: 450px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 10px;
+        }
+
+        .result-info {
+            line-height: 1.8;
+
+            margin-bottom: 18px;
+        }
+
+        /* INFO */
+
+        .info-section {
+            width: min(950px, 92%);
+
+            margin: 20px auto 50px;
+        }
+
+        .info-card {
+            background: #ffffff;
+
+            padding: 28px;
+
+            border-radius: 16px;
+
+            border: 1px solid #e5e7eb;
+        }
+
+        .info-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .info-card p {
+            color: #64748b;
+
+            line-height: 1.7;
+
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer span {
+            color: #60a5fa;
+        }
+
+        footer p {
+            margin-top: 6px;
+            color: #9ca3af;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .back {
+                font-size: 14px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .title h1 {
+                font-size: 30px;
+            }
+
+            .title p {
+                font-size: 14px;
+            }
+
+            .upload-area {
+                padding: 35px 15px;
+            }
+
+            .choose-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .target-row {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .mode-buttons {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .mode-btn {
+                width: 100%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .info-section {
+                width: 92%;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+
+            .back {
+                font-size: 13px;
+            }
+
+            .upload-icon {
+                font-size: 42px;
+            }
+
+        }
+
+    </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -378,9 +564,12 @@ footer span{
 
 <main class="container">
 
+
     <div class="title">
 
-        <h1>🖼️ Image Resizer</h1>
+        <h1>
+            🖼️ Image Resizer
+        </h1>
 
         <p>
             Resize images by pixels, percentage or target file size.
@@ -390,48 +579,65 @@ footer span{
     </div>
 
 
-    <!-- UPLOAD -->
+    <!-- =========================
+         UPLOAD
+    ========================== -->
 
     <div class="upload-area">
 
-        <div class="upload-icon">📤</div>
-
-        <h2>Choose Your Image</h2>
-
-        <p>JPG, PNG and WebP supported</p>
-
-        <button
-            type="button"
-            class="choose-btn"
-            id="chooseBtn">
-            Choose Image
-        </button>
-
-        <div class="file-input-wrapper">
-
-            <input
-                type="file"
-                id="imageInput"
-                accept="image/jpeg,image/png,image/webp"
-            >
-
+        <div class="upload-icon">
+            📤
         </div>
+
+        <h2>
+            Choose Your Image
+        </h2>
+
+        <p>
+            JPG, PNG and WebP supported
+        </p>
+
+
+        <!--
+            IMPORTANT:
+            LABEL DIRECTLY OPENS FILE PICKER.
+            No JavaScript click required.
+        -->
+
+        <label
+            for="imageInput"
+            class="choose-btn">
+
+            Choose Image
+
+        </label>
+
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/jpeg,image/png,image/webp">
+
 
     </div>
 
 
-    <!-- EDITOR -->
+    <!-- =========================
+         EDITOR
+    ========================== -->
 
     <section
         class="editor"
         id="editor">
 
 
-        <!-- ORIGINAL -->
+        <!-- ORIGINAL IMAGE -->
 
         <div class="card preview">
 
-            <h2>Original Image</h2>
+            <h2>
+                Original Image
+            </h2>
 
             <img
                 id="previewImage"
@@ -449,8 +655,12 @@ footer span{
 
         <div class="card">
 
-            <h2>Resize Settings</h2>
+            <h2>
+                Resize Settings
+            </h2>
 
+
+            <!-- MODES -->
 
             <div class="mode-buttons">
 
@@ -458,21 +668,29 @@ footer span{
                     type="button"
                     class="mode-btn active"
                     data-mode="pixels">
+
                     Pixels
+
                 </button>
+
 
                 <button
                     type="button"
                     class="mode-btn"
                     data-mode="percentage">
+
                     Percentage
+
                 </button>
+
 
                 <button
                     type="button"
                     class="mode-btn"
                     data-mode="size">
+
                     KB / MB
+
                 </button>
 
             </div>
@@ -544,7 +762,7 @@ footer span{
             </div>
 
 
-            <!-- SIZE -->
+            <!-- KB / MB -->
 
             <div
                 id="sizeMode"
@@ -564,6 +782,7 @@ footer span{
                             min="1"
                             step="0.1"
                             placeholder="Example: 200">
+
 
                         <select id="targetUnit">
 
@@ -588,9 +807,10 @@ footer span{
             </div>
 
 
+            <!-- FORMAT + QUALITY -->
+
             <div class="grid">
 
-                <!-- FORMAT -->
 
                 <div class="field">
 
@@ -617,15 +837,16 @@ footer span{
                 </div>
 
 
-                <!-- QUALITY -->
-
                 <div class="field">
 
                     <label for="quality">
+
                         Quality:
+
                         <span id="qualityValue">
                             90%
                         </span>
+
                     </label>
 
                     <input
@@ -637,8 +858,11 @@ footer span{
 
                 </div>
 
+
             </div>
 
+
+            <!-- ACTIONS -->
 
             <div class="actions">
 
@@ -646,15 +870,25 @@ footer span{
                     type="button"
                     class="btn primary"
                     id="resizeBtn">
+
                     Resize Image
+
                 </button>
 
-                <button
-                    type="button"
+
+                <!--
+                    LABEL is used again so
+                    mobile can select another image.
+                -->
+
+                <label
+                    for="imageInput"
                     class="btn secondary"
-                    id="anotherBtn">
+                    style="text-align:center;">
+
                     Choose Another Image
-                </button>
+
+                </label>
 
             </div>
 
@@ -667,7 +901,9 @@ footer span{
             class="card result"
             id="result">
 
-            <h2>Resized Image</h2>
+            <h2>
+                Resized Image
+            </h2>
 
             <img
                 id="resultImage"
@@ -683,15 +919,66 @@ footer span{
                 class="btn primary"
                 download="resized-image.jpg"
                 style="display:inline-block;text-decoration:none;">
+
                 ⬇️ Download Image
+
             </a>
 
         </div>
 
+
     </section>
+
 
 </main>
 
+
+<!-- INFO -->
+
+<section class="info-section">
+
+    <div class="info-card">
+
+        <h2>
+            How to Resize an Image?
+        </h2>
+
+        <p>
+            Upload your image and choose whether you want
+            to resize it by pixels, percentage or target file size.
+        </p>
+
+        <p>
+            <strong>Pixels:</strong>
+            Set exact width and height.
+        </p>
+
+        <p>
+            <strong>Percentage:</strong>
+            Reduce or increase image dimensions by percentage.
+        </p>
+
+        <p>
+            <strong>Target KB/MB:</strong>
+            Try to create an image around your desired file size.
+        </p>
+
+        <p>
+            <strong>Output Format:</strong>
+            JPG, PNG or WebP.
+        </p>
+
+        <p>
+            Your image is processed directly in your browser.
+            It is not uploaded to our server.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -712,18 +999,12 @@ footer span{
 
 <script>
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
 const imageInput =
     document.getElementById("imageInput");
-
-const chooseBtn =
-    document.getElementById("chooseBtn");
-
-const anotherBtn =
-    document.getElementById("anotherBtn");
 
 const editor =
     document.getElementById("editor");
@@ -783,9 +1064,9 @@ const sizeMode =
     document.getElementById("sizeMode");
 
 
-/* =========================
+/* =========================================
    VARIABLES
-========================= */
+========================================= */
 
 let selectedImage = null;
 let selectedFile = null;
@@ -797,680 +1078,797 @@ let originalURL = null;
 let resultURL = null;
 
 
-/* =========================
-   FILE PICKER
-========================= */
-
-/*
- IMPORTANT:
- There is only ONE event that opens
- the native file picker.
-*/
-
-chooseBtn.addEventListener("click", function(){
-
-    imageInput.click();
-
-});
-
-
-anotherBtn.addEventListener("click", function(){
-
-    imageInput.value = "";
-
-    imageInput.click();
-
-});
-
-
-/* =========================
+/* =========================================
    FILE SELECTED
-========================= */
+========================================= */
 
-imageInput.addEventListener("change", function(){
+imageInput.addEventListener(
+    "change",
+    function () {
 
-    const file = imageInput.files[0];
+        const file =
+            imageInput.files &&
+            imageInput.files[0];
 
-    if(!file){
-        return;
+        if (!file) {
+            return;
+        }
+
+
+        /* Validate */
+
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+        if (
+            !allowedTypes.includes(
+                file.type
+            )
+        ) {
+
+            alert(
+                "Please select JPG, PNG or WebP image."
+            );
+
+            imageInput.value = "";
+
+            return;
+        }
+
+
+        selectedFile = file;
+
+
+        /* Clear old URL */
+
+        if (originalURL) {
+
+            URL.revokeObjectURL(
+                originalURL
+            );
+
+            originalURL = null;
+        }
+
+
+        /* Create new URL */
+
+        originalURL =
+            URL.createObjectURL(file);
+
+
+        /* Load image */
+
+        const img =
+            new Image();
+
+
+        img.onload =
+            function () {
+
+                selectedImage = img;
+
+                originalWidth =
+                    img.naturalWidth;
+
+                originalHeight =
+                    img.naturalHeight;
+
+
+                /* Preview */
+
+                previewImage.src =
+                    originalURL;
+
+
+                /* Default dimensions */
+
+                widthInput.value =
+                    originalWidth;
+
+                heightInput.value =
+                    originalHeight;
+
+
+                /* Information */
+
+                originalInfo.innerHTML =
+                    "Dimensions: <strong>" +
+                    originalWidth +
+                    " × " +
+                    originalHeight +
+                    " px</strong><br>" +
+
+                    "File size: <strong>" +
+                    formatBytes(file.size) +
+                    "</strong>";
+
+
+                /* Show editor */
+
+                editor.classList.add(
+                    "show"
+                );
+
+
+                /* Hide previous result */
+
+                result.classList.remove(
+                    "show"
+                );
+
+
+                /* Scroll */
+
+                setTimeout(
+                    function () {
+
+                        editor.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    },
+                    100
+                );
+
+            };
+
+
+        img.onerror =
+            function () {
+
+                alert(
+                    "Image could not be loaded. Please try another image."
+                );
+
+
+                if (originalURL) {
+
+                    URL.revokeObjectURL(
+                        originalURL
+                    );
+
+                    originalURL = null;
+                }
+
+
+                selectedImage = null;
+                selectedFile = null;
+
+                imageInput.value = "";
+
+            };
+
+
+        img.src =
+            originalURL;
+
     }
+);
 
 
-    if(
-        file.type !== "image/jpeg" &&
-        file.type !== "image/png" &&
-        file.type !== "image/webp"
-    ){
+/* =========================================
+   MODE BUTTONS
+========================================= */
 
-        alert(
-            "Please select JPG, PNG or WebP image."
+const modeButtons =
+    document.querySelectorAll(
+        ".mode-btn"
+    );
+
+
+modeButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                modeButtons.forEach(
+                    function (btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const mode =
+                    button.dataset.mode;
+
+
+                pixelsMode.style.display =
+                    mode === "pixels"
+                        ? "block"
+                        : "none";
+
+
+                percentageMode.style.display =
+                    mode === "percentage"
+                        ? "block"
+                        : "none";
+
+
+                sizeMode.style.display =
+                    mode === "size"
+                        ? "block"
+                        : "none";
+
+            }
         );
 
-        imageInput.value = "";
-
-        return;
     }
+);
 
 
-    selectedFile = file;
+/* =========================================
+   QUALITY
+========================================= */
 
+qualityInput.addEventListener(
+    "input",
+    function () {
 
-    if(originalURL){
-        URL.revokeObjectURL(originalURL);
+        qualityValue.textContent =
+            qualityInput.value + "%";
+
     }
+);
 
 
-    originalURL =
-        URL.createObjectURL(file);
+/* =========================================
+   KEEP ASPECT RATIO
+========================================= */
+
+widthInput.addEventListener(
+    "input",
+    function () {
+
+        if (!selectedImage) {
+            return;
+        }
 
 
-    const img = new Image();
+        const width =
+            parseInt(
+                widthInput.value
+            );
 
 
-    img.onload = function(){
-
-        selectedImage = img;
-
-        originalWidth =
-            img.naturalWidth;
-
-        originalHeight =
-            img.naturalHeight;
+        if (
+            !width ||
+            width <= 0
+        ) {
+            return;
+        }
 
 
-        previewImage.src =
-            originalURL;
+        heightInput.value =
+            Math.round(
+                width *
+                originalHeight /
+                originalWidth
+            );
+
+    }
+);
+
+
+heightInput.addEventListener(
+    "input",
+    function () {
+
+        if (!selectedImage) {
+            return;
+        }
+
+
+        const height =
+            parseInt(
+                heightInput.value
+            );
+
+
+        if (
+            !height ||
+            height <= 0
+        ) {
+            return;
+        }
 
 
         widthInput.value =
-            originalWidth;
+            Math.round(
+                height *
+                originalWidth /
+                originalHeight
+            );
 
-        heightInput.value =
-            originalHeight;
-
-
-        originalInfo.innerHTML =
-            "Dimensions: <strong>" +
-            originalWidth +
-            " × " +
-            originalHeight +
-            " px</strong><br>" +
-
-            "File size: <strong>" +
-            formatBytes(file.size) +
-            "</strong>";
-
-
-        editor.classList.add("show");
-
-        result.classList.remove("show");
-
-
-        setTimeout(function(){
-
-            editor.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
-
-        },100);
-
-    };
-
-
-    img.onerror = function(){
-
-        alert(
-            "Image could not be loaded. Please try another image."
-        );
-
-        URL.revokeObjectURL(originalURL);
-
-        originalURL = null;
-
-        selectedImage = null;
-
-        selectedFile = null;
-
-        imageInput.value = "";
-
-    };
-
-
-    img.src =
-        originalURL;
-
-});
-
-
-/* =========================
-   MODE
-========================= */
-
-const modeButtons =
-    document.querySelectorAll(".mode-btn");
-
-
-modeButtons.forEach(function(button){
-
-    button.addEventListener("click",function(){
-
-        modeButtons.forEach(function(btn){
-
-            btn.classList.remove("active");
-
-        });
-
-
-        button.classList.add("active");
-
-
-        const mode =
-            button.dataset.mode;
-
-
-        pixelsMode.style.display =
-            mode === "pixels"
-            ? "block"
-            : "none";
-
-
-        percentageMode.style.display =
-            mode === "percentage"
-            ? "block"
-            : "none";
-
-
-        sizeMode.style.display =
-            mode === "size"
-            ? "block"
-            : "none";
-
-    });
-
-});
-
-
-/* =========================
-   QUALITY
-========================= */
-
-qualityInput.addEventListener("input",function(){
-
-    qualityValue.textContent =
-        qualityInput.value + "%";
-
-});
-
-
-/* =========================
-   ASPECT RATIO
-========================= */
-
-widthInput.addEventListener("input",function(){
-
-    if(!selectedImage){
-        return;
     }
+);
 
 
-    const width =
-        parseInt(widthInput.value);
-
-
-    if(!width || width <= 0){
-        return;
-    }
-
-
-    heightInput.value =
-        Math.round(
-            width *
-            originalHeight /
-            originalWidth
-        );
-
-});
-
-
-heightInput.addEventListener("input",function(){
-
-    if(!selectedImage){
-        return;
-    }
-
-
-    const height =
-        parseInt(heightInput.value);
-
-
-    if(!height || height <= 0){
-        return;
-    }
-
-
-    widthInput.value =
-        Math.round(
-            height *
-            originalWidth /
-            originalHeight
-        );
-
-});
-
-
-/* =========================
+/* =========================================
    RESIZE
-========================= */
+========================================= */
 
-resizeBtn.addEventListener("click",async function(){
+resizeBtn.addEventListener(
+    "click",
+    async function () {
 
-    if(!selectedImage){
+        if (!selectedImage) {
 
-        alert(
-            "Please choose an image first."
-        );
+            alert(
+                "Please choose an image first."
+            );
 
-        return;
-    }
-
-
-    resizeBtn.disabled = true;
-
-    resizeBtn.textContent =
-        "Processing...";
-
-
-    try{
-
-        const mode =
-            document
-            .querySelector(".mode-btn.active")
-            .dataset.mode;
-
-
-        let newWidth =
-            originalWidth;
-
-        let newHeight =
-            originalHeight;
-
-
-        /* PIXELS */
-
-        if(mode === "pixels"){
-
-            newWidth =
-                parseInt(
-                    widthInput.value
-                );
-
-            newHeight =
-                parseInt(
-                    heightInput.value
-                );
-
-
-            if(
-                !newWidth ||
-                !newHeight ||
-                newWidth <= 0 ||
-                newHeight <= 0
-            ){
-
-                alert(
-                    "Enter valid width and height."
-                );
-
-                return;
-            }
-
+            return;
         }
 
 
-        /* PERCENTAGE */
+        resizeBtn.disabled =
+            true;
 
-        if(mode === "percentage"){
+        resizeBtn.textContent =
+            "Processing...";
 
-            const percentage =
-                parseFloat(
-                    percentageInput.value
+
+        try {
+
+            const activeMode =
+                document.querySelector(
+                    ".mode-btn.active"
                 );
 
 
-            if(
-                !percentage ||
-                percentage <= 0
-            ){
+            const mode =
+                activeMode.dataset.mode;
 
-                alert(
-                    "Enter a valid percentage."
-                );
 
-                return;
+            let newWidth =
+                originalWidth;
+
+            let newHeight =
+                originalHeight;
+
+
+            /* PIXELS */
+
+            if (
+                mode === "pixels"
+            ) {
+
+                newWidth =
+                    parseInt(
+                        widthInput.value
+                    );
+
+                newHeight =
+                    parseInt(
+                        heightInput.value
+                    );
+
+
+                if (
+                    !newWidth ||
+                    !newHeight ||
+                    newWidth <= 0 ||
+                    newHeight <= 0
+                ) {
+
+                    alert(
+                        "Enter valid width and height."
+                    );
+
+                    return;
+                }
+
             }
 
 
-            newWidth =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalWidth *
-                        percentage /
-                        100
-                    )
-                );
+            /* PERCENTAGE */
+
+            if (
+                mode === "percentage"
+            ) {
+
+                const percentage =
+                    parseFloat(
+                        percentageInput.value
+                    );
 
 
-            newHeight =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalHeight *
-                        percentage /
-                        100
-                    )
-                );
+                if (
+                    !percentage ||
+                    percentage <= 0
+                ) {
 
-        }
+                    alert(
+                        "Enter a valid percentage."
+                    );
 
-
-        /* TARGET SIZE */
-
-        if(mode === "size"){
-
-            const target =
-                parseFloat(
-                    targetSizeInput.value
-                );
+                    return;
+                }
 
 
-            if(
-                !target ||
-                target <= 0
-            ){
-
-                alert(
-                    "Enter a target file size."
-                );
-
-                return;
-            }
-
-
-            const targetBytes =
-                targetUnit.value === "MB"
-                ? target * 1024 * 1024
-                : target * 1024;
-
-
-            const ratio =
-                Math.sqrt(
-                    targetBytes /
-                    selectedFile.size
-                );
-
-
-            const safeRatio =
-                Math.min(
-                    1,
+                newWidth =
                     Math.max(
-                        .05,
-                        ratio
-                    )
+                        1,
+                        Math.round(
+                            originalWidth *
+                            percentage /
+                            100
+                        )
+                    );
+
+
+                newHeight =
+                    Math.max(
+                        1,
+                        Math.round(
+                            originalHeight *
+                            percentage /
+                            100
+                        )
+                    );
+
+            }
+
+
+            /* TARGET SIZE */
+
+            if (
+                mode === "size"
+            ) {
+
+                const target =
+                    parseFloat(
+                        targetSizeInput.value
+                    );
+
+
+                if (
+                    !target ||
+                    target <= 0
+                ) {
+
+                    alert(
+                        "Enter a target file size."
+                    );
+
+                    return;
+                }
+
+
+                const targetBytes =
+                    targetUnit.value === "MB"
+                        ? target * 1024 * 1024
+                        : target * 1024;
+
+
+                const ratio =
+                    Math.sqrt(
+                        targetBytes /
+                        selectedFile.size
+                    );
+
+
+                const safeRatio =
+                    Math.min(
+                        1,
+                        Math.max(
+                            0.05,
+                            ratio
+                        )
+                    );
+
+
+                newWidth =
+                    Math.max(
+                        1,
+                        Math.round(
+                            originalWidth *
+                            safeRatio
+                        )
+                    );
+
+
+                newHeight =
+                    Math.max(
+                        1,
+                        Math.round(
+                            originalHeight *
+                            safeRatio
+                        )
+                    );
+
+            }
+
+
+            /* CANVAS */
+
+            const canvas =
+                document.createElement(
+                    "canvas"
                 );
 
 
-            newWidth =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalWidth *
-                        safeRatio
-                    )
+            canvas.width =
+                newWidth;
+
+            canvas.height =
+                newHeight;
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
                 );
 
 
-            newHeight =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalHeight *
-                        safeRatio
-                    )
+            ctx.imageSmoothingEnabled =
+                true;
+
+            ctx.imageSmoothingQuality =
+                "high";
+
+
+            const format =
+                formatSelect.value;
+
+
+            /* JPG WHITE BACKGROUND */
+
+            if (
+                format === "image/jpeg"
+            ) {
+
+                ctx.fillStyle =
+                    "#ffffff";
+
+                ctx.fillRect(
+                    0,
+                    0,
+                    newWidth,
+                    newHeight
                 );
 
-        }
+            }
 
 
-        /* CANVAS */
+            /* DRAW */
 
-        const canvas =
-            document.createElement("canvas");
-
-
-        canvas.width =
-            newWidth;
-
-        canvas.height =
-            newHeight;
-
-
-        const ctx =
-            canvas.getContext("2d");
-
-
-        ctx.imageSmoothingEnabled = true;
-
-        ctx.imageSmoothingQuality = "high";
-
-
-        const format =
-            formatSelect.value;
-
-
-        /* WHITE BACKGROUND FOR JPG */
-
-        if(format === "image/jpeg"){
-
-            ctx.fillStyle = "#ffffff";
-
-            ctx.fillRect(
+            ctx.drawImage(
+                selectedImage,
                 0,
                 0,
                 newWidth,
                 newHeight
             );
 
-        }
+
+            const quality =
+                parseInt(
+                    qualityInput.value
+                ) / 100;
 
 
-        ctx.drawImage(
-            selectedImage,
-            0,
-            0,
-            newWidth,
-            newHeight
-        );
-
-
-        const quality =
-            parseInt(
-                qualityInput.value
-            ) / 100;
-
-
-        let blob =
-            await getBlob(
-                canvas,
-                format,
-                quality
-            );
-
-
-        /* TARGET SIZE IMPROVEMENT */
-
-        if(mode === "size"){
-
-            const target =
-                parseFloat(
-                    targetSizeInput.value
+            let blob =
+                await getBlob(
+                    canvas,
+                    format,
+                    quality
                 );
 
 
-            const targetBytes =
-                targetUnit.value === "MB"
-                ? target * 1024 * 1024
-                : target * 1024;
+            if (!blob) {
 
-
-            let q =
-                quality;
-
-
-            for(
-                let i = 0;
-                i < 8 &&
-                blob.size > targetBytes;
-                i++
-            ){
-
-                q =
-                    Math.max(
-                        .1,
-                        q - .1
-                    );
-
-
-                blob =
-                    await getBlob(
-                        canvas,
-                        format,
-                        q
-                    );
+                throw new Error(
+                    "Unable to create image."
+                );
 
             }
 
-        }
+
+            /* TARGET SIZE QUALITY */
+
+            if (
+                mode === "size"
+            ) {
+
+                const target =
+                    parseFloat(
+                        targetSizeInput.value
+                    );
 
 
-        /* RESULT URL */
+                const targetBytes =
+                    targetUnit.value === "MB"
+                        ? target * 1024 * 1024
+                        : target * 1024;
 
-        if(resultURL){
 
-            URL.revokeObjectURL(
-                resultURL
+                let currentQuality =
+                    quality;
+
+
+                for (
+                    let i = 0;
+                    i < 10 &&
+                    blob.size > targetBytes &&
+                    currentQuality > 0.1;
+                    i++
+                ) {
+
+                    currentQuality =
+                        Math.max(
+                            0.1,
+                            currentQuality - 0.1
+                        );
+
+
+                    blob =
+                        await getBlob(
+                            canvas,
+                            format,
+                            currentQuality
+                        );
+
+                }
+
+            }
+
+
+            /* RESULT URL */
+
+            if (resultURL) {
+
+                URL.revokeObjectURL(
+                    resultURL
+                );
+
+            }
+
+
+            resultURL =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            resultImage.src =
+                resultURL;
+
+
+            const extension =
+                getExtension(
+                    format
+                );
+
+
+            downloadBtn.href =
+                resultURL;
+
+
+            downloadBtn.download =
+                "smarttools-resized-image." +
+                extension;
+
+
+            resultInfo.innerHTML =
+
+                "New dimensions: <strong>" +
+                newWidth +
+                " × " +
+                newHeight +
+                " px</strong><br>" +
+
+                "New file size: <strong>" +
+                formatBytes(blob.size) +
+                "</strong><br>" +
+
+                "Format: <strong>" +
+                extension.toUpperCase() +
+                "</strong>";
+
+
+            result.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    result.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                },
+                100
             );
 
         }
 
 
-        resultURL =
-            URL.createObjectURL(blob);
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Unable to resize this image. Please try again."
+            );
+
+        }
 
 
-        resultImage.src =
-            resultURL;
+        finally {
 
+            resizeBtn.disabled =
+                false;
 
-        const extension =
-            getExtension(format);
+            resizeBtn.textContent =
+                "Resize Image";
 
-
-        downloadBtn.href =
-            resultURL;
-
-
-        downloadBtn.download =
-            "resized-image." +
-            extension;
-
-
-        resultInfo.innerHTML =
-            "New dimensions: <strong>" +
-            newWidth +
-            " × " +
-            newHeight +
-            " px</strong><br>" +
-
-            "New file size: <strong>" +
-            formatBytes(blob.size) +
-            "</strong><br>" +
-
-            "Format: <strong>" +
-            extension.toUpperCase() +
-            "</strong>";
-
-
-        result.classList.add("show");
-
-
-        setTimeout(function(){
-
-            result.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
-
-        },100);
+        }
 
     }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Unable to resize this image. Please try again."
-        );
-
-    }
-    finally{
-
-        resizeBtn.disabled = false;
-
-        resizeBtn.textContent =
-            "Resize Image";
-
-    }
-
-});
+);
 
 
-/* =========================
-   CANVAS → BLOB
-========================= */
+/* =========================================
+   CANVAS TO BLOB
+========================================= */
 
 function getBlob(
     canvas,
     format,
     quality
-){
+) {
 
-    return new Promise(function(resolve){
+    return new Promise(
+        function (resolve) {
 
-        canvas.toBlob(
-            function(blob){
+            canvas.toBlob(
+                function (blob) {
 
-                resolve(blob);
+                    resolve(blob);
 
-            },
-            format,
-            quality
-        );
+                },
+                format,
+                quality
+            );
 
-    });
+        }
+    );
 
 }
 
 
-/* =========================
+/* =========================================
    FILE SIZE
-========================= */
+========================================= */
 
-function formatBytes(bytes){
+function formatBytes(bytes) {
 
-    if(bytes === 0){
+    if (
+        bytes === 0
+    ) {
+
         return "0 Bytes";
+
     }
 
 
@@ -1491,7 +1889,10 @@ function formatBytes(bytes){
 
     return (
         bytes /
-        Math.pow(1024,i)
+        Math.pow(
+            1024,
+            i
+        )
     ).toFixed(2)
     + " "
     + units[i];
@@ -1499,19 +1900,29 @@ function formatBytes(bytes){
 }
 
 
-/* =========================
+/* =========================================
    EXTENSION
-========================= */
+========================================= */
 
-function getExtension(type){
+function getExtension(type) {
 
-    if(type === "image/png"){
+    if (
+        type === "image/png"
+    ) {
+
         return "png";
+
     }
 
-    if(type === "image/webp"){
+
+    if (
+        type === "image/webp"
+    ) {
+
         return "webp";
+
     }
+
 
     return "jpg";
 
