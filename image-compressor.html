@@ -1,1 +1,2020 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image Compressor - Compress Images Online | SmartTools</title>
+
+<meta name="description" content="Free online image compressor. Compress JPG, PNG and WebP images to reduce file size while maintaining good quality. Fast, secure and mobile friendly.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    line-height:1.6;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    padding:15px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    text-decoration:none;
+    color:#172033;
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#2563eb;
+}
+
+.back{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.container{
+    width:min(950px,92%);
+    margin:35px auto;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:38px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    color:#6b7280;
+}
+
+.card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.upload{
+    text-align:center;
+    border:2px dashed #2563eb;
+    padding:35px 18px;
+    border-radius:16px;
+    background:#fff;
+}
+
+.upload-icon{
+    font-size:44px;
+}
+
+.upload p{
+    color:#6b7280;
+    margin:5px 0 17px;
+}
+
+#imageInput{
+    width:100%;
+    max-width:430px;
+    padding:10px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:#fff;
+    font-size:16px;
+}
+
+#imageInput::file-selector-button{
+    background:#2563eb;
+    color:#fff;
+    border:0;
+    border-radius:7px;
+    padding:10px 14px;
+    margin-right:8px;
+    font-weight:700;
+}
+
+.editor{
+    display:none;
+}
+
+.editor.show{
+    display:block;
+}
+
+.preview{
+    text-align:center;
+}
+
+.preview img,
+.result img{
+    max-width:100%;
+    max-height:430px;
+    display:block;
+    margin:auto;
+    border-radius:10px;
+}
+
+.info{
+    margin-top:13px;
+    color:#555;
+    line-height:1.9;
+}
+
+h2{
+    font-size:22px;
+    margin-bottom:17px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.field{
+    margin-bottom:16px;
+}
+
+.field label{
+    display:block;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:16px;
+    background:#fff;
+}
+
+.field input:focus,
+.field select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+.target-row{
+    display:grid;
+    grid-template-columns:1fr 110px;
+    gap:10px;
+}
+
+.switch-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:13px;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    margin-bottom:15px;
+}
+
+.switch-text strong{
+    display:block;
+}
+
+.switch-text small{
+    color:#6b7280;
+}
+
+.switch{
+    position:relative;
+    width:50px;
+    height:28px;
+    flex:none;
+}
+
+.switch input{
+    opacity:0;
+    width:0;
+    height:0;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#d1d5db;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:22px;
+    left:3px;
+    top:3px;
+    background:#fff;
+    border-radius:50%;
+    transition:.2s;
+}
+
+.switch input:checked + .slider{
+    background:#2563eb;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(22px);
+}
+
+.advanced-toggle{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    background:#fff;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.advanced{
+    display:none;
+    padding-top:17px;
+}
+
+.advanced.show{
+    display:block;
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:8px;
+    padding:13px 20px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.primary{
+    background:#2563eb;
+    color:#fff;
+}
+
+.secondary{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-info{
+    margin:16px 0;
+    line-height:2;
+}
+
+.download{
+    display:inline-block;
+    text-decoration:none;
+}
+
+.message{
+    margin-top:15px;
+    padding:11px;
+    border-radius:8px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    font-size:14px;
+}
+
+.message.error{
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+.saved{
+    color:#16a34a;
+    font-size:20px;
+    font-weight:800;
+    margin:10px 0 17px;
+}
+
+.progress{
+    display:none;
+    margin-top:18px;
+}
+
+.progress.show{
+    display:block;
+}
+
+.progress-bar{
+    width:100%;
+    height:9px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#2563eb;
+    transition:width .2s;
+}
+
+.progress-text{
+    margin-top:7px;
+    font-size:14px;
+    color:#6b7280;
+}
+
+footer{
+    margin-top:40px;
+    background:#111827;
+    color:#fff;
+    text-align:center;
+    padding:27px 20px;
+}
+
+footer span{
+    color:#60a5fa;
+}
+
+footer p{
+    color:#9ca3af;
+    margin-top:5px;
+}
+
+@media(max-width:650px){
+
+    header{
+        padding:14px 5%;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .container{
+        width:92%;
+        margin:25px auto;
+    }
+
+    .card{
+        padding:19px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .target-row{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html" class="logo">
+    Smart<span>Tools</span>
+</a>
+
+<a href="index.html" class="back">
+    ← Back
+</a>
+
+</header>
+
+
+<main class="container">
+
+<div class="hero">
+
+<h1>🗜️ Image Compressor</h1>
+
+<p>
+Compress JPG, PNG and WebP images quickly and easily.
+</p>
+
+</div>
+
+
+<div class="upload">
+
+<div class="upload-icon">📤</div>
+
+<h2>Choose Your Image</h2>
+
+<p>
+JPG, PNG and WebP supported
+</p>
+
+<input
+    type="file"
+    id="imageInput"
+    accept="image/jpeg,image/png,image/webp"
+>
+
+</div>
+
+
+<section id="editor" class="editor">
+
+
+<div class="card preview">
+
+<h2>Original Image</h2>
+
+<img
+    id="previewImage"
+    alt="Original image preview"
+>
+
+<div
+    id="originalInfo"
+    class="info"
+></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Compression Settings</h2>
+
+
+<div class="field">
+
+<label>
+Compression Mode
+</label>
+
+<select id="mode">
+
+<option value="quality">
+Quality Based
+</option>
+
+<option value="target">
+Target File Size
+</option>
+
+</select>
+
+</div>
+
+
+<div id="qualitySettings">
+
+<div class="field">
+
+<label>
+Quality:
+<span id="qualityValue">80%</span>
+</label>
+
+<input
+    type="range"
+    id="quality"
+    min="10"
+    max="100"
+    value="80"
+>
+
+</div>
+
+</div>
+
+
+<div
+    id="targetSettings"
+    style="display:none;"
+>
+
+<div class="field">
+
+<label>
+Target File Size
+</label>
+
+<div class="target-row">
+
+<input
+    type="number"
+    id="targetSize"
+    min="1"
+    step="0.1"
+    placeholder="Example: 500"
+    inputmode="decimal"
+>
+
+<select id="targetUnit">
+
+<option value="KB">KB</option>
+
+<option value="MB">MB</option>
+
+</select>
+
+</div>
+
+<small>
+The compressor will try to get as close as practical to your requested size.
+</small>
+
+</div>
+
+</div>
+
+
+<button
+    type="button"
+    id="advancedToggle"
+    class="advanced-toggle"
+>
+⚙️ Advanced Options
+</button>
+
+
+<div
+    id="advancedOptions"
+    class="advanced"
+>
+
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>
+Output Format
+</label>
+
+<select id="format">
+
+<option value="auto">
+Automatic
+</option>
+
+<option value="image/jpeg">
+JPG
+</option>
+
+<option value="image/webp">
+WebP
+</option>
+
+<option value="image/png">
+PNG
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Maximum Dimension
+</label>
+
+<select id="maxDimension">
+
+<option value="original">
+Keep Original
+</option>
+
+<option value="4000">
+4000 px
+</option>
+
+<option value="3000">
+3000 px
+</option>
+
+<option value="2500">
+2500 px
+</option>
+
+<option value="2000">
+2000 px
+</option>
+
+<option value="1500">
+1500 px
+</option>
+
+<option value="1000">
+1000 px
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="switch-row">
+
+<div class="switch-text">
+
+<strong>
+Allow Dimension Reduction
+</strong>
+
+<small>
+Useful when a very small target file size is required.
+</small>
+
+</div>
+
+<label class="switch">
+
+<input
+    type="checkbox"
+    id="allowResize"
+    checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+    type="button"
+    id="compressBtn"
+    class="btn primary"
+>
+Compress Image
+</button>
+
+<button
+    type="button"
+    id="anotherBtn"
+    class="btn secondary"
+>
+Choose Another Image
+</button>
+
+</div>
+
+
+<div
+    id="progress"
+    class="progress"
+>
+
+<div class="progress-bar">
+
+<div
+    id="progressFill"
+    class="progress-fill"
+></div>
+
+</div>
+
+<div
+    id="progressText"
+    class="progress-text"
+>
+Preparing...
+</div>
+
+</div>
+
+
+</div>
+
+
+<div
+    id="result"
+    class="card result"
+>
+
+<h2>Compressed Image</h2>
+
+<img
+    id="resultImage"
+    alt="Compressed image preview"
+>
+
+<div
+    id="resultInfo"
+    class="result-info"
+></div>
+
+<div
+    id="savedText"
+    class="saved"
+></div>
+
+<a
+    id="downloadBtn"
+    class="btn primary download"
+    download="smarttools-compressed-image.jpg"
+>
+⬇️ Download Compressed Image
+</a>
+
+<div
+    id="message"
+    class="message"
+></div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div>
+Smart<span>Tools</span>
+</div>
+
+<p>
+Free online tools for everyday use.
+</p>
+
+<p>
+© 2026 SmartTools. All Rights Reserved.
+</p>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+const imageInput =
+document.getElementById("imageInput");
+
+const editor =
+document.getElementById("editor");
+
+const previewImage =
+document.getElementById("previewImage");
+
+const originalInfo =
+document.getElementById("originalInfo");
+
+const mode =
+document.getElementById("mode");
+
+const qualitySettings =
+document.getElementById("qualitySettings");
+
+const targetSettings =
+document.getElementById("targetSettings");
+
+const quality =
+document.getElementById("quality");
+
+const qualityValue =
+document.getElementById("qualityValue");
+
+const targetSize =
+document.getElementById("targetSize");
+
+const targetUnit =
+document.getElementById("targetUnit");
+
+const advancedToggle =
+document.getElementById("advancedToggle");
+
+const advancedOptions =
+document.getElementById("advancedOptions");
+
+const format =
+document.getElementById("format");
+
+const maxDimension =
+document.getElementById("maxDimension");
+
+const allowResize =
+document.getElementById("allowResize");
+
+const compressBtn =
+document.getElementById("compressBtn");
+
+const anotherBtn =
+document.getElementById("anotherBtn");
+
+const progress =
+document.getElementById("progress");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const progressText =
+document.getElementById("progressText");
+
+const result =
+document.getElementById("result");
+
+const resultImage =
+document.getElementById("resultImage");
+
+const resultInfo =
+document.getElementById("resultInfo");
+
+const savedText =
+document.getElementById("savedText");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+const message =
+document.getElementById("message");
+
+
+let sourceImage = null;
+let sourceFile = null;
+let sourceURL = null;
+let outputURL = null;
+
+let sourceWidth = 0;
+let sourceHeight = 0;
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+imageInput.addEventListener(
+"change",
+function(){
+
+const file =
+imageInput.files &&
+imageInput.files[0];
+
+if(!file) return;
+
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"image/webp"
+];
+
+if(!allowedTypes.includes(file.type)){
+
+showMessage(
+"Please select a JPG, PNG or WebP image.",
+true
+);
+
+imageInput.value = "";
+
+return;
+}
+
+loadImage(file);
+
+}
+);
+
+
+/* =========================
+   LOAD IMAGE
+========================= */
+
+function loadImage(file){
+
+cleanupURLs();
+
+sourceFile = file;
+
+sourceURL =
+URL.createObjectURL(file);
+
+const img =
+new Image();
+
+img.onload =
+function(){
+
+sourceImage = img;
+
+sourceWidth =
+img.naturalWidth;
+
+sourceHeight =
+img.naturalHeight;
+
+previewImage.src =
+sourceURL;
+
+originalInfo.innerHTML =
+"Dimensions: <strong>" +
+sourceWidth +
+" × " +
+sourceHeight +
+" px</strong><br>" +
+
+"Original size: <strong>" +
+formatBytes(file.size) +
+"</strong><br>" +
+
+"Format: <strong>" +
+file.type.replace("image/","").toUpperCase() +
+"</strong>";
+
+editor.classList.add("show");
+
+result.classList.remove("show");
+
+showMessage("",false);
+
+};
+
+img.onerror =
+function(){
+
+showMessage(
+"Unable to read this image. Please try another image.",
+true
+);
+
+};
+
+img.src =
+sourceURL;
+
+}
+
+
+/* =========================
+   MODE
+========================= */
+
+mode.addEventListener(
+"change",
+function(){
+
+if(mode.value === "target"){
+
+qualitySettings.style.display =
+"none";
+
+targetSettings.style.display =
+"block";
+
+}else{
+
+qualitySettings.style.display =
+"block";
+
+targetSettings.style.display =
+"none";
+
+}
+
+}
+);
+
+
+/* =========================
+   QUALITY
+========================= */
+
+quality.addEventListener(
+"input",
+function(){
+
+qualityValue.textContent =
+quality.value + "%";
+
+}
+);
+
+
+/* =========================
+   ADVANCED
+========================= */
+
+advancedToggle.addEventListener(
+"click",
+function(){
+
+advancedOptions.classList.toggle(
+"show"
+);
+
+advancedToggle.textContent =
+advancedOptions.classList.contains("show")
+? "⚙️ Hide Advanced Options"
+: "⚙️ Advanced Options";
+
+}
+);
+
+
+/* =========================
+   ANOTHER IMAGE
+========================= */
+
+anotherBtn.addEventListener(
+"click",
+function(){
+
+imageInput.value = "";
+
+imageInput.click();
+
+}
+);
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function getOutputFormat(){
+
+if(format.value !== "auto"){
+
+return format.value;
+
+}
+
+if(
+sourceFile.type ===
+"image/webp"
+){
+
+return "image/webp";
+
+}
+
+if(
+sourceFile.type ===
+"image/png"
+){
+
+return "image/jpeg";
+
+}
+
+/*
+JPEG is usually much smaller
+than PNG for photographs.
+*/
+
+return "image/jpeg";
+
+}
+
+
+/* =========================
+   TARGET BYTES
+========================= */
+
+function getTargetBytes(){
+
+const value =
+Number(targetSize.value);
+
+if(
+!Number.isFinite(value) ||
+value <= 0
+){
+
+return 0;
+
+}
+
+if(targetUnit.value === "MB"){
+
+return value *
+1024 *
+1024;
+
+}
+
+return value *
+1024;
+
+}
+
+
+/* =========================
+   DIMENSIONS
+========================= */
+
+function calculateDimensions(){
+
+let width =
+sourceWidth;
+
+let height =
+sourceHeight;
+
+const max =
+maxDimension.value === "original"
+? Infinity
+: Number(maxDimension.value);
+
+
+if(
+width > max ||
+height > max
+){
+
+const scale =
+Math.min(
+max / width,
+max / height
+);
+
+width =
+Math.max(
+1,
+Math.round(width * scale)
+);
+
+height =
+Math.max(
+1,
+Math.round(height * scale)
+);
+
+}
+
+
+return {
+width,
+height
+};
+
+}
+
+
+/* =========================
+   CANVAS ENCODE
+========================= */
+
+function encodeImage(
+width,
+height,
+type,
+qualityValueNumber
+){
+
+return new Promise(
+function(resolve){
+
+const canvas =
+document.createElement("canvas");
+
+canvas.width =
+Math.max(
+1,
+Math.round(width)
+);
+
+canvas.height =
+Math.max(
+1,
+Math.round(height)
+);
+
+
+const ctx =
+canvas.getContext(
+"2d"
+);
+
+
+if(!ctx){
+
+resolve(null);
+
+return;
+
+}
+
+
+ctx.imageSmoothingEnabled =
+true;
+
+ctx.imageSmoothingQuality =
+"high";
+
+
+/*
+White background for JPEG
+so transparent PNG doesn't
+become black.
+*/
+
+if(type === "image/jpeg"){
+
+ctx.fillStyle =
+"#ffffff";
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+}
+
+
+ctx.drawImage(
+sourceImage,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+canvas.toBlob(
+function(blob){
+
+if(!blob){
+
+resolve(null);
+
+return;
+
+}
+
+resolve({
+blob:blob,
+width:canvas.width,
+height:canvas.height
+});
+
+},
+type,
+qualityValueNumber
+);
+
+}
+);
+
+}
+
+
+/* =========================
+   FAST TARGET COMPRESSION
+   Maximum 7 attempts
+========================= */
+
+async function findTargetSize(
+target,
+type,
+width,
+height
+){
+
+let low = 0.05;
+
+let high = 0.95;
+
+let best = null;
+
+for(
+let i = 0;
+i < 7;
+i++
+){
+
+const q =
+(low + high) / 2;
+
+
+const output =
+await encodeImage(
+width,
+height,
+type,
+q
+);
+
+
+if(!output){
+
+continue;
+
+}
+
+
+if(
+!best ||
+Math.abs(
+output.blob.size - target
+)
+<
+Math.abs(
+best.blob.size - target
+)
+){
+
+best = output;
+
+}
+
+
+const difference =
+Math.abs(
+output.blob.size - target
+);
+
+
+/*
+Stop when within 2%.
+*/
+
+if(
+difference <=
+target * 0.02
+){
+
+return output;
+
+}
+
+
+if(
+output.blob.size >
+target
+){
+
+high = q;
+
+}else{
+
+low = q;
+
+}
+
+}
+
+return best;
+
+}
+
+
+/* =========================
+   SMART TARGET RESIZE
+========================= */
+
+async function compressToTarget(
+target,
+type
+){
+
+let dimensions =
+calculateDimensions();
+
+
+/*
+First try keeping dimensions.
+*/
+
+let output =
+await findTargetSize(
+target,
+type,
+dimensions.width,
+dimensions.height
+);
+
+
+if(
+!allowResize.checked ||
+!output ||
+output.blob.size <= target
+){
+
+return output;
+
+}
+
+
+/*
+If still too large,
+reduce dimensions gradually.
+
+Maximum 3 passes.
+*/
+
+let width =
+dimensions.width;
+
+let height =
+dimensions.height;
+
+
+for(
+let pass = 0;
+pass < 3;
+pass++
+){
+
+const ratio =
+Math.sqrt(
+target /
+Math.max(
+1,
+output.blob.size
+)
+);
+
+
+const scale =
+Math.max(
+0.35,
+Math.min(
+0.90,
+ratio
+)
+);
+
+
+width =
+Math.max(
+1,
+Math.round(width * scale)
+);
+
+height =
+Math.max(
+1,
+Math.round(height * scale)
+);
+
+
+const candidate =
+await findTargetSize(
+target,
+type,
+width,
+height
+);
+
+
+if(
+candidate &&
+(
+!output ||
+Math.abs(
+candidate.blob.size -
+target
+)
+<
+Math.abs(
+output.blob.size -
+target
+)
+)
+){
+
+output =
+candidate;
+
+}
+
+
+if(
+output &&
+output.blob.size <=
+target * 1.02
+){
+
+break;
+
+}
+
+}
+
+
+return output;
+
+}
+
+
+/* =========================
+   COMPRESS BUTTON
+========================= */
+
+compressBtn.addEventListener(
+"click",
+async function(){
+
+if(
+!sourceImage ||
+!sourceFile
+){
+
+showMessage(
+"Please choose an image first.",
+true
+);
+
+return;
+
+}
+
+
+compressBtn.disabled =
+true;
+
+compressBtn.textContent =
+"Compressing...";
+
+progress.classList.add("show");
+
+setProgress(
+5,
+"Preparing image..."
+);
+
+
+try{
+
+const type =
+getOutputFormat();
+
+let output = null;
+
+
+if(mode.value === "quality"){
+
+setProgress(
+25,
+"Compressing image..."
+);
+
+
+const dimensions =
+calculateDimensions();
+
+
+output =
+await encodeImage(
+dimensions.width,
+dimensions.height,
+type,
+Number(quality.value) / 100
+);
+
+
+}else{
+
+const target =
+getTargetBytes();
+
+
+if(!target){
+
+throw new Error(
+"Please enter a valid target file size."
+);
+
+}
+
+
+setProgress(
+15,
+"Finding the best compression..."
+);
+
+
+output =
+await compressToTarget(
+target,
+type
+);
+
+}
+
+
+setProgress(
+90,
+"Finalizing image..."
+);
+
+
+if(
+!output ||
+!output.blob
+){
+
+throw new Error(
+"Image could not be compressed."
+);
+
+}
+
+
+/*
+Don't replace a smaller original
+with a larger compressed result
+in quality mode.
+*/
+
+if(
+mode.value === "quality" &&
+output.blob.size >= sourceFile.size &&
+type === sourceFile.type
+){
+
+const fallback =
+await encodeImage(
+output.width,
+output.height,
+type,
+0.55
+);
+
+if(
+fallback &&
+fallback.blob.size <
+output.blob.size
+){
+
+output =
+fallback;
+
+}
+
+}
+
+
+if(outputURL){
+
+URL.revokeObjectURL(
+outputURL
+);
+
+}
+
+
+outputURL =
+URL.createObjectURL(
+output.blob
+);
+
+
+resultImage.src =
+outputURL;
+
+
+const extension =
+type === "image/png"
+? "png"
+: type === "image/webp"
+? "webp"
+: "jpg";
+
+
+downloadBtn.href =
+outputURL;
+
+downloadBtn.download =
+"smarttools-compressed-image." +
+extension;
+
+
+const originalSize =
+sourceFile.size;
+
+const finalSize =
+output.blob.size;
+
+
+const savedPercent =
+Math.max(
+0,
+(
+1 -
+finalSize /
+Math.max(
+1,
+originalSize
+)
+) * 100
+);
+
+
+resultInfo.innerHTML =
+"Original size: <strong>" +
+formatBytes(originalSize) +
+"</strong><br>" +
+
+"Compressed size: <strong>" +
+formatBytes(finalSize) +
+"</strong><br>" +
+
+"Original dimensions: <strong>" +
+sourceWidth +
+" × " +
+sourceHeight +
+" px</strong><br>" +
+
+"Final dimensions: <strong>" +
+output.width +
+" × " +
+output.height +
+" px</strong><br>" +
+
+"Output format: <strong>" +
+extension.toUpperCase() +
+"</strong>";
+
+
+if(savedPercent > 0){
+
+savedText.textContent =
+"Saved " +
+savedPercent.toFixed(1) +
+"%";
+
+}else{
+
+savedText.textContent =
+"Image processed successfully";
+
+}
+
+
+result.classList.add(
+"show"
+);
+
+
+setProgress(
+100,
+"Compression complete!"
+);
+
+
+if(mode.value === "target"){
+
+const target =
+getTargetBytes();
+
+const difference =
+Math.abs(
+finalSize - target
+);
+
+const percentage =
+difference /
+Math.max(
+1,
+target
+) * 100;
+
+
+if(percentage <= 5){
+
+showMessage(
+"✓ Compressed size is very close to your requested target.",
+false
+);
+
+}else{
+
+showMessage(
+"✓ Image compressed successfully. Exact file size may vary because browser image encoders work differently for every image.",
+false
+);
+
+}
+
+}else{
+
+showMessage(
+"✓ Image compressed successfully.",
+false
+);
+
+}
+
+
+setTimeout(
+function(){
+
+result.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+},
+100
+);
+
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+error.message ||
+"Something went wrong while compressing the image.",
+true
+);
+
+}finally{
+
+compressBtn.disabled =
+false;
+
+compressBtn.textContent =
+"Compress Image";
+
+}
+
+}
+);
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function setProgress(
+percent,
+text
+){
+
+progressFill.style.width =
+percent + "%";
+
+progressText.textContent =
+text;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+text,
+isError
+){
+
+message.textContent =
+text;
+
+message.className =
+isError
+? "message error"
+: "message";
+
+}
+
+
+/* =========================
+   FORMAT BYTES
+========================= */
+
+function formatBytes(bytes){
+
+if(bytes < 1024){
+
+return bytes.toFixed(0) +
+" Bytes";
+
+}
+
+if(
+bytes <
+1024 * 1024
+){
+
+return (
+bytes / 1024
+).toFixed(2) +
+" KB";
+
+}
+
+return (
+bytes /
+(1024 * 1024)
+).toFixed(2) +
+" MB";
+
+}
+
+
+/* =========================
+   CLEANUP
+========================= */
+
+function cleanupURLs(){
+
+if(sourceURL){
+
+URL.revokeObjectURL(
+sourceURL
+);
+
+sourceURL = null;
+
+}
+
+if(outputURL){
+
+URL.revokeObjectURL(
+outputURL
+);
+
+outputURL = null;
+
+}
+
+}
+
+
+window.addEventListener(
+"beforeunload",
+cleanupURLs
+);
+
+</script>
+
+</body>
+</html>
+```
 
