@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://satishkrsingh123.github.io/Smart-tools---Free-Online-Tools/sitemap.xml
