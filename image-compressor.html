@@ -5,10 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Image Compressor - SmartTools</title>
-
+<title>Image Compressor - Compress Image to KB & MB | SmartTools</title>
 <meta name="description"
-content="Compress JPG, PNG and WebP images online. Choose a target KB or MB size and get the closest practical file size.">
+      content="Compress JPG, PNG and WebP images online to a target KB or MB size with automatic quality optimization.">
 
 <style>
 *{
@@ -33,12 +32,12 @@ header{
     align-items:center;
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
 }
 
 .logo{
-    text-decoration:none;
     color:#172033;
+    text-decoration:none;
     font-size:25px;
     font-weight:800;
 }
@@ -60,12 +59,12 @@ header{
 
 .hero{
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:28px;
 }
 
 .hero h1{
     font-size:38px;
-    margin-bottom:7px;
+    margin-bottom:8px;
 }
 
 .hero p{
@@ -81,26 +80,27 @@ header{
 }
 
 .upload{
-    text-align:center;
-    border:2px dashed #2563eb;
-    padding:35px 18px;
-    border-radius:16px;
     background:#fff;
+    border:2px dashed #2563eb;
+    border-radius:16px;
+    padding:35px 18px;
+    text-align:center;
 }
 
 .upload-icon{
     font-size:44px;
+    margin-bottom:8px;
 }
 
 .upload p{
     color:#6b7280;
-    margin:5px 0 17px;
+    margin:5px 0 18px;
 }
 
 #imageInput{
     width:100%;
     max-width:430px;
-    padding:10px;
+    padding:11px;
     border:1px solid #d1d5db;
     border-radius:8px;
     background:#fff;
@@ -112,9 +112,10 @@ header{
     color:#fff;
     border:0;
     border-radius:7px;
-    padding:10px 14px;
+    padding:10px 15px;
     margin-right:8px;
     font-weight:700;
+    cursor:pointer;
 }
 
 .editor{
@@ -131,22 +132,22 @@ header{
 
 .preview img,
 .result img{
+    display:block;
     max-width:100%;
     max-height:430px;
-    display:block;
     margin:auto;
     border-radius:10px;
 }
 
 .info{
-    margin-top:13px;
+    margin-top:14px;
     color:#555;
     line-height:1.9;
 }
 
 h2{
     font-size:22px;
-    margin-bottom:17px;
+    margin-bottom:18px;
 }
 
 .field{
@@ -167,6 +168,7 @@ h2{
     border-radius:8px;
     font-size:16px;
     background:#fff;
+    color:#172033;
 }
 
 .field input:focus,
@@ -179,6 +181,12 @@ h2{
     display:grid;
     grid-template-columns:1fr 120px;
     gap:10px;
+}
+
+.field small{
+    display:block;
+    margin-top:6px;
+    color:#6b7280;
 }
 
 .switch-row{
@@ -221,7 +229,7 @@ h2{
     cursor:pointer;
 }
 
-.slider:before{
+.slider::before{
     content:"";
     position:absolute;
     width:22px;
@@ -237,15 +245,15 @@ h2{
     background:#2563eb;
 }
 
-.switch input:checked + .slider:before{
+.switch input:checked + .slider::before{
     transform:translateX(22px);
 }
 
 .advanced-toggle{
     width:100%;
-    padding:12px;
     border:1px solid #d1d5db;
     background:#fff;
+    padding:12px;
     border-radius:8px;
     font-weight:700;
     cursor:pointer;
@@ -253,7 +261,7 @@ h2{
 
 .advanced{
     display:none;
-    padding-top:17px;
+    margin-top:15px;
 }
 
 .advanced.show{
@@ -263,8 +271,8 @@ h2{
 .actions{
     display:flex;
     gap:12px;
-    margin-top:20px;
     flex-wrap:wrap;
+    margin-top:20px;
 }
 
 .btn{
@@ -301,8 +309,8 @@ h2{
 }
 
 .progress-bar{
-    width:100%;
     height:9px;
+    width:100%;
     background:#e5e7eb;
     border-radius:20px;
     overflow:hidden;
@@ -312,7 +320,7 @@ h2{
     width:0%;
     height:100%;
     background:#2563eb;
-    transition:width:.2s;
+    transition:width .2s;
 }
 
 .progress-text{
@@ -339,7 +347,7 @@ h2{
     color:#16a34a;
     font-size:20px;
     font-weight:800;
-    margin:10px 0 17px;
+    margin:10px 0 18px;
 }
 
 .download{
@@ -361,21 +369,9 @@ h2{
     color:#b91c1c;
 }
 
-footer{
-    margin-top:40px;
-    background:#111827;
-    color:#fff;
-    text-align:center;
-    padding:27px 20px;
-}
-
-footer span{
-    color:#60a5fa;
-}
-
-footer p{
-    color:#9ca3af;
-    margin-top:5px;
+.message.warn{
+    background:#fff7ed;
+    color:#9a3412;
 }
 
 @media(max-width:650px){
@@ -421,11 +417,11 @@ footer p{
 <header>
 
 <a href="index.html" class="logo">
-Smart<span>Tools</span>
+    Smart<span>Tools</span>
 </a>
 
 <a href="index.html" class="back">
-← Back
+    ← Back
 </a>
 
 </header>
@@ -438,11 +434,13 @@ Smart<span>Tools</span>
 <h1>🗜️ Image Compressor</h1>
 
 <p>
-Compress images to a selected KB or MB target size.
+Compress images to a target KB or MB size while keeping good quality.
 </p>
 
 </div>
 
+
+<!-- UPLOAD -->
 
 <div class="upload">
 
@@ -450,38 +448,43 @@ Compress images to a selected KB or MB target size.
 
 <h2>Choose Your Image</h2>
 
-<p>
-JPG, PNG and WebP supported
-</p>
+<p>JPG, PNG and WebP supported</p>
 
 <input
-type="file"
-id="imageInput"
-accept="image/jpeg,image/png,image/webp"
+    type="file"
+    id="imageInput"
+    accept="image/jpeg,image/png,image/webp"
 >
 
 </div>
 
 
-<section id="editor" class="editor">
+<section
+    id="editor"
+    class="editor"
+>
 
+
+<!-- ORIGINAL IMAGE -->
 
 <div class="card preview">
 
 <h2>Original Image</h2>
 
 <img
-id="previewImage"
-alt="Original image"
+    id="previewImage"
+    alt="Original image"
 >
 
 <div
-id="originalInfo"
-class="info"
-></div>
+    id="originalInfo"
+    class="info">
+</div>
 
 </div>
 
+
+<!-- SETTINGS -->
 
 <div class="card">
 
@@ -490,7 +493,7 @@ class="info"
 
 <div class="field">
 
-<label>
+<label for="mode">
 Compression Mode
 </label>
 
@@ -509,6 +512,8 @@ Quality Based
 </div>
 
 
+<!-- TARGET -->
+
 <div id="targetSettings">
 
 <div class="field">
@@ -520,12 +525,12 @@ Target File Size
 <div class="target-row">
 
 <input
-type="number"
-id="targetSize"
-min="1"
-step="0.1"
-placeholder="Example: 500"
-inputmode="decimal"
+    type="number"
+    id="targetSize"
+    min="1"
+    step="0.1"
+    placeholder="Example: 500"
+    inputmode="decimal"
 >
 
 <select id="targetUnit">
@@ -539,7 +544,7 @@ inputmode="decimal"
 </div>
 
 <small>
-Example: enter 500 KB to get as close as possible to 500 KB.
+The tool searches for the closest practical result to your target.
 </small>
 
 </div>
@@ -547,9 +552,11 @@ Example: enter 500 KB to get as close as possible to 500 KB.
 </div>
 
 
+<!-- QUALITY -->
+
 <div
-id="qualitySettings"
-style="display:none;"
+    id="qualitySettings"
+    style="display:none;"
 >
 
 <div class="field">
@@ -560,11 +567,11 @@ Quality:
 </label>
 
 <input
-type="range"
-id="quality"
-min="10"
-max="100"
-value="80"
+    type="range"
+    id="quality"
+    min="10"
+    max="100"
+    value="80"
 >
 
 </div>
@@ -572,18 +579,20 @@ value="80"
 </div>
 
 
+<!-- ADVANCED -->
+
 <button
-type="button"
-id="advancedToggle"
-class="advanced-toggle"
+    type="button"
+    id="advancedToggle"
+    class="advanced-toggle"
 >
 ⚙️ Advanced Options
 </button>
 
 
 <div
-id="advancedOptions"
-class="advanced"
+    id="advancedOptions"
+    class="advanced"
 >
 
 <div class="field">
@@ -620,7 +629,7 @@ Allow Dimension Reduction
 </strong>
 
 <small>
-Only used when the target cannot be reached through quality alone.
+If quality alone cannot reach the target, dimensions can be reduced.
 </small>
 
 </div>
@@ -628,9 +637,9 @@ Only used when the target cannot be reached through quality alone.
 <label class="switch">
 
 <input
-type="checkbox"
-id="allowResize"
-checked
+    type="checkbox"
+    id="allowResize"
+    checked
 >
 
 <span class="slider"></span>
@@ -645,17 +654,17 @@ checked
 <div class="actions">
 
 <button
-type="button"
-id="compressBtn"
-class="btn primary"
+    type="button"
+    id="compressBtn"
+    class="btn primary"
 >
 Compress Image
 </button>
 
 <button
-type="button"
-id="anotherBtn"
-class="btn secondary"
+    type="button"
+    id="anotherBtn"
+    class="btn secondary"
 >
 Choose Another Image
 </button>
@@ -664,23 +673,22 @@ Choose Another Image
 
 
 <div
-id="progress"
-class="progress"
+    id="progress"
+    class="progress"
 >
 
 <div class="progress-bar">
 
 <div
-id="progressFill"
-class="progress-fill"
-></div>
+    id="progressFill"
+    class="progress-fill">
+</div>
 
 </div>
 
 <div
-id="progressText"
-class="progress-text"
->
+    id="progressText"
+    class="progress-text">
 Preparing...
 </div>
 
@@ -690,40 +698,41 @@ Preparing...
 </div>
 
 
+<!-- RESULT -->
+
 <div
-id="result"
-class="card result"
+    id="result"
+    class="card result"
 >
 
 <h2>Compressed Image</h2>
 
 <img
-id="resultImage"
-alt="Compressed image"
+    id="resultImage"
+    alt="Compressed image"
 >
 
 <div
-id="resultInfo"
-class="result-info"
-></div>
+    id="resultInfo"
+    class="result-info">
+</div>
 
 <div
-id="savedText"
-class="saved"
-></div>
+    id="savedText"
+    class="saved">
+</div>
 
 <a
-id="downloadBtn"
-class="btn primary download"
-download="smarttools-compressed-image.jpg"
->
+    id="downloadBtn"
+    class="btn primary download"
+    download="smarttools-compressed-image.jpg">
 ⬇️ Download Compressed Image
 </a>
 
 <div
-id="message"
-class="message"
-></div>
+    id="message"
+    class="message">
+</div>
 
 </div>
 
@@ -751,91 +760,98 @@ Free online tools for everyday use.
 
 
 <script>
-
 "use strict";
 
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const imageInput =
-document.getElementById("imageInput");
+    document.getElementById("imageInput");
 
 const editor =
-document.getElementById("editor");
+    document.getElementById("editor");
 
 const previewImage =
-document.getElementById("previewImage");
+    document.getElementById("previewImage");
 
 const originalInfo =
-document.getElementById("originalInfo");
+    document.getElementById("originalInfo");
 
 const mode =
-document.getElementById("mode");
+    document.getElementById("mode");
 
 const targetSettings =
-document.getElementById("targetSettings");
+    document.getElementById("targetSettings");
 
 const qualitySettings =
-document.getElementById("qualitySettings");
+    document.getElementById("qualitySettings");
 
-const targetSize =
-document.getElementById("targetSize");
+const targetSizeInput =
+    document.getElementById("targetSize");
 
 const targetUnit =
-document.getElementById("targetUnit");
+    document.getElementById("targetUnit");
 
-const quality =
-document.getElementById("quality");
+const qualityInput =
+    document.getElementById("quality");
 
 const qualityValue =
-document.getElementById("qualityValue");
+    document.getElementById("qualityValue");
 
 const advancedToggle =
-document.getElementById("advancedToggle");
+    document.getElementById("advancedToggle");
 
 const advancedOptions =
-document.getElementById("advancedOptions");
+    document.getElementById("advancedOptions");
 
-const format =
-document.getElementById("format");
+const formatSelect =
+    document.getElementById("format");
 
 const allowResize =
-document.getElementById("allowResize");
+    document.getElementById("allowResize");
 
 const compressBtn =
-document.getElementById("compressBtn");
+    document.getElementById("compressBtn");
 
 const anotherBtn =
-document.getElementById("anotherBtn");
+    document.getElementById("anotherBtn");
 
 const progress =
-document.getElementById("progress");
+    document.getElementById("progress");
 
 const progressFill =
-document.getElementById("progressFill");
+    document.getElementById("progressFill");
 
 const progressText =
-document.getElementById("progressText");
+    document.getElementById("progressText");
 
 const result =
-document.getElementById("result");
+    document.getElementById("result");
 
 const resultImage =
-document.getElementById("resultImage");
+    document.getElementById("resultImage");
 
 const resultInfo =
-document.getElementById("resultInfo");
+    document.getElementById("resultInfo");
 
 const savedText =
-document.getElementById("savedText");
+    document.getElementById("savedText");
 
 const downloadBtn =
-document.getElementById("downloadBtn");
+    document.getElementById("downloadBtn");
 
 const message =
-document.getElementById("message");
+    document.getElementById("message");
 
+
+/* =========================================================
+   STATE
+========================================================= */
 
 let sourceImage = null;
 let sourceFile = null;
+
 let sourceURL = null;
 let outputURL = null;
 
@@ -843,1386 +859,1422 @@ let sourceWidth = 0;
 let sourceHeight = 0;
 
 
-/* =========================
-   FILE PICKER
-========================= */
+/*
+   Maximum canvas size for browser stability.
+*/
+const MAX_PIXELS = 24000000;
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
 
 imageInput.addEventListener(
-"change",
-function(){
+    "change",
+    function(){
 
-const file =
-imageInput.files &&
-imageInput.files[0];
+        const file =
+            imageInput.files &&
+            imageInput.files[0];
 
-if(!file){
-return;
-}
+        if(!file){
+            return;
+        }
 
-const allowed = [
-"image/jpeg",
-"image/png",
-"image/webp"
-];
+        const allowed = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
 
-if(!allowed.includes(file.type)){
+        if(!allowed.includes(file.type)){
 
-showMessage(
-"Please select a JPG, PNG or WebP image.",
-true
+            showMessage(
+                "Please select a JPG, PNG or WebP image.",
+                "error"
+            );
+
+            imageInput.value = "";
+
+            return;
+        }
+
+        loadImage(file);
+    }
 );
 
-imageInput.value = "";
 
-return;
-}
-
-loadImage(file);
-
-}
-);
-
-
-/* =========================
+/* =========================================================
    LOAD IMAGE
-========================= */
+========================================================= */
 
 function loadImage(file){
 
-cleanupURLs();
+    cleanupURLs();
 
-sourceFile = file;
+    sourceFile = file;
 
-sourceURL =
-URL.createObjectURL(file);
+    sourceURL =
+        URL.createObjectURL(file);
 
-const img =
-new Image();
+    const img =
+        new Image();
 
-img.onload =
-function(){
+    img.onload =
+        function(){
 
-sourceImage = img;
+            sourceImage = img;
 
-sourceWidth =
-img.naturalWidth;
+            sourceWidth =
+                img.naturalWidth;
 
-sourceHeight =
-img.naturalHeight;
+            sourceHeight =
+                img.naturalHeight;
 
-previewImage.src =
-sourceURL;
+            previewImage.src =
+                sourceURL;
 
-originalInfo.innerHTML =
-"Dimensions: <strong>" +
-sourceWidth +
-" × " +
-sourceHeight +
-" px</strong><br>" +
+            originalInfo.innerHTML =
+                "Dimensions: <strong>" +
+                sourceWidth +
+                " × " +
+                sourceHeight +
+                " px</strong><br>" +
 
-"Original size: <strong>" +
-formatBytes(file.size) +
-"</strong><br>" +
+                "Original size: <strong>" +
+                formatBytes(file.size) +
+                "</strong><br>" +
 
-"Format: <strong>" +
-file.type
-.replace("image/","")
-.toUpperCase() +
-"</strong>";
+                "Format: <strong>" +
+                file.type
+                    .replace("image/","")
+                    .toUpperCase() +
+                "</strong>";
 
-editor.classList.add("show");
+            editor.classList.add("show");
 
-result.classList.remove("show");
+            result.classList.remove("show");
 
-showMessage("",false);
+            setProgress(0,"");
 
-};
+            showMessage("","normal");
+        };
 
-img.onerror =
-function(){
+    img.onerror =
+        function(){
 
-showMessage(
-"Unable to read this image. Please select another image.",
-true
-);
+            showMessage(
+                "Unable to load this image. Please choose another image.",
+                "error"
+            );
+        };
 
-};
-
-img.src =
-sourceURL;
-
+    img.src =
+        sourceURL;
 }
 
 
-/* =========================
+/* =========================================================
    MODE
-========================= */
+========================================================= */
 
 mode.addEventListener(
-"change",
-function(){
+    "change",
+    function(){
 
-if(mode.value === "target"){
+        if(
+            mode.value === "target"
+        ){
 
-targetSettings.style.display =
-"block";
+            targetSettings.style.display =
+                "block";
 
-qualitySettings.style.display =
-"none";
+            qualitySettings.style.display =
+                "none";
 
-}else{
+        }else{
 
-targetSettings.style.display =
-"none";
+            targetSettings.style.display =
+                "none";
 
-qualitySettings.style.display =
-"block";
-
-}
-
-}
+            qualitySettings.style.display =
+                "block";
+        }
+    }
 );
 
 
-/* =========================
+/* =========================================================
    QUALITY
-========================= */
+========================================================= */
 
-quality.addEventListener(
-"input",
-function(){
+qualityInput.addEventListener(
+    "input",
+    function(){
 
-qualityValue.textContent =
-quality.value + "%";
-
-}
+        qualityValue.textContent =
+            qualityInput.value + "%";
+    }
 );
 
 
-/* =========================
+/* =========================================================
    ADVANCED
-========================= */
+========================================================= */
 
 advancedToggle.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-advancedOptions.classList.toggle("show");
+        advancedOptions.classList.toggle(
+            "show"
+        );
 
-advancedToggle.textContent =
-advancedOptions.classList.contains("show")
-? "⚙️ Hide Advanced Options"
-: "⚙️ Advanced Options";
-
-}
+        advancedToggle.textContent =
+            advancedOptions.classList.contains("show")
+            ? "⚙️ Hide Advanced Options"
+            : "⚙️ Advanced Options";
+    }
 );
 
 
-/* =========================
+/* =========================================================
    ANOTHER IMAGE
-========================= */
+========================================================= */
 
 anotherBtn.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-imageInput.value = "";
+        imageInput.value = "";
 
-imageInput.click();
-
-}
+        imageInput.click();
+    }
 );
 
 
-/* =========================
-   OUTPUT FORMAT
-========================= */
-
-function getOutputFormat(){
-
-if(format.value !== "auto"){
-
-return format.value;
-
-}
-
-/*
-For target-size compression,
-JPEG/WebP are much more suitable
-than PNG because PNG quality
-cannot be controlled.
-*/
-
-if(
-sourceFile.type === "image/webp"
-){
-
-return "image/webp";
-
-}
-
-return "image/jpeg";
-
-}
-
-
-/* =========================
+/* =========================================================
    TARGET BYTES
-========================= */
+========================================================= */
 
 function getTargetBytes(){
 
-const value =
-Number(targetSize.value);
+    const value =
+        Number(targetSizeInput.value);
 
-if(
-!Number.isFinite(value) ||
-value <= 0
+    if(
+        !Number.isFinite(value) ||
+        value <= 0
+    ){
+        return 0;
+    }
+
+    return targetUnit.value === "MB"
+        ? value * 1024 * 1024
+        : value * 1024;
+}
+
+
+/* =========================================================
+   OUTPUT FORMAT
+========================================================= */
+
+function getOutputFormat(){
+
+    if(
+        formatSelect.value !== "auto"
+    ){
+        return formatSelect.value;
+    }
+
+    /*
+       JPEG/WebP are appropriate for target-size
+       compression. PNG has no useful browser
+       quality parameter.
+    */
+    if(
+        sourceFile.type === "image/webp"
+    ){
+        return "image/webp";
+    }
+
+    return "image/jpeg";
+}
+
+
+/* =========================================================
+   SAFE DIMENSIONS
+========================================================= */
+
+function safeDimensions(
+    width,
+    height
 ){
 
-return 0;
+    width =
+        Math.max(
+            1,
+            Math.round(width)
+        );
 
-}
+    height =
+        Math.max(
+            1,
+            Math.round(height)
+        );
 
-if(targetUnit.value === "MB"){
+    const pixels =
+        width * height;
 
-return value *
-1024 *
-1024;
+    if(
+        pixels <= MAX_PIXELS
+    ){
+        return {
+            width,
+            height
+        };
+    }
 
-}
+    const scale =
+        Math.sqrt(
+            MAX_PIXELS / pixels
+        );
 
-return value * 1024;
+    return {
+        width:
+            Math.max(
+                1,
+                Math.floor(
+                    width * scale
+                )
+            ),
 
-}
-
-
-/* =========================
-   CANVAS
-========================= */
-
-function createCanvas(
-width,
-height,
-type
-){
-
-const canvas =
-document.createElement("canvas");
-
-canvas.width =
-Math.max(
-1,
-Math.round(width)
-);
-
-canvas.height =
-Math.max(
-1,
-Math.round(height)
-);
-
-const ctx =
-canvas.getContext("2d");
-
-if(!ctx){
-
-return null;
-
-}
-
-ctx.imageSmoothingEnabled =
-true;
-
-ctx.imageSmoothingQuality =
-"high";
-
-
-/*
-JPEG background must be white.
-*/
-
-if(type === "image/jpeg"){
-
-ctx.fillStyle =
-"#ffffff";
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
+        height:
+            Math.max(
+                1,
+                Math.floor(
+                    height * scale
+                )
+            )
+    };
 }
 
 
-ctx.drawImage(
-sourceImage,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-return canvas;
-
-}
-
-
-/* =========================
+/* =========================================================
    ENCODE
-========================= */
+========================================================= */
 
-function encode(
-width,
-height,
-type,
-q
+function encodeImage(
+    width,
+    height,
+    type,
+    quality
 ){
 
-return new Promise(
-function(resolve){
+    return new Promise(
+        function(resolve){
 
-const canvas =
-createCanvas(
-width,
-height,
-type
-);
+            const safe =
+                safeDimensions(
+                    width,
+                    height
+                );
 
-if(!canvas){
+            const canvas =
+                document.createElement(
+                    "canvas"
+                );
 
-resolve(null);
+            canvas.width =
+                safe.width;
 
-return;
+            canvas.height =
+                safe.height;
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+            if(!ctx){
+
+                resolve(null);
+
+                return;
+            }
+
+            ctx.imageSmoothingEnabled =
+                true;
+
+            ctx.imageSmoothingQuality =
+                "high";
+
+            /*
+               JPEG transparency background.
+            */
+            if(
+                type === "image/jpeg"
+            ){
+
+                ctx.fillStyle =
+                    "#ffffff";
+
+                ctx.fillRect(
+                    0,
+                    0,
+                    safe.width,
+                    safe.height
+                );
+            }
+
+            ctx.drawImage(
+                sourceImage,
+                0,
+                0,
+                safe.width,
+                safe.height
+            );
+
+            canvas.toBlob(
+                function(blob){
+
+                    if(!blob){
+
+                        resolve(null);
+
+                        return;
+                    }
+
+                    resolve({
+                        blob:blob,
+                        width:safe.width,
+                        height:safe.height,
+                        quality:quality
+                    });
+
+                },
+                type,
+                quality
+            );
+        }
+    );
 }
 
-canvas.toBlob(
-function(blob){
 
-if(!blob){
-
-resolve(null);
-
-return;
-}
-
-resolve({
-
-blob:blob,
-
-width:canvas.width,
-
-height:canvas.height,
-
-quality:q
-
-});
-
-},
-type,
-q
-);
-
-}
-);
-
-}
-
-
-/* =========================
+/* =========================================================
    FIND CLOSEST QUALITY
-========================= */
+========================================================= */
 
-async function findClosest(
-target,
-type,
-width,
-height
+async function findClosestQuality(
+    target,
+    type,
+    width,
+    height
 ){
 
-/*
-We keep TWO candidates:
-
-1. largest result below target
-2. smallest result above target
-
-Then choose whichever is closer.
-
-This prevents a 500 KB request from
-unnecessarily returning 200 KB when
-a much closer result is available.
-*/
-
-let below = null;
-let above = null;
+    let below = null;
+    let above = null;
 
 
-/*
-Use 12 quality points first.
-This gives us a reliable range.
-*/
+    /*
+       First coarse search.
 
-const qualities = [];
+       These quality points make sure we find
+       both sides of the requested target.
+    */
 
-for(
-let i = 0;
-i <= 11;
-i++
-){
+    const qualityPoints = [
+        0.10,
+        0.20,
+        0.30,
+        0.40,
+        0.50,
+        0.60,
+        0.70,
+        0.80,
+        0.90,
+        1.00
+    ];
 
-qualities.push(
-0.05 +
-(i * 0.90 / 11)
-);
 
+    for(
+        let i = 0;
+        i < qualityPoints.length;
+        i++
+    ){
+
+        const q =
+            qualityPoints[i];
+
+        const candidate =
+            await encodeImage(
+                width,
+                height,
+                type,
+                q
+            );
+
+        if(!candidate){
+            continue;
+        }
+
+
+        const size =
+            candidate.blob.size;
+
+
+        if(
+            size <= target
+        ){
+
+            if(
+                !below ||
+                size >
+                below.blob.size
+            ){
+
+                below =
+                    candidate;
+            }
+
+        }else{
+
+            if(
+                !above ||
+                size <
+                above.blob.size
+            ){
+
+                above =
+                    candidate;
+            }
+        }
+
+
+        setProgress(
+            15 +
+            Math.round(
+                (i + 1) /
+                qualityPoints.length *
+                25
+            ),
+            "Checking compression levels..."
+        );
+    }
+
+
+    /*
+       If we cannot get a result on one side,
+       return the available side.
+    */
+
+    if(!below){
+        return above;
+    }
+
+    if(!above){
+        return below;
+    }
+
+
+    /*
+       Binary search between the nearest
+       quality values surrounding target.
+    */
+
+    let low =
+        below.quality;
+
+    let high =
+        above.quality;
+
+    let best =
+        chooseClosest(
+            below,
+            above,
+            target
+        );
+
+
+    for(
+        let i = 0;
+        i < 10;
+        i++
+    ){
+
+        const middle =
+            (low + high) / 2;
+
+        const candidate =
+            await encodeImage(
+                width,
+                height,
+                type,
+                middle
+            );
+
+        if(!candidate){
+            continue;
+        }
+
+
+        const size =
+            candidate.blob.size;
+
+
+        if(
+            size <= target
+        ){
+
+            if(
+                !below ||
+                size >
+                below.blob.size
+            ){
+
+                below =
+                    candidate;
+            }
+
+            low =
+                middle;
+
+        }else{
+
+            if(
+                !above ||
+                size <
+                above.blob.size
+            ){
+
+                above =
+                    candidate;
+            }
+
+            high =
+                middle;
+        }
+
+
+        best =
+            chooseClosest(
+                below,
+                above,
+                target
+            );
+
+
+        const difference =
+            Math.abs(
+                best.blob.size -
+                target
+            );
+
+
+        /*
+           Within 1% is good enough.
+        */
+
+        if(
+            difference <=
+            target * 0.01
+        ){
+
+            break;
+        }
+
+
+        setProgress(
+            40 +
+            Math.round(
+                (i + 1) /
+                10 *
+                25
+            ),
+            "Fine-tuning target size..."
+        );
+    }
+
+
+    return best;
 }
 
 
-for(
-let i = 0;
-i < qualities.length;
-i++
-){
-
-const q =
-qualities[i];
-
-const output =
-await encode(
-width,
-height,
-type,
-q
-);
-
-if(!output){
-
-continue;
-}
-
-
-const size =
-output.blob.size;
-
-
-if(size <= target){
-
-if(
-!below ||
-size > below.blob.size
-){
-
-below = output;
-
-}
-
-}else{
-
-if(
-!above ||
-size < above.blob.size
-){
-
-above = output;
-
-}
-
-}
-
-
-setProgress(
-15 +
-Math.round(
-(i + 1) /
-qualities.length *
-40
-),
-"Finding closest file size..."
-);
-
-}
-
-
-/*
-If one candidate is missing, return the other.
-*/
-
-if(!below){
-return above;
-}
-
-if(!above){
-return below;
-}
-
-
-/*
-Now binary-search between the two
-quality values.
-
-Maximum 10 extra attempts.
-*/
-
-let low =
-below.quality;
-
-let high =
-above.quality;
-
-let best =
-chooseClosest(
-below,
-above,
-target
-);
-
-
-for(
-let i = 0;
-i < 10;
-i++
-){
-
-const mid =
-(low + high) / 2;
-
-const output =
-await encode(
-width,
-height,
-type,
-mid
-);
-
-if(!output){
-continue;
-}
-
-
-const size =
-output.blob.size;
-
-
-if(size <= target){
-
-if(
-!below ||
-size > below.blob.size
-){
-
-below = output;
-
-}
-
-low = mid;
-
-}else{
-
-if(
-!above ||
-size < above.blob.size
-){
-
-above = output;
-
-}
-
-high = mid;
-
-}
-
-
-best =
-chooseClosest(
-below,
-above,
-target
-);
-
-
-const difference =
-Math.abs(
-best.blob.size -
-target
-);
-
-
-/*
-Very close result.
-*/
-
-if(
-difference <=
-Math.max(
-1024,
-target * 0.01
-)
-){
-
-break;
-}
-
-
-setProgress(
-55 +
-Math.round(
-(i + 1) /
-10 *
-20
-),
-"Fine-tuning target size..."
-);
-
-}
-
-
-return best;
-
-}
-
-
-/* =========================
-   CHOOSE CLOSEST
-========================= */
+/* =========================================================
+   CHOOSE CLOSEST RESULT
+========================================================= */
 
 function chooseClosest(
-below,
-above,
-target
+    below,
+    above,
+    target
 ){
 
-if(!below){
-return above;
+    if(!below){
+        return above;
+    }
+
+    if(!above){
+        return below;
+    }
+
+
+    const belowDifference =
+        Math.abs(
+            below.blob.size -
+            target
+        );
+
+    const aboveDifference =
+        Math.abs(
+            above.blob.size -
+            target
+        );
+
+
+    return (
+        belowDifference <=
+        aboveDifference
+    )
+    ? below
+    : above;
 }
 
-if(!above){
-return below;
-}
 
-const belowDifference =
-Math.abs(
-target -
-below.blob.size
-);
+/* =========================================================
+   TARGET OPTIMIZER
+========================================================= */
 
-const aboveDifference =
-Math.abs(
-above.blob.size -
-target
-);
-
-return
-belowDifference <=
-aboveDifference
-? below
-: above;
-
-}
-
-
-/* =========================
-   DIMENSION REDUCTION
-========================= */
-
-async function findTargetWithDimensions(
-target,
-type
+async function optimizeTarget(
+    target,
+    type
 ){
 
-let width =
-sourceWidth;
+    /*
+       First, always try to preserve original
+       dimensions.
+    */
 
-let height =
-sourceHeight;
+    let width =
+        sourceWidth;
 
-
-let best =
-await findClosest(
-target,
-type,
-width,
-height
-);
+    let height =
+        sourceHeight;
 
 
-if(!best){
-return null;
+    let best =
+        await findClosestQuality(
+            target,
+            type,
+            width,
+            height
+        );
+
+
+    if(!best){
+        return null;
+    }
+
+
+    /*
+       If original dimensions can achieve a
+       close result, do not resize dimensions.
+    */
+
+    const initialDifference =
+        Math.abs(
+            best.blob.size -
+            target
+        );
+
+
+    if(
+        initialDifference <=
+        target * 0.03
+    ){
+
+        return best;
+    }
+
+
+    /*
+       If the best result is too large and
+       dimension reduction is allowed,
+       adjust dimensions gradually.
+
+       The result from every pass is compared
+       with the old best.
+    */
+
+    if(
+        best.blob.size >
+        target &&
+        allowResize.checked
+    ){
+
+        let currentWidth =
+            width;
+
+        let currentHeight =
+            height;
+
+
+        for(
+            let pass = 0;
+            pass < 5;
+            pass++
+        ){
+
+            const scale =
+                Math.sqrt(
+                    target /
+                    Math.max(
+                        1,
+                        best.blob.size
+                    )
+                );
+
+
+            /*
+               Controlled reduction.
+            */
+
+            const safeScale =
+                Math.max(
+                    0.60,
+                    Math.min(
+                        0.92,
+                        scale
+                    )
+                );
+
+
+            currentWidth =
+                Math.max(
+                    320,
+                    Math.round(
+                        currentWidth *
+                        safeScale
+                    )
+                );
+
+            currentHeight =
+                Math.max(
+                    320,
+                    Math.round(
+                        currentHeight *
+                        safeScale
+                    )
+                );
+
+
+            const candidate =
+                await findClosestQuality(
+                    target,
+                    type,
+                    currentWidth,
+                    currentHeight
+                );
+
+
+            if(!candidate){
+                break;
+            }
+
+
+            if(
+                Math.abs(
+                    candidate.blob.size -
+                    target
+                )
+                <
+                Math.abs(
+                    best.blob.size -
+                    target
+                )
+            ){
+
+                best =
+                    candidate;
+            }
+
+
+            const difference =
+                Math.abs(
+                    best.blob.size -
+                    target
+                );
+
+
+            if(
+                difference <=
+                target * 0.02
+            ){
+
+                break;
+            }
+
+
+            setProgress(
+                68 +
+                Math.round(
+                    (pass + 1) /
+                    5 *
+                    18
+                ),
+                "Optimizing dimensions..."
+            );
+        }
+    }
+
+
+    return best;
 }
 
 
-/*
-If already close enough, stop.
-*/
-
-if(
-best.blob.size <=
-target * 1.05 &&
-best.blob.size >=
-target * 0.90
-){
-
-return best;
-
-}
-
-
-/*
-If the closest result is above target,
-reduce dimensions gradually.
-
-We never immediately shrink the image
-massively.
-*/
-
-if(
-best.blob.size >
-target &&
-allowResize.checked
-){
-
-for(
-let pass = 0;
-pass < 5;
-pass++
-){
-
-const ratio =
-Math.sqrt(
-target /
-best.blob.size
-);
-
-
-/*
-Gentle scaling.
-*/
-
-let scale =
-Math.max(
-0.60,
-Math.min(
-0.95,
-ratio
-)
-);
-
-
-/*
-If the first estimate is too aggressive,
-make the reduction gentler.
-*/
-
-if(pass === 0){
-
-scale =
-Math.max(
-0.75,
-Math.min(
-0.95,
-ratio
-)
-);
-
-}
-
-
-width =
-Math.max(
-320,
-Math.round(
-width * scale
-)
-);
-
-height =
-Math.max(
-320,
-Math.round(
-height * scale
-)
-);
-
-
-const candidate =
-await findClosest(
-target,
-type,
-width,
-height
-);
-
-
-if(!candidate){
-break;
-}
-
-
-if(
-Math.abs(
-candidate.blob.size -
-target
-)
-<
-Math.abs(
-best.blob.size -
-target
-)
-){
-
-best =
-candidate;
-
-}
-
-
-if(
-best.blob.size <=
-target * 1.05 &&
-best.blob.size >=
-target * 0.90
-){
-
-break;
-
-}
-
-}
-
-}
-
-
-return best;
-
-}
-
-
-/* =========================
-   COMPRESS
-========================= */
+/* =========================================================
+   COMPRESS BUTTON
+========================================================= */
 
 compressBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-if(
-!sourceImage ||
-!sourceFile
-){
+        if(
+            !sourceImage ||
+            !sourceFile
+        ){
 
-showMessage(
-"Please choose an image first.",
-true
+            showMessage(
+                "Please choose an image first.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        compressBtn.disabled =
+            true;
+
+        compressBtn.textContent =
+            "Processing...";
+
+
+        progress.classList.add(
+            "show"
+        );
+
+
+        setProgress(
+            5,
+            "Preparing image..."
+        );
+
+
+        try{
+
+            const type =
+                getOutputFormat();
+
+
+            let output = null;
+
+
+            /* =========================================
+               QUALITY MODE
+            ========================================= */
+
+            if(
+                mode.value ===
+                "quality"
+            ){
+
+                output =
+                    await encodeImage(
+                        sourceWidth,
+                        sourceHeight,
+                        type,
+                        Number(
+                            qualityInput.value
+                        ) / 100
+                    );
+
+            }
+
+
+            /* =========================================
+               TARGET MODE
+            ========================================= */
+
+            else{
+
+                const target =
+                    getTargetBytes();
+
+
+                if(!target){
+
+                    throw new Error(
+                        "Please enter a valid KB or MB target size."
+                    );
+                }
+
+
+                /*
+                   If original is already smaller than
+                   target, do not artificially enlarge it.
+                */
+
+                if(
+                    sourceFile.size <=
+                    target
+                ){
+
+                    const sameImage =
+                        await encodeImage(
+                            sourceWidth,
+                            sourceHeight,
+                            type,
+                            0.95
+                        );
+
+
+                    if(
+                        sameImage &&
+                        sameImage.blob.size <
+                        sourceFile.size
+                    ){
+
+                        output =
+                            sameImage;
+
+                    }else{
+
+                        output = {
+                            blob:sourceFile,
+                            width:sourceWidth,
+                            height:sourceHeight,
+                            quality:1
+                        };
+                    }
+
+                    showMessage(
+                        "The original image is already smaller than the target, so it was not artificially enlarged.",
+                        "normal"
+                    );
+
+                }else{
+
+                    output =
+                        await optimizeTarget(
+                            target,
+                            type
+                        );
+
+                }
+            }
+
+
+            if(
+                !output ||
+                !output.blob
+            ){
+
+                throw new Error(
+                    "Unable to create compressed image."
+                );
+            }
+
+
+            /*
+               Compression should not make the file
+               larger than the original.
+            */
+
+            if(
+                output.blob.size >
+                sourceFile.size
+            ){
+
+                const fallback =
+                    await encodeImage(
+                        sourceWidth,
+                        sourceHeight,
+                        type,
+                        0.60
+                    );
+
+
+                if(
+                    fallback &&
+                    fallback.blob.size <
+                    output.blob.size
+                ){
+
+                    output =
+                        fallback;
+                }
+
+
+                if(
+                    output.blob.size >
+                    sourceFile.size
+                ){
+
+                    output = {
+                        blob:sourceFile,
+                        width:sourceWidth,
+                        height:sourceHeight,
+                        quality:1
+                    };
+                }
+            }
+
+
+            setProgress(
+                92,
+                "Finalizing..."
+            );
+
+
+            /*
+               Result URL.
+            */
+
+            if(outputURL){
+
+                URL.revokeObjectURL(
+                    outputURL
+                );
+            }
+
+
+            outputURL =
+                URL.createObjectURL(
+                    output.blob
+                );
+
+
+            resultImage.src =
+                outputURL;
+
+
+            const extension =
+                type ===
+                "image/webp"
+                ? "webp"
+                : "jpg";
+
+
+            downloadBtn.href =
+                outputURL;
+
+            downloadBtn.download =
+                "smarttools-compressed-image." +
+                extension;
+
+
+            const originalSize =
+                sourceFile.size;
+
+            const finalSize =
+                output.blob.size;
+
+
+            const saved =
+                Math.max(
+                    0,
+                    (
+                        1 -
+                        finalSize /
+                        originalSize
+                    ) * 100
+                );
+
+
+            resultInfo.innerHTML =
+                "Original size: <strong>" +
+                formatBytes(originalSize) +
+                "</strong><br>" +
+
+                "Final size: <strong>" +
+                formatBytes(finalSize) +
+                "</strong><br>" +
+
+                "Original dimensions: <strong>" +
+                sourceWidth +
+                " × " +
+                sourceHeight +
+                " px</strong><br>" +
+
+                "Final dimensions: <strong>" +
+                output.width +
+                " × " +
+                output.height +
+                " px</strong><br>" +
+
+                "Output format: <strong>" +
+                extension.toUpperCase() +
+                "</strong>";
+
+
+            savedText.textContent =
+                saved > 0
+                ? "Saved " +
+                  saved.toFixed(1) +
+                  "%"
+                : "No size reduction";
+
+
+            result.classList.add(
+                "show"
+            );
+
+
+            /*
+               Target accuracy message.
+            */
+
+            if(
+                mode.value ===
+                "target"
+            ){
+
+                const target =
+                    getTargetBytes();
+
+
+                const difference =
+                    Math.abs(
+                        finalSize -
+                        target
+                    );
+
+
+                const differencePercent =
+                    difference /
+                    target *
+                    100;
+
+
+                if(
+                    differencePercent <=
+                    2
+                ){
+
+                    showMessage(
+                        "✓ Excellent: output is " +
+                        formatBytes(finalSize) +
+                        " for target " +
+                        formatBytes(target) +
+                        ".",
+                        "normal"
+                    );
+
+                }else if(
+                    differencePercent <=
+                    5
+                ){
+
+                    showMessage(
+                        "✓ Very close: output is " +
+                        formatBytes(finalSize) +
+                        " for target " +
+                        formatBytes(target) +
+                        ".",
+                        "normal"
+                    );
+
+                }else{
+
+                    showMessage(
+                        "Closest practical result: " +
+                        formatBytes(finalSize) +
+                        " for target " +
+                        formatBytes(target) +
+                        ". Some images cannot be encoded to an exact byte size by the browser.",
+                        "warn"
+                    );
+                }
+
+            }else{
+
+                showMessage(
+                    "✓ Image compressed successfully.",
+                    "normal"
+                );
+            }
+
+
+            setProgress(
+                100,
+                "Compression complete!"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    result.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                },
+                100
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Compressor Error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Something went wrong while compressing the image.",
+                "error"
+            );
+
+        }
+        finally{
+
+            compressBtn.disabled =
+                false;
+
+            compressBtn.textContent =
+                "Compress Image";
+        }
+
+    }
 );
 
-return;
 
-}
-
-
-compressBtn.disabled =
-true;
-
-compressBtn.textContent =
-"Processing...";
-
-progress.classList.add("show");
-
-setProgress(
-5,
-"Preparing image..."
-);
-
-
-try{
-
-const type =
-getOutputFormat();
-
-let output = null;
-
-
-if(mode.value === "quality"){
-
-const q =
-Number(
-quality.value
-) / 100;
-
-
-setProgress(
-30,
-"Compressing image..."
-);
-
-
-output =
-await encode(
-sourceWidth,
-sourceHeight,
-type,
-q
-);
-
-
-}else{
-
-const target =
-getTargetBytes();
-
-
-if(!target){
-
-throw new Error(
-"Please enter a valid target size."
-);
-
-}
-
-
-/*
-If original image is already smaller
-than target, don't artificially inflate it.
-*/
-
-if(
-sourceFile.size <= target
-){
-
-output =
-await encode(
-sourceWidth,
-sourceHeight,
-type,
-0.95
-);
-
-
-/*
-If conversion itself makes it larger,
-keep original.
-*/
-
-if(
-output &&
-output.blob.size >
-sourceFile.size
-){
-
-output = {
-
-blob:sourceFile,
-
-width:sourceWidth,
-
-height:sourceHeight,
-
-quality:1
-
-};
-
-}
-
-
-showMessage(
-"Your original image is already smaller than the requested target size.",
-false
-);
-
-}else{
-
-output =
-await findTargetWithDimensions(
-target,
-type
-);
-
-}
-
-}
-
-
-setProgress(
-92,
-"Finalizing..."
-);
-
-
-if(
-!output ||
-!output.blob
-){
-
-throw new Error(
-"Unable to compress this image."
-);
-
-}
-
-
-/*
-Never return a bigger file than original
-when the goal is compression.
-*/
-
-if(
-output.blob.size >
-sourceFile.size
-){
-
-const fallback =
-await encode(
-output.width,
-output.height,
-type,
-0.60
-);
-
-if(
-fallback &&
-fallback.blob.size <
-output.blob.size
-){
-
-output =
-fallback;
-
-}
-
-}
-
-
-/*
-If fallback is still bigger than original,
-use original.
-*/
-
-if(
-output.blob.size >
-sourceFile.size
-){
-
-output = {
-
-blob:sourceFile,
-
-width:sourceWidth,
-
-height:sourceHeight,
-
-quality:1
-
-};
-
-}
-
-
-if(outputURL){
-
-URL.revokeObjectURL(
-outputURL
-);
-
-}
-
-
-outputURL =
-URL.createObjectURL(
-output.blob
-);
-
-
-resultImage.src =
-outputURL;
-
-
-const extension =
-type === "image/webp"
-? "webp"
-: "jpg";
-
-
-downloadBtn.href =
-outputURL;
-
-downloadBtn.download =
-"smarttools-compressed-image." +
-extension;
-
-
-const originalBytes =
-sourceFile.size;
-
-const finalBytes =
-output.blob.size;
-
-
-const savedPercent =
-Math.max(
-0,
-(
-1 -
-finalBytes /
-originalBytes
-) * 100
-);
-
-
-resultInfo.innerHTML =
-
-"Original size: <strong>" +
-formatBytes(originalBytes) +
-"</strong><br>" +
-
-"Final size: <strong>" +
-formatBytes(finalBytes) +
-"</strong><br>" +
-
-"Original dimensions: <strong>" +
-sourceWidth +
-" × " +
-sourceHeight +
-" px</strong><br>" +
-
-"Final dimensions: <strong>" +
-output.width +
-" × " +
-output.height +
-" px</strong><br>" +
-
-"Format: <strong>" +
-extension.toUpperCase() +
-"</strong>";
-
-
-savedText.textContent =
-savedPercent > 0
-? "Saved " +
-savedPercent.toFixed(1) +
-"%"
-: "Image is already very small";
-
-
-result.classList.add(
-"show"
-);
-
-
-if(mode.value === "target"){
-
-const target =
-getTargetBytes();
-
-const difference =
-Math.abs(
-finalBytes -
-target
-);
-
-const percentage =
-difference /
-target *
-100;
-
-
-if(
-finalBytes <= target &&
-percentage <= 5
-){
-
-showMessage(
-"✓ Target achieved closely: " +
-formatBytes(finalBytes) +
-" for requested " +
-formatBytes(target) +
-".",
-false
-);
-
-}else if(
-percentage <= 10
-){
-
-showMessage(
-"✓ Very close to target: " +
-formatBytes(finalBytes) +
-" for requested " +
-formatBytes(target) +
-".",
-false
-);
-
-}else{
-
-showMessage(
-"✓ Closest practical result found: " +
-formatBytes(finalBytes) +
-" for requested " +
-formatBytes(target) +
-". Exact size depends on the image and browser encoder.",
-false
-);
-
-}
-
-}else{
-
-showMessage(
-"✓ Image compressed successfully.",
-false
-);
-
-}
-
-
-setProgress(
-100,
-"Compression complete!"
-);
-
-
-setTimeout(
-function(){
-
-result.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-},
-100
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-error.message ||
-"Something went wrong.",
-true
-);
-
-}finally{
-
-compressBtn.disabled =
-false;
-
-compressBtn.textContent =
-"Compress Image";
-
-}
-
-}
-);
-
-
-/* =========================
+/* =========================================================
    PROGRESS
-========================= */
+========================================================= */
 
 function setProgress(
-percent,
-text
+    percent,
+    text
 ){
 
-progressFill.style.width =
-percent + "%";
+    progressFill.style.width =
+        percent + "%";
 
-progressText.textContent =
-text;
-
+    progressText.textContent =
+        text;
 }
 
 
-/* =========================
-   FORMAT BYTES
-========================= */
-
-function formatBytes(bytes){
-
-if(bytes < 1024){
-
-return bytes.toFixed(0) +
-" Bytes";
-
-}
-
-if(
-bytes <
-1024 * 1024
-){
-
-return (
-bytes / 1024
-).toFixed(2) +
-" KB";
-
-}
-
-return (
-bytes /
-(1024 * 1024)
-).toFixed(2) +
-" MB";
-
-}
-
-
-/* =========================
+/* =========================================================
    MESSAGE
-========================= */
+========================================================= */
 
 function showMessage(
-text,
-error
+    text,
+    type
 ){
 
-message.textContent =
-text;
+    message.textContent =
+        text;
 
-message.className =
-error
-? "message error"
-: "message";
+    if(type === "error"){
 
+        message.className =
+            "message error";
+
+    }else if(type === "warn"){
+
+        message.className =
+            "message warn";
+
+    }else{
+
+        message.className =
+            "message";
+    }
 }
 
 
-/* =========================
+/* =========================================================
+   FILE SIZE
+========================================================= */
+
+function formatBytes(
+    bytes
+){
+
+    if(
+        bytes < 1024
+    ){
+
+        return (
+            bytes.toFixed(0) +
+            " Bytes"
+        );
+    }
+
+
+    if(
+        bytes <
+        1024 * 1024
+    ){
+
+        return (
+            (
+                bytes /
+                1024
+            ).toFixed(2) +
+            " KB"
+        );
+    }
+
+
+    return (
+        (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(2) +
+        " MB"
+    );
+}
+
+
+/* =========================================================
    CLEANUP
-========================= */
+========================================================= */
 
 function cleanupURLs(){
 
-if(sourceURL){
+    if(sourceURL){
 
-URL.revokeObjectURL(
-sourceURL
-);
+        URL.revokeObjectURL(
+            sourceURL
+        );
 
-sourceURL = null;
+        sourceURL = null;
+    }
 
-}
 
-if(outputURL){
+    if(outputURL){
 
-URL.revokeObjectURL(
-outputURL
-);
+        URL.revokeObjectURL(
+            outputURL
+        );
 
-outputURL = null;
-
-}
-
+        outputURL = null;
+    }
 }
 
 
 window.addEventListener(
-"beforeunload",
-cleanupURLs
+    "beforeunload",
+    cleanupURLs
 );
 
 </script>
