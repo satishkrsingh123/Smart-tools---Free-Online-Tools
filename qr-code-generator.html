@@ -1,0 +1,1358 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>QR Code Generator - Create QR Codes Online | SmartTools</title>
+
+    <meta
+        name="description"
+        content="Free online QR Code Generator. Create QR codes from URLs, text, phone numbers and other information. Download your QR code as a PNG image."
+    >
+
+    <!-- QR Code library -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js">
+    </script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 15px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #172033;
+            text-decoration: none;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .back {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .container {
+            width: min(1000px, 92%);
+            margin: 35px auto 55px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #6b7280;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        /* =========================
+           CARD
+        ========================== */
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+
+            padding: 25px;
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           INPUT
+        ========================== */
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .field textarea,
+        .field input,
+        .field select {
+            width: 100%;
+
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+
+            padding: 12px;
+
+            font-size: 16px;
+
+            background: #ffffff;
+            color: #172033;
+
+            outline: none;
+        }
+
+        .field textarea {
+            min-height: 150px;
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        .field textarea:focus,
+        .field input:focus,
+        .field select:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .field small {
+            display: block;
+
+            color: #6b7280;
+
+            margin-top: 6px;
+        }
+
+        .counter {
+            text-align: right;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+        /* =========================
+           OPTIONS
+        ========================== */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .color-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .color-input {
+            width: 100%;
+            height: 46px;
+
+            padding: 3px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .actions {
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 10px;
+        }
+
+        .btn {
+            border: 0;
+
+            border-radius: 9px;
+
+            padding: 13px 20px;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .primary:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .secondary:hover {
+            background: #d1d5db;
+        }
+
+        .success {
+            background: #16a34a;
+            color: #ffffff;
+        }
+
+        .success:hover {
+            background: #15803d;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           PREVIEW
+        ========================== */
+
+        .result {
+            display: none;
+
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .qr-box {
+            min-height: 310px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            overflow: hidden;
+        }
+
+        #qrCanvas {
+            display: block;
+
+            max-width: 100%;
+            height: auto;
+
+            background: #ffffff;
+
+            border-radius: 4px;
+        }
+
+        .result-info {
+            color: #64748b;
+
+            margin-top: 14px;
+
+            font-size: 14px;
+
+            word-break: break-word;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .message.success-message {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        /* =========================
+           INFO
+        ========================== */
+
+        .info-box {
+            background: #eff6ff;
+
+            border: 1px solid #dbeafe;
+
+            color: #1d4ed8;
+
+            border-radius: 10px;
+
+            padding: 14px;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #111827;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            padding: 28px 20px;
+        }
+
+        footer span {
+            color: #60a5fa;
+        }
+
+        footer p {
+            color: #9ca3af;
+
+            margin-top: 5px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .back {
+                font-size: 14px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 25px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 19px;
+            }
+
+            .grid,
+            .color-row {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .qr-box {
+                min-height: 260px;
+                padding: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            Smart<span>Tools</span>
+        </a>
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Back
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="container">
+
+
+        <div class="hero">
+
+            <h1>
+                🔲 QR Code Generator
+            </h1>
+
+            <p>
+                Create a QR code from any URL or text
+                and download it as a PNG image.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             INPUT CARD
+        ========================== -->
+
+        <div class="card">
+
+            <h2>
+                Enter Your Content
+            </h2>
+
+
+            <div class="field">
+
+                <label for="qrText">
+                    Text or URL
+                </label>
+
+                <textarea
+                    id="qrText"
+                    maxlength="2000"
+                    placeholder="Enter a website URL, text, phone number, email, etc..."
+                    autocomplete="off"
+                    spellcheck="false"
+                ></textarea>
+
+
+                <div class="counter">
+
+                    <span id="charCount">
+                        0
+                    </span>
+                    /
+                    2000 characters
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 QR OPTIONS
+            ========================== -->
+
+            <h2>
+                QR Settings
+            </h2>
+
+
+            <div class="grid">
+
+
+                <!-- SIZE -->
+
+                <div class="field">
+
+                    <label for="qrSize">
+                        QR Code Size
+                    </label>
+
+                    <select id="qrSize">
+
+                        <option value="200">
+                            200 × 200
+                        </option>
+
+                        <option value="300" selected>
+                            300 × 300
+                        </option>
+
+                        <option value="400">
+                            400 × 400
+                        </option>
+
+                        <option value="500">
+                            500 × 500
+                        </option>
+
+                        <option value="600">
+                            600 × 600
+                        </option>
+
+                        <option value="800">
+                            800 × 800
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ERROR CORRECTION -->
+
+                <div class="field">
+
+                    <label for="errorCorrection">
+                        Error Correction
+                    </label>
+
+                    <select id="errorCorrection">
+
+                        <option value="L">
+                            Low - 7%
+                        </option>
+
+                        <option value="M" selected>
+                            Medium - 15%
+                        </option>
+
+                        <option value="Q">
+                            Quartile - 25%
+                        </option>
+
+                        <option value="H">
+                            High - 30%
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 COLORS
+            ========================== -->
+
+            <div class="color-row">
+
+
+                <div class="field">
+
+                    <label for="foreground">
+                        QR Color
+                    </label>
+
+                    <input
+                        type="color"
+                        id="foreground"
+                        class="color-input"
+                        value="#000000"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="background">
+                        Background Color
+                    </label>
+
+                    <input
+                        type="color"
+                        id="background"
+                        class="color-input"
+                        value="#ffffff"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MARGIN
+            ========================== -->
+
+            <div class="field">
+
+                <label for="margin">
+                    Margin
+                </label>
+
+                <select id="margin">
+
+                    <option value="1">
+                        Small
+                    </option>
+
+                    <option value="2" selected>
+                        Medium
+                    </option>
+
+                    <option value="4">
+                        Large
+                    </option>
+
+                </select>
+
+                <small>
+                    A small white border helps QR scanners
+                    read the code correctly.
+                </small>
+
+            </div>
+
+
+            <!-- =========================
+                 ACTIONS
+            ========================== -->
+
+            <div class="actions">
+
+                <button
+                    type="button"
+                    id="generateBtn"
+                    class="btn primary"
+                >
+                    Generate QR Code
+                </button>
+
+
+                <button
+                    type="button"
+                    id="clearBtn"
+                    class="btn secondary"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+        </div>
+
+
+
+        <!-- =========================
+             RESULT
+        ========================== -->
+
+        <div
+            id="result"
+            class="card result"
+        >
+
+            <h2>
+                Your QR Code
+            </h2>
+
+
+            <div class="qr-box">
+
+                <canvas
+                    id="qrCanvas"
+                    aria-label="Generated QR Code"
+                ></canvas>
+
+            </div>
+
+
+            <div
+                id="resultInfo"
+                class="result-info"
+            ></div>
+
+
+            <div class="actions">
+
+                <button
+                    type="button"
+                    id="downloadBtn"
+                    class="btn success"
+                >
+                    ⬇️ Download PNG
+                </button>
+
+
+                <button
+                    type="button"
+                    id="regenerateBtn"
+                    class="btn secondary"
+                >
+                    🔄 Regenerate
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             INFO
+        ========================== -->
+
+        <div class="card">
+
+            <h2>
+                How to Use QR Code Generator
+            </h2>
+
+
+            <div class="info-box">
+
+                Enter a website link, text, phone number,
+                email or other information above and click
+                <strong>Generate QR Code</strong>.
+
+                You can choose the QR size, error correction
+                level and colors, then download the generated
+                QR code as a PNG image.
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div>
+            Smart<span>Tools</span>
+        </div>
+
+        <p>
+            Free online tools for everyday use.
+        </p>
+
+        <p>
+            © 2026 SmartTools. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =========================
+           ELEMENTS
+        ========================== */
+
+        const qrText =
+            document.getElementById("qrText");
+
+
+        const charCount =
+            document.getElementById("charCount");
+
+
+        const qrSize =
+            document.getElementById("qrSize");
+
+
+        const errorCorrection =
+            document.getElementById("errorCorrection");
+
+
+        const foreground =
+            document.getElementById("foreground");
+
+
+        const background =
+            document.getElementById("background");
+
+
+        const margin =
+            document.getElementById("margin");
+
+
+        const generateBtn =
+            document.getElementById("generateBtn");
+
+
+        const clearBtn =
+            document.getElementById("clearBtn");
+
+
+        const regenerateBtn =
+            document.getElementById("regenerateBtn");
+
+
+        const downloadBtn =
+            document.getElementById("downloadBtn");
+
+
+        const canvas =
+            document.getElementById("qrCanvas");
+
+
+        const result =
+            document.getElementById("result");
+
+
+        const resultInfo =
+            document.getElementById("resultInfo");
+
+
+        const message =
+            document.getElementById("message");
+
+
+        /* =========================
+           LIVE CHARACTER COUNT
+        ========================== */
+
+        qrText.addEventListener(
+            "input",
+            function () {
+
+                charCount.textContent =
+                    qrText.value.length;
+
+            }
+        );
+
+
+        /* =========================
+           GENERATE
+        ========================== */
+
+        generateBtn.addEventListener(
+            "click",
+            generateQRCode
+        );
+
+
+        regenerateBtn.addEventListener(
+            "click",
+            generateQRCode
+        );
+
+
+        async function generateQRCode() {
+
+            const text =
+                qrText.value.trim();
+
+
+            /* =========================
+               VALIDATE
+            ========================== */
+
+            if (!text) {
+
+                showMessage(
+                    "Please enter some text or a URL first.",
+                    "error"
+                );
+
+                qrText.focus();
+
+                return;
+
+            }
+
+
+            if (text.length > 2000) {
+
+                showMessage(
+                    "The maximum supported text length is 2000 characters.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               LIBRARY CHECK
+            ========================== */
+
+            if (
+                typeof QRCode ===
+                "undefined"
+            ) {
+
+                showMessage(
+                    "QR generator library could not be loaded. Please check your internet connection and refresh the page.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               BUTTON STATE
+            ========================== */
+
+            generateBtn.disabled =
+                true;
+
+            regenerateBtn.disabled =
+                true;
+
+            generateBtn.textContent =
+                "Generating...";
+
+
+            try {
+
+                const size =
+                    Number(
+                        qrSize.value
+                    );
+
+
+                const correction =
+                    errorCorrection.value;
+
+
+                const darkColor =
+                    foreground.value;
+
+
+                const lightColor =
+                    background.value;
+
+
+                const marginValue =
+                    Number(
+                        margin.value
+                    );
+
+
+                /* =========================
+                   COLOR VALIDATION
+                ========================== */
+
+                if (
+                    darkColor.toLowerCase() ===
+                    lightColor.toLowerCase()
+                ) {
+
+                    throw new Error(
+                        "QR color and background color cannot be the same."
+                    );
+
+                }
+
+
+                /* =========================
+                   GENERATE OPTIONS
+                ========================== */
+
+                const options = {
+
+                    width: size,
+
+                    margin: marginValue,
+
+                    errorCorrectionLevel:
+                        correction,
+
+                    color: {
+
+                        dark:
+                            darkColor,
+
+                        light:
+                            lightColor
+
+                    }
+
+                };
+
+
+                /* =========================
+                   GENERATE CANVAS
+                ========================== */
+
+                await QRCode.toCanvas(
+                    canvas,
+                    text,
+                    options
+                );
+
+
+                /* =========================
+                   RESULT INFO
+                ========================== */
+
+                const correctionText = {
+
+                    L: "Low",
+
+                    M: "Medium",
+
+                    Q: "Quartile",
+
+                    H: "High"
+
+                }[correction];
+
+
+                resultInfo.innerHTML =
+
+                    "Size: <strong>" +
+                    size +
+                    " × " +
+                    size +
+                    " px</strong> &nbsp; | &nbsp; " +
+
+                    "Error correction: <strong>" +
+                    correctionText +
+                    "</strong>";
+
+
+                result.classList.add(
+                    "show"
+                );
+
+
+                showMessage(
+                    "✓ QR code generated successfully.",
+                    "success"
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        result.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    },
+                    100
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "QR Code Error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Unable to generate QR code. Please try again.",
+                    "error"
+                );
+
+            }
+
+            finally {
+
+                generateBtn.disabled =
+                    false;
+
+                regenerateBtn.disabled =
+                    false;
+
+                generateBtn.textContent =
+                    "Generate QR Code";
+
+            }
+
+        }
+
+
+        /* =========================
+           DOWNLOAD
+        ========================== */
+
+        downloadBtn.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    !canvas ||
+                    !canvas.width
+                ) {
+
+                    showMessage(
+                        "Generate a QR code first.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.download =
+                        "smarttools-qr-code.png";
+
+
+                    link.href =
+                        canvas.toDataURL(
+                            "image/png"
+                        );
+
+
+                    document.body.appendChild(
+                        link
+                    );
+
+
+                    link.click();
+
+
+                    link.remove();
+
+
+                    showMessage(
+                        "✓ QR code downloaded successfully.",
+                        "success"
+                    );
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Download Error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Unable to download the QR code.",
+                        "error"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           CLEAR
+        ========================== */
+
+        clearBtn.addEventListener(
+            "click",
+            function () {
+
+                qrText.value =
+                    "";
+
+                charCount.textContent =
+                    "0";
+
+
+                const ctx =
+                    canvas.getContext(
+                        "2d"
+                    );
+
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+                result.classList.remove(
+                    "show"
+                );
+
+
+                resultInfo.textContent =
+                    "";
+
+
+                showMessage(
+                    "",
+                    "normal"
+                );
+
+
+                qrText.focus();
+
+            }
+        );
+
+
+        /* =========================
+           MESSAGE
+        ========================== */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent =
+                text;
+
+
+            if (!text) {
+
+                message.className =
+                    "message";
+
+                return;
+
+            }
+
+
+            message.className =
+                type === "error"
+                    ? "message show error"
+                    : "message show success-message";
+
+        }
+
+    </script>
+
+</body>
+</html>
+```
