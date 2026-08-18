@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Image Compressor - Compress Images Online | SmartTools</title>
+<title>Image Compressor - SmartTools</title>
 
-<meta name="description" content="Free online image compressor. Compress JPG, PNG and WebP images to reduce file size while maintaining good quality. Fast, secure and mobile friendly.">
+<meta name="description"
+content="Compress JPG, PNG and WebP images online. Choose a target KB or MB size and get the closest practical file size.">
 
 <style>
 *{
@@ -148,14 +149,8 @@ h2{
     margin-bottom:17px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
 .field{
-    margin-bottom:16px;
+    margin-bottom:17px;
 }
 
 .field label{
@@ -182,7 +177,7 @@ h2{
 
 .target-row{
     display:grid;
-    grid-template-columns:1fr 110px;
+    grid-template-columns:1fr 120px;
     gap:10px;
 }
 
@@ -296,46 +291,6 @@ h2{
     cursor:not-allowed;
 }
 
-.result{
-    display:none;
-    text-align:center;
-}
-
-.result.show{
-    display:block;
-}
-
-.result-info{
-    margin:16px 0;
-    line-height:2;
-}
-
-.download{
-    display:inline-block;
-    text-decoration:none;
-}
-
-.message{
-    margin-top:15px;
-    padding:11px;
-    border-radius:8px;
-    background:#eff6ff;
-    color:#1d4ed8;
-    font-size:14px;
-}
-
-.message.error{
-    background:#fef2f2;
-    color:#b91c1c;
-}
-
-.saved{
-    color:#16a34a;
-    font-size:20px;
-    font-weight:800;
-    margin:10px 0 17px;
-}
-
 .progress{
     display:none;
     margin-top:18px;
@@ -357,13 +312,53 @@ h2{
     width:0%;
     height:100%;
     background:#2563eb;
-    transition:width .2s;
+    transition:width:.2s;
 }
 
 .progress-text{
     margin-top:7px;
     font-size:14px;
     color:#6b7280;
+}
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-info{
+    margin:16px 0;
+    line-height:2;
+}
+
+.saved{
+    color:#16a34a;
+    font-size:20px;
+    font-weight:800;
+    margin:10px 0 17px;
+}
+
+.download{
+    display:inline-block;
+    text-decoration:none;
+}
+
+.message{
+    margin-top:15px;
+    padding:11px;
+    border-radius:8px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    font-size:14px;
+}
+
+.message.error{
+    background:#fef2f2;
+    color:#b91c1c;
 }
 
 footer{
@@ -406,10 +401,6 @@ footer p{
         padding:19px;
     }
 
-    .grid{
-        grid-template-columns:1fr;
-    }
-
     .target-row{
         grid-template-columns:1fr;
     }
@@ -430,11 +421,11 @@ footer p{
 <header>
 
 <a href="index.html" class="logo">
-    Smart<span>Tools</span>
+Smart<span>Tools</span>
 </a>
 
 <a href="index.html" class="back">
-    ← Back
+← Back
 </a>
 
 </header>
@@ -447,7 +438,7 @@ footer p{
 <h1>🗜️ Image Compressor</h1>
 
 <p>
-Compress JPG, PNG and WebP images quickly and easily.
+Compress images to a selected KB or MB target size.
 </p>
 
 </div>
@@ -464,9 +455,9 @@ JPG, PNG and WebP supported
 </p>
 
 <input
-    type="file"
-    id="imageInput"
-    accept="image/jpeg,image/png,image/webp"
+type="file"
+id="imageInput"
+accept="image/jpeg,image/png,image/webp"
 >
 
 </div>
@@ -480,13 +471,13 @@ JPG, PNG and WebP supported
 <h2>Original Image</h2>
 
 <img
-    id="previewImage"
-    alt="Original image preview"
+id="previewImage"
+alt="Original image"
 >
 
 <div
-    id="originalInfo"
-    class="info"
+id="originalInfo"
+class="info"
 ></div>
 
 </div>
@@ -505,12 +496,12 @@ Compression Mode
 
 <select id="mode">
 
-<option value="quality">
-Quality Based
-</option>
-
 <option value="target">
 Target File Size
+</option>
+
+<option value="quality">
+Quality Based
 </option>
 
 </select>
@@ -518,32 +509,7 @@ Target File Size
 </div>
 
 
-<div id="qualitySettings">
-
-<div class="field">
-
-<label>
-Quality:
-<span id="qualityValue">80%</span>
-</label>
-
-<input
-    type="range"
-    id="quality"
-    min="10"
-    max="100"
-    value="80"
->
-
-</div>
-
-</div>
-
-
-<div
-    id="targetSettings"
-    style="display:none;"
->
+<div id="targetSettings">
 
 <div class="field">
 
@@ -554,12 +520,12 @@ Target File Size
 <div class="target-row">
 
 <input
-    type="number"
-    id="targetSize"
-    min="1"
-    step="0.1"
-    placeholder="Example: 500"
-    inputmode="decimal"
+type="number"
+id="targetSize"
+min="1"
+step="0.1"
+placeholder="Example: 500"
+inputmode="decimal"
 >
 
 <select id="targetUnit">
@@ -573,7 +539,7 @@ Target File Size
 </div>
 
 <small>
-The compressor will try to get as close as practical to your requested size.
+Example: enter 500 KB to get as close as possible to 500 KB.
 </small>
 
 </div>
@@ -581,23 +547,44 @@ The compressor will try to get as close as practical to your requested size.
 </div>
 
 
+<div
+id="qualitySettings"
+style="display:none;"
+>
+
+<div class="field">
+
+<label>
+Quality:
+<span id="qualityValue">80%</span>
+</label>
+
+<input
+type="range"
+id="quality"
+min="10"
+max="100"
+value="80"
+>
+
+</div>
+
+</div>
+
+
 <button
-    type="button"
-    id="advancedToggle"
-    class="advanced-toggle"
+type="button"
+id="advancedToggle"
+class="advanced-toggle"
 >
 ⚙️ Advanced Options
 </button>
 
 
 <div
-    id="advancedOptions"
-    class="advanced"
+id="advancedOptions"
+class="advanced"
 >
-
-
-<div class="grid">
-
 
 <div class="field">
 
@@ -619,55 +606,7 @@ JPG
 WebP
 </option>
 
-<option value="image/png">
-PNG
-</option>
-
 </select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-Maximum Dimension
-</label>
-
-<select id="maxDimension">
-
-<option value="original">
-Keep Original
-</option>
-
-<option value="4000">
-4000 px
-</option>
-
-<option value="3000">
-3000 px
-</option>
-
-<option value="2500">
-2500 px
-</option>
-
-<option value="2000">
-2000 px
-</option>
-
-<option value="1500">
-1500 px
-</option>
-
-<option value="1000">
-1000 px
-</option>
-
-</select>
-
-</div>
-
 
 </div>
 
@@ -681,7 +620,7 @@ Allow Dimension Reduction
 </strong>
 
 <small>
-Useful when a very small target file size is required.
+Only used when the target cannot be reached through quality alone.
 </small>
 
 </div>
@@ -689,9 +628,9 @@ Useful when a very small target file size is required.
 <label class="switch">
 
 <input
-    type="checkbox"
-    id="allowResize"
-    checked
+type="checkbox"
+id="allowResize"
+checked
 >
 
 <span class="slider"></span>
@@ -706,17 +645,17 @@ Useful when a very small target file size is required.
 <div class="actions">
 
 <button
-    type="button"
-    id="compressBtn"
-    class="btn primary"
+type="button"
+id="compressBtn"
+class="btn primary"
 >
 Compress Image
 </button>
 
 <button
-    type="button"
-    id="anotherBtn"
-    class="btn secondary"
+type="button"
+id="anotherBtn"
+class="btn secondary"
 >
 Choose Another Image
 </button>
@@ -725,22 +664,22 @@ Choose Another Image
 
 
 <div
-    id="progress"
-    class="progress"
+id="progress"
+class="progress"
 >
 
 <div class="progress-bar">
 
 <div
-    id="progressFill"
-    class="progress-fill"
+id="progressFill"
+class="progress-fill"
 ></div>
 
 </div>
 
 <div
-    id="progressText"
-    class="progress-text"
+id="progressText"
+class="progress-text"
 >
 Preparing...
 </div>
@@ -752,38 +691,38 @@ Preparing...
 
 
 <div
-    id="result"
-    class="card result"
+id="result"
+class="card result"
 >
 
 <h2>Compressed Image</h2>
 
 <img
-    id="resultImage"
-    alt="Compressed image preview"
+id="resultImage"
+alt="Compressed image"
 >
 
 <div
-    id="resultInfo"
-    class="result-info"
+id="resultInfo"
+class="result-info"
 ></div>
 
 <div
-    id="savedText"
-    class="saved"
+id="savedText"
+class="saved"
 ></div>
 
 <a
-    id="downloadBtn"
-    class="btn primary download"
-    download="smarttools-compressed-image.jpg"
+id="downloadBtn"
+class="btn primary download"
+download="smarttools-compressed-image.jpg"
 >
 ⬇️ Download Compressed Image
 </a>
 
 <div
-    id="message"
-    class="message"
+id="message"
+class="message"
 ></div>
 
 </div>
@@ -831,23 +770,23 @@ document.getElementById("originalInfo");
 const mode =
 document.getElementById("mode");
 
-const qualitySettings =
-document.getElementById("qualitySettings");
-
 const targetSettings =
 document.getElementById("targetSettings");
 
-const quality =
-document.getElementById("quality");
-
-const qualityValue =
-document.getElementById("qualityValue");
+const qualitySettings =
+document.getElementById("qualitySettings");
 
 const targetSize =
 document.getElementById("targetSize");
 
 const targetUnit =
 document.getElementById("targetUnit");
+
+const quality =
+document.getElementById("quality");
+
+const qualityValue =
+document.getElementById("qualityValue");
 
 const advancedToggle =
 document.getElementById("advancedToggle");
@@ -857,9 +796,6 @@ document.getElementById("advancedOptions");
 
 const format =
 document.getElementById("format");
-
-const maxDimension =
-document.getElementById("maxDimension");
 
 const allowResize =
 document.getElementById("allowResize");
@@ -908,7 +844,7 @@ let sourceHeight = 0;
 
 
 /* =========================
-   FILE INPUT
+   FILE PICKER
 ========================= */
 
 imageInput.addEventListener(
@@ -919,15 +855,17 @@ const file =
 imageInput.files &&
 imageInput.files[0];
 
-if(!file) return;
+if(!file){
+return;
+}
 
-const allowedTypes = [
+const allowed = [
 "image/jpeg",
 "image/png",
 "image/webp"
 ];
 
-if(!allowedTypes.includes(file.type)){
+if(!allowed.includes(file.type)){
 
 showMessage(
 "Please select a JPG, PNG or WebP image.",
@@ -987,7 +925,9 @@ formatBytes(file.size) +
 "</strong><br>" +
 
 "Format: <strong>" +
-file.type.replace("image/","").toUpperCase() +
+file.type
+.replace("image/","")
+.toUpperCase() +
 "</strong>";
 
 editor.classList.add("show");
@@ -1002,7 +942,7 @@ img.onerror =
 function(){
 
 showMessage(
-"Unable to read this image. Please try another image.",
+"Unable to read this image. Please select another image.",
 true
 );
 
@@ -1024,19 +964,19 @@ function(){
 
 if(mode.value === "target"){
 
-qualitySettings.style.display =
-"none";
-
 targetSettings.style.display =
 "block";
+
+qualitySettings.style.display =
+"none";
 
 }else{
 
-qualitySettings.style.display =
-"block";
-
 targetSettings.style.display =
 "none";
+
+qualitySettings.style.display =
+"block";
 
 }
 
@@ -1067,9 +1007,7 @@ advancedToggle.addEventListener(
 "click",
 function(){
 
-advancedOptions.classList.toggle(
-"show"
-);
+advancedOptions.classList.toggle("show");
 
 advancedToggle.textContent =
 advancedOptions.classList.contains("show")
@@ -1097,7 +1035,7 @@ imageInput.click();
 
 
 /* =========================
-   FORMAT
+   OUTPUT FORMAT
 ========================= */
 
 function getOutputFormat(){
@@ -1108,28 +1046,20 @@ return format.value;
 
 }
 
+/*
+For target-size compression,
+JPEG/WebP are much more suitable
+than PNG because PNG quality
+cannot be controlled.
+*/
+
 if(
-sourceFile.type ===
-"image/webp"
+sourceFile.type === "image/webp"
 ){
 
 return "image/webp";
 
 }
-
-if(
-sourceFile.type ===
-"image/png"
-){
-
-return "image/jpeg";
-
-}
-
-/*
-JPEG is usually much smaller
-than PNG for photographs.
-*/
 
 return "image/jpeg";
 
@@ -1162,77 +1092,20 @@ return value *
 
 }
 
-return value *
-1024;
+return value * 1024;
 
 }
 
 
 /* =========================
-   DIMENSIONS
+   CANVAS
 ========================= */
 
-function calculateDimensions(){
-
-let width =
-sourceWidth;
-
-let height =
-sourceHeight;
-
-const max =
-maxDimension.value === "original"
-? Infinity
-: Number(maxDimension.value);
-
-
-if(
-width > max ||
-height > max
-){
-
-const scale =
-Math.min(
-max / width,
-max / height
-);
-
-width =
-Math.max(
-1,
-Math.round(width * scale)
-);
-
-height =
-Math.max(
-1,
-Math.round(height * scale)
-);
-
-}
-
-
-return {
-width,
-height
-};
-
-}
-
-
-/* =========================
-   CANVAS ENCODE
-========================= */
-
-function encodeImage(
+function createCanvas(
 width,
 height,
-type,
-qualityValueNumber
+type
 ){
-
-return new Promise(
-function(resolve){
 
 const canvas =
 document.createElement("canvas");
@@ -1249,21 +1122,14 @@ Math.max(
 Math.round(height)
 );
 
-
 const ctx =
-canvas.getContext(
-"2d"
-);
-
+canvas.getContext("2d");
 
 if(!ctx){
 
-resolve(null);
-
-return;
+return null;
 
 }
-
 
 ctx.imageSmoothingEnabled =
 true;
@@ -1273,9 +1139,7 @@ ctx.imageSmoothingQuality =
 
 
 /*
-White background for JPEG
-so transparent PNG doesn't
-become black.
+JPEG background must be white.
 */
 
 if(type === "image/jpeg"){
@@ -1301,6 +1165,38 @@ canvas.width,
 canvas.height
 );
 
+return canvas;
+
+}
+
+
+/* =========================
+   ENCODE
+========================= */
+
+function encode(
+width,
+height,
+type,
+q
+){
+
+return new Promise(
+function(resolve){
+
+const canvas =
+createCanvas(
+width,
+height,
+type
+);
+
+if(!canvas){
+
+resolve(null);
+
+return;
+}
 
 canvas.toBlob(
 function(blob){
@@ -1310,18 +1206,23 @@ if(!blob){
 resolve(null);
 
 return;
-
 }
 
 resolve({
+
 blob:blob,
+
 width:canvas.width,
-height:canvas.height
+
+height:canvas.height,
+
+quality:q
+
 });
 
 },
 type,
-qualityValueNumber
+q
 );
 
 }
@@ -1331,99 +1232,251 @@ qualityValueNumber
 
 
 /* =========================
-   FAST TARGET COMPRESSION
-   Maximum 7 attempts
+   FIND CLOSEST QUALITY
 ========================= */
 
-async function findTargetSize(
+async function findClosest(
 target,
 type,
 width,
 height
 ){
 
-let low = 0.05;
+/*
+We keep TWO candidates:
 
-let high = 0.95;
+1. largest result below target
+2. smallest result above target
 
-let best = null;
+Then choose whichever is closer.
+
+This prevents a 500 KB request from
+unnecessarily returning 200 KB when
+a much closer result is available.
+*/
+
+let below = null;
+let above = null;
+
+
+/*
+Use 12 quality points first.
+This gives us a reliable range.
+*/
+
+const qualities = [];
 
 for(
 let i = 0;
-i < 7;
+i <= 11;
+i++
+){
+
+qualities.push(
+0.05 +
+(i * 0.90 / 11)
+);
+
+}
+
+
+for(
+let i = 0;
+i < qualities.length;
 i++
 ){
 
 const q =
-(low + high) / 2;
-
+qualities[i];
 
 const output =
-await encodeImage(
+await encode(
 width,
 height,
 type,
 q
 );
 
-
 if(!output){
 
 continue;
-
 }
 
+
+const size =
+output.blob.size;
+
+
+if(size <= target){
 
 if(
-!best ||
-Math.abs(
-output.blob.size - target
-)
-<
-Math.abs(
-best.blob.size - target
-)
+!below ||
+size > below.blob.size
 ){
 
-best = output;
+below = output;
 
 }
+
+}else{
+
+if(
+!above ||
+size < above.blob.size
+){
+
+above = output;
+
+}
+
+}
+
+
+setProgress(
+15 +
+Math.round(
+(i + 1) /
+qualities.length *
+40
+),
+"Finding closest file size..."
+);
+
+}
+
+
+/*
+If one candidate is missing, return the other.
+*/
+
+if(!below){
+return above;
+}
+
+if(!above){
+return below;
+}
+
+
+/*
+Now binary-search between the two
+quality values.
+
+Maximum 10 extra attempts.
+*/
+
+let low =
+below.quality;
+
+let high =
+above.quality;
+
+let best =
+chooseClosest(
+below,
+above,
+target
+);
+
+
+for(
+let i = 0;
+i < 10;
+i++
+){
+
+const mid =
+(low + high) / 2;
+
+const output =
+await encode(
+width,
+height,
+type,
+mid
+);
+
+if(!output){
+continue;
+}
+
+
+const size =
+output.blob.size;
+
+
+if(size <= target){
+
+if(
+!below ||
+size > below.blob.size
+){
+
+below = output;
+
+}
+
+low = mid;
+
+}else{
+
+if(
+!above ||
+size < above.blob.size
+){
+
+above = output;
+
+}
+
+high = mid;
+
+}
+
+
+best =
+chooseClosest(
+below,
+above,
+target
+);
 
 
 const difference =
 Math.abs(
-output.blob.size - target
+best.blob.size -
+target
 );
 
 
 /*
-Stop when within 2%.
+Very close result.
 */
 
 if(
 difference <=
-target * 0.02
+Math.max(
+1024,
+target * 0.01
+)
 ){
 
-return output;
-
+break;
 }
 
 
-if(
-output.blob.size >
-target
-){
-
-high = q;
-
-}else{
-
-low = q;
-
-}
+setProgress(
+55 +
+Math.round(
+(i + 1) /
+10 *
+20
+),
+"Fine-tuning target size..."
+);
 
 }
+
 
 return best;
 
@@ -1431,97 +1484,62 @@ return best;
 
 
 /* =========================
-   SMART TARGET RESIZE
+   CHOOSE CLOSEST
 ========================= */
 
-async function compressToTarget(
-target,
-type
+function chooseClosest(
+below,
+above,
+target
 ){
 
-let dimensions =
-calculateDimensions();
+if(!below){
+return above;
+}
 
+if(!above){
+return below;
+}
 
-/*
-First try keeping dimensions.
-*/
-
-let output =
-await findTargetSize(
-target,
-type,
-dimensions.width,
-dimensions.height
+const belowDifference =
+Math.abs(
+target -
+below.blob.size
 );
 
+const aboveDifference =
+Math.abs(
+above.blob.size -
+target
+);
 
-if(
-!allowResize.checked ||
-!output ||
-output.blob.size <= target
-){
-
-return output;
+return
+belowDifference <=
+aboveDifference
+? below
+: above;
 
 }
 
 
-/*
-If still too large,
-reduce dimensions gradually.
+/* =========================
+   DIMENSION REDUCTION
+========================= */
 
-Maximum 3 passes.
-*/
-
-let width =
-dimensions.width;
-
-let height =
-dimensions.height;
-
-
-for(
-let pass = 0;
-pass < 3;
-pass++
+async function findTargetWithDimensions(
+target,
+type
 ){
 
-const ratio =
-Math.sqrt(
-target /
-Math.max(
-1,
-output.blob.size
-)
-);
+let width =
+sourceWidth;
+
+let height =
+sourceHeight;
 
 
-const scale =
-Math.max(
-0.35,
-Math.min(
-0.90,
-ratio
-)
-);
-
-
-width =
-Math.max(
-1,
-Math.round(width * scale)
-);
-
-height =
-Math.max(
-1,
-Math.round(height * scale)
-);
-
-
-const candidate =
-await findTargetSize(
+let best =
+await findClosest(
 target,
 type,
 width,
@@ -1529,32 +1547,141 @@ height
 );
 
 
+if(!best){
+return null;
+}
+
+
+/*
+If already close enough, stop.
+*/
+
 if(
-candidate &&
-(
-!output ||
+best.blob.size <=
+target * 1.05 &&
+best.blob.size >=
+target * 0.90
+){
+
+return best;
+
+}
+
+
+/*
+If the closest result is above target,
+reduce dimensions gradually.
+
+We never immediately shrink the image
+massively.
+*/
+
+if(
+best.blob.size >
+target &&
+allowResize.checked
+){
+
+for(
+let pass = 0;
+pass < 5;
+pass++
+){
+
+const ratio =
+Math.sqrt(
+target /
+best.blob.size
+);
+
+
+/*
+Gentle scaling.
+*/
+
+let scale =
+Math.max(
+0.60,
+Math.min(
+0.95,
+ratio
+)
+);
+
+
+/*
+If the first estimate is too aggressive,
+make the reduction gentler.
+*/
+
+if(pass === 0){
+
+scale =
+Math.max(
+0.75,
+Math.min(
+0.95,
+ratio
+)
+);
+
+}
+
+
+width =
+Math.max(
+320,
+Math.round(
+width * scale
+)
+);
+
+height =
+Math.max(
+320,
+Math.round(
+height * scale
+)
+);
+
+
+const candidate =
+await findClosest(
+target,
+type,
+width,
+height
+);
+
+
+if(!candidate){
+break;
+}
+
+
+if(
 Math.abs(
 candidate.blob.size -
 target
 )
 <
 Math.abs(
-output.blob.size -
+best.blob.size -
 target
-)
 )
 ){
 
-output =
+best =
 candidate;
 
 }
 
 
 if(
-output &&
-output.blob.size <=
-target * 1.02
+best.blob.size <=
+target * 1.05 &&
+best.blob.size >=
+target * 0.90
 ){
 
 break;
@@ -1563,14 +1690,16 @@ break;
 
 }
 
+}
 
-return output;
+
+return best;
 
 }
 
 
 /* =========================
-   COMPRESS BUTTON
+   COMPRESS
 ========================= */
 
 compressBtn.addEventListener(
@@ -1596,7 +1725,7 @@ compressBtn.disabled =
 true;
 
 compressBtn.textContent =
-"Compressing...";
+"Processing...";
 
 progress.classList.add("show");
 
@@ -1616,22 +1745,24 @@ let output = null;
 
 if(mode.value === "quality"){
 
+const q =
+Number(
+quality.value
+) / 100;
+
+
 setProgress(
-25,
+30,
 "Compressing image..."
 );
 
 
-const dimensions =
-calculateDimensions();
-
-
 output =
-await encodeImage(
-dimensions.width,
-dimensions.height,
+await encode(
+sourceWidth,
+sourceHeight,
 type,
-Number(quality.value) / 100
+q
 );
 
 
@@ -1644,30 +1775,77 @@ getTargetBytes();
 if(!target){
 
 throw new Error(
-"Please enter a valid target file size."
+"Please enter a valid target size."
 );
 
 }
 
 
-setProgress(
-15,
-"Finding the best compression..."
+/*
+If original image is already smaller
+than target, don't artificially inflate it.
+*/
+
+if(
+sourceFile.size <= target
+){
+
+output =
+await encode(
+sourceWidth,
+sourceHeight,
+type,
+0.95
 );
 
 
+/*
+If conversion itself makes it larger,
+keep original.
+*/
+
+if(
+output &&
+output.blob.size >
+sourceFile.size
+){
+
+output = {
+
+blob:sourceFile,
+
+width:sourceWidth,
+
+height:sourceHeight,
+
+quality:1
+
+};
+
+}
+
+
+showMessage(
+"Your original image is already smaller than the requested target size.",
+false
+);
+
+}else{
+
 output =
-await compressToTarget(
+await findTargetWithDimensions(
 target,
 type
 );
 
 }
 
+}
+
 
 setProgress(
-90,
-"Finalizing image..."
+92,
+"Finalizing..."
 );
 
 
@@ -1677,30 +1855,28 @@ if(
 ){
 
 throw new Error(
-"Image could not be compressed."
+"Unable to compress this image."
 );
 
 }
 
 
 /*
-Don't replace a smaller original
-with a larger compressed result
-in quality mode.
+Never return a bigger file than original
+when the goal is compression.
 */
 
 if(
-mode.value === "quality" &&
-output.blob.size >= sourceFile.size &&
-type === sourceFile.type
+output.blob.size >
+sourceFile.size
 ){
 
 const fallback =
-await encodeImage(
+await encode(
 output.width,
 output.height,
 type,
-0.55
+0.60
 );
 
 if(
@@ -1713,6 +1889,31 @@ output =
 fallback;
 
 }
+
+}
+
+
+/*
+If fallback is still bigger than original,
+use original.
+*/
+
+if(
+output.blob.size >
+sourceFile.size
+){
+
+output = {
+
+blob:sourceFile,
+
+width:sourceWidth,
+
+height:sourceHeight,
+
+quality:1
+
+};
 
 }
 
@@ -1737,9 +1938,7 @@ outputURL;
 
 
 const extension =
-type === "image/png"
-? "png"
-: type === "image/webp"
+type === "image/webp"
 ? "webp"
 : "jpg";
 
@@ -1752,10 +1951,10 @@ downloadBtn.download =
 extension;
 
 
-const originalSize =
+const originalBytes =
 sourceFile.size;
 
-const finalSize =
+const finalBytes =
 output.blob.size;
 
 
@@ -1764,22 +1963,20 @@ Math.max(
 0,
 (
 1 -
-finalSize /
-Math.max(
-1,
-originalSize
-)
+finalBytes /
+originalBytes
 ) * 100
 );
 
 
 resultInfo.innerHTML =
+
 "Original size: <strong>" +
-formatBytes(originalSize) +
+formatBytes(originalBytes) +
 "</strong><br>" +
 
-"Compressed size: <strong>" +
-formatBytes(finalSize) +
+"Final size: <strong>" +
+formatBytes(finalBytes) +
 "</strong><br>" +
 
 "Original dimensions: <strong>" +
@@ -1794,34 +1991,21 @@ output.width +
 output.height +
 " px</strong><br>" +
 
-"Output format: <strong>" +
+"Format: <strong>" +
 extension.toUpperCase() +
 "</strong>";
 
 
-if(savedPercent > 0){
-
 savedText.textContent =
-"Saved " +
+savedPercent > 0
+? "Saved " +
 savedPercent.toFixed(1) +
-"%";
-
-}else{
-
-savedText.textContent =
-"Image processed successfully";
-
-}
+"%"
+: "Image is already very small";
 
 
 result.classList.add(
 "show"
-);
-
-
-setProgress(
-100,
-"Compression complete!"
 );
 
 
@@ -1832,28 +2016,51 @@ getTargetBytes();
 
 const difference =
 Math.abs(
-finalSize - target
+finalBytes -
+target
 );
 
 const percentage =
 difference /
-Math.max(
-1,
-target
-) * 100;
+target *
+100;
 
 
-if(percentage <= 5){
+if(
+finalBytes <= target &&
+percentage <= 5
+){
 
 showMessage(
-"✓ Compressed size is very close to your requested target.",
+"✓ Target achieved closely: " +
+formatBytes(finalBytes) +
+" for requested " +
+formatBytes(target) +
+".",
+false
+);
+
+}else if(
+percentage <= 10
+){
+
+showMessage(
+"✓ Very close to target: " +
+formatBytes(finalBytes) +
+" for requested " +
+formatBytes(target) +
+".",
 false
 );
 
 }else{
 
 showMessage(
-"✓ Image compressed successfully. Exact file size may vary because browser image encoders work differently for every image.",
+"✓ Closest practical result found: " +
+formatBytes(finalBytes) +
+" for requested " +
+formatBytes(target) +
+". Exact size depends on the image and browser encoder.",
 false
 );
 
@@ -1867,6 +2074,12 @@ false
 );
 
 }
+
+
+setProgress(
+100,
+"Compression complete!"
+);
 
 
 setTimeout(
@@ -1888,7 +2101,7 @@ console.error(error);
 
 showMessage(
 error.message ||
-"Something went wrong while compressing the image.",
+"Something went wrong.",
 true
 );
 
@@ -1925,26 +2138,6 @@ text;
 
 
 /* =========================
-   MESSAGE
-========================= */
-
-function showMessage(
-text,
-isError
-){
-
-message.textContent =
-text;
-
-message.className =
-isError
-? "message error"
-: "message";
-
-}
-
-
-/* =========================
    FORMAT BYTES
 ========================= */
 
@@ -1974,6 +2167,26 @@ bytes /
 (1024 * 1024)
 ).toFixed(2) +
 " MB";
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+text,
+error
+){
+
+message.textContent =
+text;
+
+message.className =
+error
+? "message error"
+: "message";
 
 }
 
@@ -2017,4 +2230,3 @@ cleanupURLs
 </body>
 </html>
 ```
-
