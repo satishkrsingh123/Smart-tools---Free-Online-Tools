@@ -1,14 +1,23 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Word Counter - Words, Characters & Sentences | SmartTools</title>
-
-<meta name="description"
-      content="Free online word counter. Count words, characters, sentences, paragraphs and reading time instantly. Mobile friendly and easy to use.">
+<title>Word Counter Online Free - Count Words, Characters & Sentences | SmartTools</title>
+<meta name="description" content="Count words, characters, sentences, paragraphs and reading time online for free. Fast and accurate word counter tool. No signup, no watermark, 100% free.">
+<meta name="keywords" content="word counter, character counter, count words online, free word counter, text counter, sentence counter, paragraph counter, reading time calculator, online word count">
+<meta name="robots" content="index, follow">
+<meta name="author" content="SmartTools">
+<link rel="canonical" href="https://satishkrsingh123.github.io/Smart-tools---Free-Online-Tools/word-counter.html">
+<meta property="og:title" content="Word Counter Online Free - Count Words, Characters & Sentences | SmartTools">
+<meta property="og:description" content="Count words, characters, sentences and paragraphs online for free. No signup required.">
+<meta property="og:url" content="https://satishkrsingh123.github.io/Smart-tools---Free-Online-Tools/word-counter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SmartTools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Word Counter Online Free | SmartTools">
+<meta name="twitter:description" content="Count words, characters, sentences and paragraphs online for free. No signup required.">
+<meta name="theme-color" content="#2563eb">
 
 <style>
 *{
@@ -228,59 +237,21 @@ footer p{
 }
 
 @media(max-width:800px){
-
-    .stats{
-        grid-template-columns:repeat(3,1fr);
-    }
+    .stats{ grid-template-columns:repeat(3,1fr); }
 }
 
 @media(max-width:600px){
-
-    header{
-        padding:14px 5%;
-    }
-
-    .logo{
-        font-size:21px;
-    }
-
-    .container{
-        width:92%;
-        margin-top:25px;
-    }
-
-    .hero h1{
-        font-size:30px;
-    }
-
-    .card{
-        padding:18px;
-    }
-
-    #textInput{
-        min-height:280px;
-        font-size:16px;
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .tools{
-        grid-template-columns:1fr;
-    }
-
-    .toolbar{
-        align-items:flex-start;
-    }
-
-    .toolbar-actions{
-        width:100%;
-    }
-
-    .toolbar-actions .btn{
-        flex:1;
-    }
+    header{ padding:14px 5%; }
+    .logo{ font-size:21px; }
+    .container{ width:92%; margin-top:25px; }
+    .hero h1{ font-size:30px; }
+    .card{ padding:18px; }
+    #textInput{ min-height:280px; font-size:16px; }
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .tools{ grid-template-columns:1fr; }
+    .toolbar{ align-items:flex-start; }
+    .toolbar-actions{ width:100%; }
+    .toolbar-actions .btn{ flex:1; }
 }
 </style>
 </head>
@@ -288,1030 +259,225 @@ footer p{
 <body>
 
 <header>
-
-    <a href="index.html" class="logo">
-        Smart<span>Tools</span>
-    </a>
-
-    <a href="index.html" class="back">
-        ← Back
-    </a>
-
+    <a href="index.html" class="logo">Smart<span>Tools</span></a>
+    <a href="index.html" class="back">← Back</a>
 </header>
-
 
 <main class="container">
 
     <div class="hero">
-
         <h1>📝 Word Counter</h1>
-
-        <p>
-            Count words, characters, sentences, paragraphs and reading time instantly.
-        </p>
-
+        <p>Count words, characters, sentences, paragraphs and reading time instantly.</p>
     </div>
 
-
-    <!-- EDITOR -->
-
     <div class="card">
-
         <div class="toolbar">
-
-            <div class="toolbar-title">
-                Enter Your Text
-            </div>
-
+            <div class="toolbar-title">Enter Your Text</div>
             <div class="toolbar-actions">
-
-                <button
-                    type="button"
-                    id="copyBtn"
-                    class="btn btn-primary">
-                    Copy
-                </button>
-
-                <button
-                    type="button"
-                    id="clearBtn"
-                    class="btn btn-danger">
-                    Clear
-                </button>
-
+                <button type="button" id="copyBtn" class="btn btn-primary">Copy</button>
+                <button type="button" id="clearBtn" class="btn btn-danger">Clear</button>
             </div>
-
         </div>
-
-
-        <textarea
-            id="textInput"
-            placeholder="Type or paste your text here..."
-            spellcheck="true"
-            aria-label="Text input">
-        </textarea>
-
-
-        <div class="info-box">
-            Word counting happens directly in your browser.
-            Your text is not uploaded to a server.
-        </div>
-
+        <textarea id="textInput" placeholder="Type or paste your text here..." spellcheck="true" aria-label="Text input"></textarea>
+        <div class="info-box">Word counting happens directly in your browser. Your text is not uploaded to a server.</div>
     </div>
 
-
-    <!-- STATISTICS -->
-
     <div class="card">
-
-        <div class="toolbar-title" style="margin-bottom:15px;">
-            Statistics
-        </div>
-
+        <div class="toolbar-title" style="margin-bottom:15px;">Statistics</div>
         <div class="stats">
-
-            <div class="stat">
-                <span
-                    id="wordCount"
-                    class="stat-value">
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Words
-                </span>
-            </div>
-
-
-            <div class="stat">
-                <span
-                    id="charCount"
-                    class="stat-value">
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Characters
-                </span>
-            </div>
-
-
-            <div class="stat">
-                <span
-                    id="charNoSpaceCount"
-                    class="stat-value">
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Without Spaces
-                </span>
-            </div>
-
-
-            <div class="stat">
-                <span
-                    id="sentenceCount"
-                    class="stat-value">
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Sentences
-                </span>
-            </div>
-
-
-            <div class="stat">
-                <span
-                    id="paragraphCount"
-                    class="stat-value">
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Paragraphs
-                </span>
-            </div>
-
+            <div class="stat"><span id="wordCount" class="stat-value">0</span><span class="stat-label">Words</span></div>
+            <div class="stat"><span id="charCount" class="stat-value">0</span><span class="stat-label">Characters</span></div>
+            <div class="stat"><span id="charNoSpaceCount" class="stat-value">0</span><span class="stat-label">Without Spaces</span></div>
+            <div class="stat"><span id="sentenceCount" class="stat-value">0</span><span class="stat-label">Sentences</span></div>
+            <div class="stat"><span id="paragraphCount" class="stat-value">0</span><span class="stat-label">Paragraphs</span></div>
         </div>
-
     </div>
 
-
-    <!-- TOOLS -->
-
     <div class="card">
-
-        <div class="toolbar-title" style="margin-bottom:15px;">
-            Text Tools
-        </div>
-
-
+        <div class="toolbar-title" style="margin-bottom:15px;">Text Tools</div>
         <div class="tools">
-
             <div class="tool-field">
-
-                <label for="caseSelect">
-                    Change Case
-                </label>
-
+                <label for="caseSelect">Change Case</label>
                 <select id="caseSelect">
-
-                    <option value="none">
-                        Select an option
-                    </option>
-
-                    <option value="upper">
-                        UPPERCASE
-                    </option>
-
-                    <option value="lower">
-                        lowercase
-                    </option>
-
-                    <option value="title">
-                        Title Case
-                    </option>
-
-                    <option value="sentence">
-                        Sentence case
-                    </option>
-
+                    <option value="none">Select an option</option>
+                    <option value="upper">UPPERCASE</option>
+                    <option value="lower">lowercase</option>
+                    <option value="title">Title Case</option>
+                    <option value="sentence">Sentence case</option>
                 </select>
-
             </div>
-
-
             <div class="tool-field">
-
-                <label for="spaceSelect">
-                    Clean Spaces
-                </label>
-
+                <label for="spaceSelect">Clean Spaces</label>
                 <select id="spaceSelect">
-
-                    <option value="none">
-                        Select an option
-                    </option>
-
-                    <option value="extra">
-                        Remove Extra Spaces
-                    </option>
-
-                    <option value="lines">
-                        Remove Empty Lines
-                    </option>
-
-                    <option value="both">
-                        Clean Spaces & Empty Lines
-                    </option>
-
+                    <option value="none">Select an option</option>
+                    <option value="extra">Remove Extra Spaces</option>
+                    <option value="lines">Remove Empty Lines</option>
+                    <option value="both">Clean Spaces & Empty Lines</option>
                 </select>
-
             </div>
-
         </div>
-
     </div>
 
-
-    <!-- READING INFO -->
-
     <div class="card">
-
-        <div class="toolbar-title">
-            Reading Information
-        </div>
-
-        <div
-            id="readingInfo"
-            class="info-box">
-            Start typing to see estimated reading time.
-        </div>
-
+        <div class="toolbar-title">Reading Information</div>
+        <div id="readingInfo" class="info-box">Start typing to see estimated reading time.</div>
     </div>
 
-
-    <!-- DOWNLOAD -->
-
     <div class="card">
-
         <div class="toolbar">
-
-            <div class="toolbar-title">
-                Export Text
-            </div>
-
+            <div class="toolbar-title">Export Text</div>
             <div class="toolbar-actions">
-
-                <button
-                    type="button"
-                    id="downloadBtn"
-                    class="btn btn-primary">
-                    Download .TXT
-                </button>
-
+                <button type="button" id="downloadBtn" class="btn btn-primary">Download .TXT</button>
             </div>
-
         </div>
-
     </div>
 
 </main>
 
-
 <footer>
-
-    <div>
-        Smart<span>Tools</span>
-    </div>
-
-    <p>
-        Free online tools for everyday use.
-    </p>
-
-    <p>
-        © 2026 SmartTools. All Rights Reserved.
-    </p>
-
+    <div>Smart<span>Tools</span></div>
+    <p>Free online tools for everyday use.</p>
+    <p>© 2026 SmartTools. All Rights Reserved.</p>
 </footer>
-
 
 <script>
 "use strict";
 
+const textInput = document.getElementById("textInput");
+const wordCount = document.getElementById("wordCount");
+const charCount = document.getElementById("charCount");
+const charNoSpaceCount = document.getElementById("charNoSpaceCount");
+const sentenceCount = document.getElementById("sentenceCount");
+const paragraphCount = document.getElementById("paragraphCount");
+const readingInfo = document.getElementById("readingInfo");
+const copyBtn = document.getElementById("copyBtn");
+const clearBtn = document.getElementById("clearBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const caseSelect = document.getElementById("caseSelect");
+const spaceSelect = document.getElementById("spaceSelect");
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const textInput =
-    document.getElementById("textInput");
-
-const wordCount =
-    document.getElementById("wordCount");
-
-const charCount =
-    document.getElementById("charCount");
-
-const charNoSpaceCount =
-    document.getElementById("charNoSpaceCount");
-
-const sentenceCount =
-    document.getElementById("sentenceCount");
-
-const paragraphCount =
-    document.getElementById("paragraphCount");
-
-const readingInfo =
-    document.getElementById("readingInfo");
-
-const copyBtn =
-    document.getElementById("copyBtn");
-
-const clearBtn =
-    document.getElementById("clearBtn");
-
-const downloadBtn =
-    document.getElementById("downloadBtn");
-
-const caseSelect =
-    document.getElementById("caseSelect");
-
-const spaceSelect =
-    document.getElementById("spaceSelect");
-
-
-/* =====================================================
-   LIVE COUNTER
-===================================================== */
-
-textInput.addEventListener(
-    "input",
-    updateStats
-);
-
-
-/* =====================================================
-   MAIN STATISTICS
-===================================================== */
+textInput.addEventListener("input", updateStats);
 
 function updateStats(){
-
-    const text =
-        textInput.value;
-
-
-    const trimmed =
-        text.trim();
-
-
-    /*
-       Modern Unicode-aware word matching.
-
-       It handles normal English text and
-       many Unicode letters/numbers.
-    */
-
+    const text = textInput.value;
+    const trimmed = text.trim();
     let words = [];
-
-
     if(trimmed){
-
-        try{
-
-            words =
-                trimmed.match(
-                    /[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu
-                ) || [];
-
-        }catch(error){
-
-            words =
-                trimmed
-                .split(/\s+/)
-                .filter(Boolean);
-
-        }
+        try{ words = trimmed.match(/[\p{L}\p{N}]+(?:[''\-][\p{L}\p{N}]+)*/gu) || []; }
+        catch(error){ words = trimmed.split(/\s+/).filter(Boolean); }
     }
-
-
-    const wordsNumber =
-        words.length;
-
-
-    /*
-       JavaScript length counts UTF-16 code units.
-       Array.from gives a more user-friendly
-       character count for many Unicode characters.
-    */
-
-    const characters =
-        Array.from(text).length;
-
-
-    const charactersWithoutSpaces =
-        Array.from(
-            text.replace(/\s/g, "")
-        ).length;
-
-
-    /*
-       Sentence detection.
-
-       Count text ending with:
-       . ! ?
-       including repeated punctuation.
-    */
-
+    const wordsNumber = words.length;
+    const characters = Array.from(text).length;
+    const charactersWithoutSpaces = Array.from(text.replace(/\s/g,"")).length;
     let sentences = 0;
-
-
     if(trimmed){
-
-        const matches =
-            trimmed.match(
-                /[^.!?…]+[.!?…]+(?=\s|$)/gu
-            );
-
-        if(matches){
-
-            sentences =
-                matches.length;
-
-        }else{
-
-            /*
-               Text without punctuation can still
-               be considered one sentence.
-            */
-
-            sentences = 1;
-        }
+        const matches = trimmed.match(/[^.!?…]+[.!?…]+(?=\s|$)/gu);
+        if(matches){ sentences = matches.length; }else{ sentences = 1; }
     }
-
-
-    /*
-       Paragraphs are blocks separated by
-       one or more blank lines.
-    */
-
-    const paragraphs =
-        trimmed
-        ? trimmed
-            .split(/\n\s*\n/)
-            .filter(
-                paragraph =>
-                    paragraph.trim().length > 0
-            ).length
-        : 0;
-
-
-    wordCount.textContent =
-        formatNumber(wordsNumber);
-
-    charCount.textContent =
-        formatNumber(characters);
-
-    charNoSpaceCount.textContent =
-        formatNumber(
-            charactersWithoutSpaces
-        );
-
-    sentenceCount.textContent =
-        formatNumber(sentences);
-
-    paragraphCount.textContent =
-        formatNumber(paragraphs);
-
-
-    updateReadingTime(
-        wordsNumber
-    );
+    const paragraphs = trimmed ? trimmed.split(/\n\s*\n/).filter(paragraph => paragraph.trim().length > 0).length : 0;
+    wordCount.textContent = formatNumber(wordsNumber);
+    charCount.textContent = formatNumber(characters);
+    charNoSpaceCount.textContent = formatNumber(charactersWithoutSpaces);
+    sentenceCount.textContent = formatNumber(sentences);
+    paragraphCount.textContent = formatNumber(paragraphs);
+    updateReadingTime(wordsNumber);
 }
 
-
-/* =====================================================
-   READING TIME
-===================================================== */
-
-function updateReadingTime(
-    words
-){
-
-    /*
-       Average reading speed:
-       200 words per minute.
-    */
-
-    const wordsPerMinute =
-        200;
-
-
-    if(!words){
-
-        readingInfo.textContent =
-            "Start typing to see estimated reading time.";
-
-        return;
-    }
-
-
-    const minutes =
-        words /
-        wordsPerMinute;
-
-
-    const totalSeconds =
-        Math.max(
-            1,
-            Math.round(
-                minutes * 60
-            )
-        );
-
-
-    const displayMinutes =
-        Math.floor(
-            totalSeconds /
-            60
-        );
-
-
-    const seconds =
-        totalSeconds %
-        60;
-
-
-    let text =
-        "Estimated reading time: ";
-
-
-    if(displayMinutes > 0){
-
-        text +=
-            displayMinutes +
-            (
-                displayMinutes === 1
-                ? " minute"
-                : " minutes"
-            );
-
-    }
-
-
-    if(seconds > 0){
-
-        if(displayMinutes > 0){
-            text += " ";
-        }
-
-        text +=
-            seconds +
-            (
-                seconds === 1
-                ? " second"
-                : " seconds"
-            );
-    }
-
-
-    readingInfo.textContent =
-        text;
+function updateReadingTime(words){
+    const wordsPerMinute = 200;
+    if(!words){ readingInfo.textContent = "Start typing to see estimated reading time."; return; }
+    const minutes = words / wordsPerMinute;
+    const totalSeconds = Math.max(1, Math.round(minutes * 60));
+    const displayMinutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    let text = "Estimated reading time: ";
+    if(displayMinutes > 0){ text += displayMinutes + (displayMinutes === 1 ? " minute" : " minutes"); }
+    if(seconds > 0){ if(displayMinutes > 0){ text += " "; } text += seconds + (seconds === 1 ? " second" : " seconds"); }
+    readingInfo.textContent = text;
 }
 
+function formatNumber(value){ return value.toLocaleString("en-IN"); }
 
-/* =====================================================
-   NUMBER FORMAT
-===================================================== */
+copyBtn.addEventListener("click", async function(){
+    const text = textInput.value;
+    if(!text){ showButtonMessage(copyBtn,"Nothing to Copy"); return; }
+    try{
+        if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); }
+        else{ textInput.focus(); textInput.select(); document.execCommand("copy"); textInput.setSelectionRange(textInput.value.length, textInput.value.length); }
+        showButtonMessage(copyBtn,"Copied ✓");
+    }catch(error){ showButtonMessage(copyBtn,"Copy Failed"); }
+});
 
-function formatNumber(
-    value
-){
+clearBtn.addEventListener("click", function(){
+    if(!textInput.value){ return; }
+    textInput.value = "";
+    updateStats();
+    textInput.focus();
+});
 
-    return value.toLocaleString(
-        "en-IN"
-    );
+caseSelect.addEventListener("change", function(){
+    const type = caseSelect.value;
+    if(type === "none"){ return; }
+    const text = textInput.value;
+    if(!text){ caseSelect.value = "none"; return; }
+    if(type === "upper"){ textInput.value = text.toUpperCase(); }
+    if(type === "lower"){ textInput.value = text.toLowerCase(); }
+    if(type === "title"){ textInput.value = toTitleCase(text); }
+    if(type === "sentence"){ textInput.value = toSentenceCase(text); }
+    updateStats();
+    caseSelect.value = "none";
+});
+
+function toTitleCase(text){
+    return text.replace(/\S+/g, function(word){ return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); });
 }
 
-
-/* =====================================================
-   COPY
-===================================================== */
-
-copyBtn.addEventListener(
-    "click",
-    async function(){
-
-        const text =
-            textInput.value;
-
-
-        if(!text){
-
-            showButtonMessage(
-                copyBtn,
-                "Nothing to Copy"
-            );
-
-            return;
-        }
-
-
-        try{
-
-            if(
-                navigator.clipboard &&
-                window.isSecureContext
-            ){
-
-                await navigator.clipboard.writeText(
-                    text
-                );
-
-            }else{
-
-                textInput.focus();
-
-                textInput.select();
-
-                document.execCommand(
-                    "copy"
-                );
-
-                textInput.setSelectionRange(
-                    textInput.value.length,
-                    textInput.value.length
-                );
-            }
-
-
-            showButtonMessage(
-                copyBtn,
-                "Copied ✓"
-            );
-
-        }
-        catch(error){
-
-            showButtonMessage(
-                copyBtn,
-                "Copy Failed"
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   CLEAR
-===================================================== */
-
-clearBtn.addEventListener(
-    "click",
-    function(){
-
-        if(!textInput.value){
-
-            return;
-        }
-
-
-        textInput.value =
-            "";
-
-
-        updateStats();
-
-
-        textInput.focus();
-
-    }
-);
-
-
-/* =====================================================
-   CHANGE CASE
-===================================================== */
-
-caseSelect.addEventListener(
-    "change",
-    function(){
-
-        const type =
-            caseSelect.value;
-
-
-        if(type === "none"){
-            return;
-        }
-
-
-        const text =
-            textInput.value;
-
-
-        if(!text){
-
-            caseSelect.value =
-                "none";
-
-            return;
-        }
-
-
-        if(type === "upper"){
-
-            textInput.value =
-                text.toUpperCase();
-
-        }
-
-
-        if(type === "lower"){
-
-            textInput.value =
-                text.toLowerCase();
-
-        }
-
-
-        if(type === "title"){
-
-            textInput.value =
-                toTitleCase(text);
-
-        }
-
-
-        if(type === "sentence"){
-
-            textInput.value =
-                toSentenceCase(text);
-
-        }
-
-
-        updateStats();
-
-
-        caseSelect.value =
-            "none";
-
-    }
-);
-
-
-/* =====================================================
-   TITLE CASE
-===================================================== */
-
-function toTitleCase(
-    text
-){
-
-    return text.replace(
-        /\S+/g,
-        function(word){
-
-            return word.charAt(0).toUpperCase() +
-                   word.slice(1).toLowerCase();
-
-        }
-    );
-}
-
-
-/* =====================================================
-   SENTENCE CASE
-===================================================== */
-
-function toSentenceCase(
-    text
-){
-
-    let result =
-        text.toLowerCase();
-
-
-    result =
-        result.replace(
-            /(^\s*[a-zà-ÿ\u0100-\u017f]|\.\s*[a-zà-ÿ\u0100-\u017f]|\!\s*[a-zà-ÿ\u0100-\u017f]|\?\s*[a-zà-ÿ\u0100-\u017f])/g,
-            function(match){
-
-                const last =
-                    match.charAt(
-                        match.length - 1
-                    );
-
-                if(
-                    match.length === 1
-                ){
-
-                    return match.toUpperCase();
-
-                }
-
-
-                return (
-                    match.slice(
-                        0,
-                        match.length - 1
-                    ) +
-                    last.toUpperCase()
-                );
-
-            }
-        );
-
-
+function toSentenceCase(text){
+    let result = text.toLowerCase();
+    result = result.replace(/(^\s*[a-zà-ÿ\u0100-\u017f]|\.\s*[a-zà-ÿ\u0100-\u017f]|\!\s*[a-zà-ÿ\u0100-\u017f]|\?\s*[a-zà-ÿ\u0100-\u017f])/g, function(match){
+        const last = match.charAt(match.length - 1);
+        if(match.length === 1){ return match.toUpperCase(); }
+        return match.slice(0, match.length - 1) + last.toUpperCase();
+    });
     return result;
 }
 
-
-/* =====================================================
-   CLEAN SPACES
-===================================================== */
-
-spaceSelect.addEventListener(
-    "change",
-    function(){
-
-        const type =
-            spaceSelect.value;
-
-
-        if(type === "none"){
-            return;
-        }
-
-
-        let text =
-            textInput.value;
-
-
-        if(type === "extra"){
-
-            text =
-                text
-                .replace(/[ \t]+/g, " ")
-                .replace(/[ \t]+\n/g, "\n")
-                .replace(/\n[ \t]+/g, "\n");
-
-        }
-
-
-        if(type === "lines"){
-
-            text =
-                text
-                .replace(
-                    /^\s*[\r\n]/gm,
-                    ""
-                );
-
-        }
-
-
-        if(type === "both"){
-
-            text =
-                text
-                .replace(/[ \t]+/g, " ")
-                .replace(/[ \t]+\n/g, "\n")
-                .replace(/\n[ \t]+/g, "\n")
-                .replace(
-                    /^\s*[\r\n]/gm,
-                    ""
-                );
-        }
-
-
-        textInput.value =
-            text;
-
-
-        updateStats();
-
-
-        spaceSelect.value =
-            "none";
-
-    }
-);
-
-
-/* =====================================================
-   DOWNLOAD TEXT
-===================================================== */
-
-downloadBtn.addEventListener(
-    "click",
-    function(){
-
-        const text =
-            textInput.value;
-
-
-        if(!text){
-
-            showButtonMessage(
-                downloadBtn,
-                "No Text"
-            );
-
-            return;
-        }
-
-
-        const blob =
-            new Blob(
-                [text],
-                {
-                    type:"text/plain;charset=utf-8"
-                }
-            );
-
-
-        const url =
-            URL.createObjectURL(
-                blob
-            );
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-
-        link.href =
-            url;
-
-
-        link.download =
-            "smarttools-word-counter.txt";
-
-
-        document.body.appendChild(
-            link
-        );
-
-
-        link.click();
-
-
-        link.remove();
-
-
-        setTimeout(
-            function(){
-
-                URL.revokeObjectURL(
-                    url
-                );
-
-            },
-            1000
-        );
-
-
-        showButtonMessage(
-            downloadBtn,
-            "Downloaded ✓"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   BUTTON MESSAGE
-===================================================== */
-
-function showButtonMessage(
-    button,
-    text
-){
-
-    const original =
-        button.textContent;
-
-
-    button.textContent =
-        text;
-
-
-    button.disabled =
-        true;
-
-
-    setTimeout(
-        function(){
-
-            button.textContent =
-                original;
-
-            button.disabled =
-                false;
-
-        },
-        1500
-    );
+spaceSelect.addEventListener("change", function(){
+    const type = spaceSelect.value;
+    if(type === "none"){ return; }
+    let text = textInput.value;
+    if(type === "extra"){ text = text.replace(/[ \t]+/g," ").replace(/[ \t]+\n/g,"\n").replace(/\n[ \t]+/g,"\n"); }
+    if(type === "lines"){ text = text.replace(/^\s*[\r\n]/gm,""); }
+    if(type === "both"){ text = text.replace(/[ \t]+/g," ").replace(/[ \t]+\n/g,"\n").replace(/\n[ \t]+/g,"\n").replace(/^\s*[\r\n]/gm,""); }
+    textInput.value = text;
+    updateStats();
+    spaceSelect.value = "none";
+});
+
+downloadBtn.addEventListener("click", function(){
+    const text = textInput.value;
+    if(!text){ showButtonMessage(downloadBtn,"No Text"); return; }
+    const blob = new Blob([text], { type:"text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "smarttools-word-counter.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    showButtonMessage(downloadBtn,"Downloaded ✓");
+});
+
+function showButtonMessage(button, text){
+    const original = button.textContent;
+    button.textContent = text;
+    button.disabled = true;
+    setTimeout(function(){ button.textContent = original; button.disabled = false; }, 1500);
 }
 
-
-/* =====================================================
-   INITIAL STATE
-===================================================== */
-
 updateStats();
-
 </script>
 
 </body>
 </html>
-```
